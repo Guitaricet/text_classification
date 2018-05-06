@@ -1,0 +1,801 @@
+,acc_test,acc_train,data_desc,dropout,epochs,f1_test,f1_train,init_function,lr,model_desc,model_type,noise_level_test,noise_level_train,task,trainable_params
+0,0.74972,0.9999555555555556,Maxlen 512,0.5,30,0.7496699339867974,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.0,IMDB binary classification,287490
+1,0.73516,0.9999555555555556,Maxlen 512,0.5,30,0.7333360183656208,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.0,IMDB binary classification,287490
+2,0.72212,0.9999555555555556,Maxlen 512,0.5,30,0.7129220215711393,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.0,IMDB binary classification,287490
+3,0.69792,0.9999555555555556,Maxlen 512,0.5,30,0.6756849609207249,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.0,IMDB binary classification,287490
+4,0.67232,0.9999555555555556,Maxlen 512,0.5,30,0.6293212669683258,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.0,IMDB binary classification,287490
+5,0.64688,0.9999555555555556,Maxlen 512,0.5,30,0.5823239969719909,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.0,IMDB binary classification,287490
+6,0.62072,0.9999555555555556,Maxlen 512,0.5,30,0.523613344051447,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.0,IMDB binary classification,287490
+7,0.60152,0.9999555555555556,Maxlen 512,0.5,30,0.4704443971932809,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.0,IMDB binary classification,287490
+8,0.58172,0.9999555555555556,Maxlen 512,0.5,30,0.4141408482267914,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.0,IMDB binary classification,287490
+9,0.56568,0.9999555555555556,Maxlen 512,0.5,30,0.3557612436216922,0.9999555654299045,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.0,IMDB binary classification,287490
+10,0.78116,0.9169333333333334,Maxlen 512,0.5,30,0.7825948738327041,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.01,IMDB binary classification,287490
+11,0.77096,0.9169333333333334,Maxlen 512,0.5,30,0.7718906860011155,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.01,IMDB binary classification,287490
+12,0.76016,0.9169333333333334,Maxlen 512,0.5,30,0.7596986213529977,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.01,IMDB binary classification,287490
+13,0.7426,0.9169333333333334,Maxlen 512,0.5,30,0.737550471063257,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.01,IMDB binary classification,287490
+14,0.72172,0.9169333333333334,Maxlen 512,0.5,30,0.7122947768909474,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.01,IMDB binary classification,287490
+15,0.70628,0.9169333333333334,Maxlen 512,0.5,30,0.6900510742476045,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.01,IMDB binary classification,287490
+16,0.68848,0.9169333333333334,Maxlen 512,0.5,30,0.6631487889273356,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.01,IMDB binary classification,287490
+17,0.66832,0.9169333333333334,Maxlen 512,0.5,30,0.6324142211188936,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.01,IMDB binary classification,287490
+18,0.6444,0.9169333333333334,Maxlen 512,0.5,30,0.5948040109389243,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.01,IMDB binary classification,287490
+19,0.63572,0.9169333333333334,Maxlen 512,0.5,30,0.5747373336446415,0.9173995668891147,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.01,IMDB binary classification,287490
+20,0.77888,0.8584,Maxlen 512,0.5,30,0.7875480399692545,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.025,IMDB binary classification,287490
+21,0.77404,0.8584,Maxlen 512,0.5,30,0.7827725437415881,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.025,IMDB binary classification,287490
+22,0.76596,0.8584,Maxlen 512,0.5,30,0.7743279207004281,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.025,IMDB binary classification,287490
+23,0.7514,0.8584,Maxlen 512,0.5,30,0.758800015523732,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.025,IMDB binary classification,287490
+24,0.73648,0.8584,Maxlen 512,0.5,30,0.7404459853439445,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.025,IMDB binary classification,287490
+25,0.71996,0.8584,Maxlen 512,0.5,30,0.7196123192759021,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.025,IMDB binary classification,287490
+26,0.70028,0.8584,Maxlen 512,0.5,30,0.6931236433632305,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.025,IMDB binary classification,287490
+27,0.68884,0.8584,Maxlen 512,0.5,30,0.6733022552601738,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.025,IMDB binary classification,287490
+28,0.67184,0.8584,Maxlen 512,0.5,30,0.6458603125269792,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.025,IMDB binary classification,287490
+29,0.66136,0.8584,Maxlen 512,0.5,30,0.6237333333333334,0.8636013357307989,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.025,IMDB binary classification,287490
+30,0.77488,0.8148888888888889,Maxlen 512,0.5,30,0.7740122068743978,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.05,IMDB binary classification,287490
+31,0.76832,0.8148888888888889,Maxlen 512,0.5,30,0.7663196966029211,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.05,IMDB binary classification,287490
+32,0.76368,0.8148888888888889,Maxlen 512,0.5,30,0.7613315019794781,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.05,IMDB binary classification,287490
+33,0.7482,0.8148888888888889,Maxlen 512,0.5,30,0.7421455781755621,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.05,IMDB binary classification,287490
+34,0.7396,0.8148888888888889,Maxlen 512,0.5,30,0.7300995024875622,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.05,IMDB binary classification,287490
+35,0.72404,0.8148888888888889,Maxlen 512,0.5,30,0.7092342057571543,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.05,IMDB binary classification,287490
+36,0.71664,0.8148888888888889,Maxlen 512,0.5,30,0.6957044673539519,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.05,IMDB binary classification,287490
+37,0.69688,0.8148888888888889,Maxlen 512,0.5,30,0.665341812400636,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.05,IMDB binary classification,287490
+38,0.68076,0.8148888888888889,Maxlen 512,0.5,30,0.6395700672898885,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.05,IMDB binary classification,287490
+39,0.66992,0.8148888888888889,Maxlen 512,0.5,30,0.6178568120774289,0.8128846758614493,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.05,IMDB binary classification,287490
+40,0.76468,0.7789333333333334,Maxlen 512,0.5,30,0.7844028291860593,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.075,IMDB binary classification,287490
+41,0.75872,0.7789333333333334,Maxlen 512,0.5,30,0.778365667254556,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.075,IMDB binary classification,287490
+42,0.75448,0.7789333333333334,Maxlen 512,0.5,30,0.7747357604227832,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.075,IMDB binary classification,287490
+43,0.74536,0.7789333333333334,Maxlen 512,0.5,30,0.7665908924250201,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.075,IMDB binary classification,287490
+44,0.73504,0.7789333333333334,Maxlen 512,0.5,30,0.7572737266397948,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.075,IMDB binary classification,287490
+45,0.72412,0.7789333333333334,Maxlen 512,0.5,30,0.7450183001220008,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.075,IMDB binary classification,287490
+46,0.71492,0.7789333333333334,Maxlen 512,0.5,30,0.7362226581294645,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.075,IMDB binary classification,287490
+47,0.70468,0.7789333333333334,Maxlen 512,0.5,30,0.7250176915341353,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.075,IMDB binary classification,287490
+48,0.69856,0.7789333333333334,Maxlen 512,0.5,30,0.7186169815547755,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.075,IMDB binary classification,287490
+49,0.68904,0.7789333333333334,Maxlen 512,0.5,30,0.7068848503129477,0.7972609439960872,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.075,IMDB binary classification,287490
+50,0.76456,0.762,Maxlen 512,0.5,30,0.7589285714285714,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.1,IMDB binary classification,287490
+51,0.75956,0.762,Maxlen 512,0.5,30,0.7528879753340185,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.1,IMDB binary classification,287490
+52,0.7556,0.762,Maxlen 512,0.5,30,0.7467042533786585,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.1,IMDB binary classification,287490
+53,0.74532,0.762,Maxlen 512,0.5,30,0.7335425821301529,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.1,IMDB binary classification,287490
+54,0.73608,0.762,Maxlen 512,0.5,30,0.7183471356612312,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.1,IMDB binary classification,287490
+55,0.72156,0.762,Maxlen 512,0.5,30,0.6989056620096026,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.1,IMDB binary classification,287490
+56,0.71332,0.762,Maxlen 512,0.5,30,0.6834503776334968,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.1,IMDB binary classification,287490
+57,0.69696,0.762,Maxlen 512,0.5,30,0.6569462053975729,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.1,IMDB binary classification,287490
+58,0.683,0.762,Maxlen 512,0.5,30,0.6319944276758764,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.1,IMDB binary classification,287490
+59,0.67264,0.762,Maxlen 512,0.5,30,0.609616485403549,0.7444036084196458,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.1,IMDB binary classification,287490
+60,0.75712,0.7462666666666666,Maxlen 512,0.5,30,0.7590667407348624,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.125,IMDB binary classification,287490
+61,0.75372,0.7462666666666666,Maxlen 512,0.5,30,0.7557812066161596,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.125,IMDB binary classification,287490
+62,0.74924,0.7462666666666666,Maxlen 512,0.5,30,0.7507454971969305,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.125,IMDB binary classification,287490
+63,0.74208,0.7462666666666666,Maxlen 512,0.5,30,0.7418114839433011,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.125,IMDB binary classification,287490
+64,0.73292,0.7462666666666666,Maxlen 512,0.5,30,0.7321378425001004,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.125,IMDB binary classification,287490
+65,0.7232,0.7462666666666666,Maxlen 512,0.5,30,0.7208326609649831,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.125,IMDB binary classification,287490
+66,0.722,0.7462666666666666,Maxlen 512,0.5,30,0.716742745353766,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.125,IMDB binary classification,287490
+67,0.70928,0.7462666666666666,Maxlen 512,0.5,30,0.7012004604505837,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.125,IMDB binary classification,287490
+68,0.69792,0.7462666666666666,Maxlen 512,0.5,30,0.6860397439095369,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.125,IMDB binary classification,287490
+69,0.68996,0.7462666666666666,Maxlen 512,0.5,30,0.6725252439900292,0.7431502227021192,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.125,IMDB binary classification,287490
+70,0.74996,0.7316888888888889,Maxlen 512,0.5,30,0.7585087888738652,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.15,IMDB binary classification,287490
+71,0.7462,0.7316888888888889,Maxlen 512,0.5,30,0.7554253555872488,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.15,IMDB binary classification,287490
+72,0.74172,0.7316888888888889,Maxlen 512,0.5,30,0.7508969561359514,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.15,IMDB binary classification,287490
+73,0.73556,0.7316888888888889,Maxlen 512,0.5,30,0.7447194655751632,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.15,IMDB binary classification,287490
+74,0.73044,0.7316888888888889,Maxlen 512,0.5,30,0.7389704458302669,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.15,IMDB binary classification,287490
+75,0.72148,0.7316888888888889,Maxlen 512,0.5,30,0.7289079229122055,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.15,IMDB binary classification,287490
+76,0.71484,0.7316888888888889,Maxlen 512,0.5,30,0.7220554407579243,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.15,IMDB binary classification,287490
+77,0.70536,0.7316888888888889,Maxlen 512,0.5,30,0.7118378843595963,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.15,IMDB binary classification,287490
+78,0.69232,0.7316888888888889,Maxlen 512,0.5,30,0.6959924116670619,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.15,IMDB binary classification,287490
+79,0.6864,0.7316888888888889,Maxlen 512,0.5,30,0.6869759642258244,0.7381251897800719,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.15,IMDB binary classification,287490
+80,0.74336,0.7199111111111111,Maxlen 512,0.5,30,0.7475804547958139,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.175,IMDB binary classification,287490
+81,0.74344,0.7199111111111111,Maxlen 512,0.5,30,0.7483916522830693,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.175,IMDB binary classification,287490
+82,0.73384,0.7199111111111111,Maxlen 512,0.5,30,0.738771984924623,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.175,IMDB binary classification,287490
+83,0.72896,0.7199111111111111,Maxlen 512,0.5,30,0.7348360334976912,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.175,IMDB binary classification,287490
+84,0.7222,0.7199111111111111,Maxlen 512,0.5,30,0.7275509003177593,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.175,IMDB binary classification,287490
+85,0.71572,0.7199111111111111,Maxlen 512,0.5,30,0.7208891332521699,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.175,IMDB binary classification,287490
+86,0.71208,0.7199111111111111,Maxlen 512,0.5,30,0.7175482655784021,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.175,IMDB binary classification,287490
+87,0.7016,0.7199111111111111,Maxlen 512,0.5,30,0.705998265941515,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.175,IMDB binary classification,287490
+88,0.69156,0.7199111111111111,Maxlen 512,0.5,30,0.692187936609317,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.175,IMDB binary classification,287490
+89,0.68772,0.7199111111111111,Maxlen 512,0.5,30,0.686956173062272,0.7230133614627287,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.175,IMDB binary classification,287490
+90,0.72908,0.6963555555555555,Maxlen 512,0.5,30,0.7495099670845815,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.0,0.2,IMDB binary classification,287490
+91,0.72612,0.6963555555555555,Maxlen 512,0.5,30,0.7478177599351773,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.01,0.2,IMDB binary classification,287490
+92,0.72476,0.6963555555555555,Maxlen 512,0.5,30,0.7461541299295386,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.025,0.2,IMDB binary classification,287490
+93,0.71472,0.6963555555555555,Maxlen 512,0.5,30,0.7384288124404019,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.05,0.2,IMDB binary classification,287490
+94,0.70772,0.6963555555555555,Maxlen 512,0.5,30,0.7335059630183449,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.075,0.2,IMDB binary classification,287490
+95,0.70084,0.6963555555555555,Maxlen 512,0.5,30,0.727630285152409,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.1,0.2,IMDB binary classification,287490
+96,0.69604,0.6963555555555555,Maxlen 512,0.5,30,0.7235420380543529,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.125,0.2,IMDB binary classification,287490
+97,0.69072,0.6963555555555555,Maxlen 512,0.5,30,0.7165065630270587,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.15,0.2,IMDB binary classification,287490
+98,0.68392,0.6963555555555555,Maxlen 512,0.5,30,0.7104646050124579,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.175,0.2,IMDB binary classification,287490
+99,0.67968,0.6963555555555555,Maxlen 512,0.5,30,0.70584778136938,0.7219599544196648,<function xavier_normal at 0x7f843d1b9048>,0.0001,"CharCNN(
+  (conv): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(15,), stride=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=64, stride=32, padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc): Linear(in_features=1536, out_features=2, bias=True)
+)",charCNN,0.2,0.2,IMDB binary classification,287490
