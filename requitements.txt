@@ -7,3 +7,4 @@ tensorboardx
 matplotlib
 seaborn
 tqdm
+spacy
