@@ -31,13 +31,13 @@ args = parser.parse_args()
 
 assert args.aijun ^ args.madrugado, '--aijun or --madrugado should be specified'
 
-rootLogger = logging.getLogger()
+logger = logging.getLogger()
 
 fileHandler = logging.FileHandler('main.log')
-rootLogger.addHandler(fileHandler)
+logger.addHandler(fileHandler)
 
 consoleHandler = logging.StreamHandler()
-rootLogger.addHandler(consoleHandler)
+logger.addHandler(consoleHandler)
 
 time_total = time()
 
@@ -62,6 +62,7 @@ ALPHABET = [c for c in ALPHABET if c not in ('(', ')')]  # выключаем э
 ALPHABET_LEN = len(ALPHABET)
 char2int = {s: i for s, i in zip(ALPHABET, range(ALPHABET_LEN))}
 
+logger.info('Script is started')
 
 class HieracialMokoron(torch.utils.data.Dataset):
     """
@@ -414,11 +415,11 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
 
     writer = SummaryWriter(comment=model_name)
     if len(list(writer.all_writers.keys())) > 1:
-        logging.info('More than one writer! 0_o')
-        logging.info(list(writer.all_writers.keys()))
+        logger.info('More than one writer! 0_o')
+        logger.info(list(writer.all_writers.keys()))
 
     run_name = list(writer.all_writers.keys())[0]
-    logging.info('Writer: %s' % run_name)
+    logger.info('Writer: %s' % run_name)
 
     optimizer = optim.Adam(params=model.parameters(), lr=lr)
     optimizer.zero_grad()
@@ -455,8 +456,8 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
 
         # evaluation
         if epoch % log_every == 0:
-            logging.info('Epoch %s. Global step %s. T=%s min' % (epoch, global_step, (time() - start_time) / 60.))
-            logging.info('Loss               : %s' % loss.data[0])
+            logger.info('Epoch %s. Global step %s. T=%s min' % (epoch, global_step, (time() - start_time) / 60.))
+            logger.info('Loss               : %s' % loss.data[0])
 
         # in-batch
         _, idx = torch.max(prediction, 1)
@@ -467,13 +468,13 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
         writer.add_scalar('accuracy_train', acc, global_step=global_step)
         writer.add_scalar('f1_train', f1, global_step=global_step)
         if epoch % log_every == 0:
-            logging.info('In-batch accuracy  :', acc)
+            logger.info('In-batch accuracy  :', acc)
 
         # validation
         metrics = get_metrics(model, val_dataloader)
         if epoch % log_every == 0:
-            logging.info('Validation accuracy: %s, f1: %s' % (metrics['accuracy'], metrics['f1']))
-            logging.info('\n')
+            logger.info('Validation accuracy: %s, f1: %s' % (metrics['accuracy'], metrics['f1']))
+            logger.info('\n')
 
         writer.add_scalar('accuracy_val', metrics['accuracy'], global_step=global_step)
         writer.add_scalar('f1_val', metrics['f1'], global_step=global_step)
@@ -482,11 +483,11 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
         try:
             torch.save(model, f)
         except Exception as e:
-            logging.error(e)
-            logging.error('Continuing (probably) without saving')
+            logger.error(e)
+            logger.error('Continuing (probably) without saving')
 
         
-    logging.info('Calculating validation metrics... Time %s min' % ((time() - start_time) / 60.))
+    logger.info('Calculating validation metrics... Time %s min' % ((time() - start_time) / 60.))
     metrics_train = get_metrics(model, dataloader)
     acc_train = metrics_train['accuracy']
     f1_train = metrics_train['f1']
@@ -520,24 +521,24 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
         task=task
     ))
     
-    logging.info('Original dataset: acc %s, f1 %s' % (metrics['accuracy'], metrics['f1']))
+    logger.info('Original dataset: acc %s, f1 %s' % (metrics['accuracy'], metrics['f1']))
     writer.add_scalar('accuracy_test_original', metrics['accuracy'], global_step=global_step)
     writer.add_scalar('f1_test_original', metrics['f1'], global_step=global_step)
 
-    logging.info('Final test metrics: %s, Time %s min' % (metrics_test, ((time() - start_time) / 60.)))
+    logger.info('Final test metrics: %s, Time %s min' % (metrics_test, ((time() - start_time) / 60.)))
     if metrics_test is not None:
         writer.add_scalar('accuracy_test_final', metrics_test['accuracy'], global_step=global_step)
         writer.add_scalar('f1_test_final', metrics_test['f1'], global_step=global_step)
-    logging.info('\n')
+    logger.info('\n')
     # model is in EVAL mode!
     return model
 
 if __name__ == 'main':
 
-    logging.info('Testing the script...')
-    logging.info('Running one epoch and evaluation to check evetything is ok')
-    logging.info('...')
-    logging.info("At least to check it won't crush")
+    logger.info('Testing the script...')
+    logger.info('Running one epoch and evaluation to check evetything is ok')
+    logger.info('...')
+    logger.info("At least to check it won't crush")
 
     results = []
     run_model_with(
@@ -547,36 +548,36 @@ if __name__ == 'main':
     pd.DataFrame(results).to_csv('results/AttentionedYoonKim_mokoron_test.csv')
 
     if not args.test:
-        logging.info('Models with one attention head')
+        logger.info('Models with one attention head')
         for noise_level in tqdm(NOISE_LEVELS, leave=False):
             run_model_with(
                 noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5,
                 lr=1e-3, epochs=30, heads=1, comment='_mokoron'
             )
-        logging.info('Saving results table')
+        logger.info('Saving results table')
         filename1 = 'results/AttentionedYoonKim_mokoron_heads1.csv'
         pd.DataFrame(results).to_csv(filename1)
-        logging.info('Saved with name %s' % filename1)
+        logger.info('Saved with name %s' % filename1)
 
-        logging.info('Models with two attention heads')
+        logger.info('Models with two attention heads')
         for noise_level in tqdm(NOISE_LEVELS, leave=False):
             run_model_with(
                 noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5, lr=1e-3, epochs=30, heads=2
             )
-        logging.info('Saving results table')
+        logger.info('Saving results table')
         filename2 = 'results/AttentionedYoonKim_mokoron_heads2.csv'
         pd.DataFrame(results).to_csv(filename2)
-        logging.info('Saved with name %s' % filename2)
+        logger.info('Saved with name %s' % filename2)
 
-        logging.info('Models with four attention heads')
+        logger.info('Models with four attention heads')
         for noise_level in tqdm(NOISE_LEVELS, leave=False):
             run_model_with(
                 noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5, lr=1e-3, epochs=30, heads=4
             )
-        logging.info('Saving results table')
+        logger.info('Saving results table')
         filename4 = 'results/AttentionedYoonKim_mokoron_heads4.csv'
         pd.DataFrame(results).to_csv(filename4)
-        logging.info('Saved with name %s' % filename4)
+        logger.info('Saved with name %s' % filename4)
 
-    logging.info('Success!')
-    logging.info('Total execution time: %smin' % ((time() - time_total) // 60))
+    logger.info('Success!')
+    logger.info('Total execution time: %smin' % ((time() - time_total) // 60))
