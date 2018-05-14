@@ -26,7 +26,7 @@ from pymystem3 import Mystem
 parser = argparse.ArgumentParser()
 parser.add_argument('--test', default=False, action='store_true')
 parser.add_argument('--aijun', default=False, action='store_true')
-parser.add_argument('--madrugado', default=False, default='store_true')
+parser.add_argument('--madrugado', default=False, action='store_true')
 args = parser.parse_args()
 
 assert args.aijun ^ args.madrugado, '--aijun or --madrugado should be specified'
