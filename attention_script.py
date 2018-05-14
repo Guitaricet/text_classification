@@ -62,7 +62,6 @@ ALPHABET = [c for c in ALPHABET if c not in ('(', ')')]  # выключаем э
 ALPHABET_LEN = len(ALPHABET)
 char2int = {s: i for s, i in zip(ALPHABET, range(ALPHABET_LEN))}
 
-logger.info('Script is started')
 
 class HieracialMokoron(torch.utils.data.Dataset):
     """
@@ -533,8 +532,8 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
     # model is in EVAL mode!
     return model
 
-if __name__ == 'main':
-
+if __name__ == '__main__':
+    logger.info('Script is started')
     logger.info('Testing the script...')
     logger.info('Running one epoch and evaluation to check evetything is ok')
     logger.info('...')
