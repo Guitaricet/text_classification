@@ -1,4 +1,5 @@
 import logging
+import argparse
 
 from time import time
 from random import random, choice
@@ -27,6 +28,7 @@ parser.add_argument('--test', default=False, action='store_true')
 parser.add_argument('--aijun', default=False, action='store_true')
 parser.add_argument('--madrugado', type=False, default='store_true')
 
+assert args.aijun ^ args.madrugado, '--aijun or --madrugado should be specified'
 
 rootLogger = logging.getLogger()
 
