@@ -39,6 +39,8 @@ logger.addHandler(fileHandler)
 consoleHandler = logging.StreamHandler()
 logger.addHandler(consoleHandler)
 
+logger.setLevel('DEBUG')
+
 time_total = time()
 
 np.random.seed(42)
