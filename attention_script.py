@@ -533,37 +533,36 @@ if __name__ == 'main':
     )
     pd.DataFrame(results).to_csv('results/AttentionedYoonKim_mokoron_test.csv')
 
-    logging.info('Models with one attention head')
-    for noise_level in tqdm(NOISE_LEVELS, leave=False):
-        run_model_with(
-            noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5,
-            lr=1e-3, epochs=30, heads=1, comment='_mokoron'
-        )
-    logging.info('Saving results table')
-    filename1 = 'results/AttentionedYoonKim_mokoron_heads1.csv'
-    pd.DataFrame(results).to_csv(filename1)
-    logging.info('Saved with name %s' % filename1)
+    # logging.info('Models with one attention head')
+    # for noise_level in tqdm(NOISE_LEVELS, leave=False):
+    #     run_model_with(
+    #         noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5,
+    #         lr=1e-3, epochs=30, heads=1, comment='_mokoron'
+    #     )
+    # logging.info('Saving results table')
+    # filename1 = 'results/AttentionedYoonKim_mokoron_heads1.csv'
+    # pd.DataFrame(results).to_csv(filename1)
+    # logging.info('Saved with name %s' % filename1)
 
-    logging.info('Models with two attention heads')
-    for noise_level in tqdm(NOISE_LEVELS, leave=False):
-        run_model_with(
-            noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5, lr=1e-3, epochs=30, heads=2
-        )
-    logging.info('Saving results table')
-    filename2 = 'results/AttentionedYoonKim_mokoron_heads2.csv'
-    pd.DataFrame(results).to_csv(filename2)
-    logging.info('Saved with name %s' % filename2)
+    # logging.info('Models with two attention heads')
+    # for noise_level in tqdm(NOISE_LEVELS, leave=False):
+    #     run_model_with(
+    #         noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5, lr=1e-3, epochs=30, heads=2
+    #     )
+    # logging.info('Saving results table')
+    # filename2 = 'results/AttentionedYoonKim_mokoron_heads2.csv'
+    # pd.DataFrame(results).to_csv(filename2)
+    # logging.info('Saved with name %s' % filename2)
 
-    logging.info('Models with four attention heads')
-    for noise_level in tqdm(NOISE_LEVELS, leave=False):
-        run_model_with(
-            noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5, lr=1e-3, epochs=30, heads=4
-        )
-
-    logging.info('Saving results table')
-    filename4 = 'results/AttentionedYoonKim_mokoron_heads4.csv'
-    pd.DataFrame(results).to_csv(filename4)
-    logging.info('Saved with name %s' % filename4)
+    # logging.info('Models with four attention heads')
+    # for noise_level in tqdm(NOISE_LEVELS, leave=False):
+    #     run_model_with(
+    #         noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5, lr=1e-3, epochs=30, heads=4
+    #     )
+    # logging.info('Saving results table')
+    # filename4 = 'results/AttentionedYoonKim_mokoron_heads4.csv'
+    # pd.DataFrame(results).to_csv(filename4)
+    # logging.info('Saved with name %s' % filename4)
 
     logging.info('Success!')
     logging.info('Total execution time: %smin' % ((time() - time_total) // 60))
