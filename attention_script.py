@@ -548,13 +548,13 @@ if __name__ == '__main__':
 
     if not args.test:
         logger.info('Models with one attention head')
-        for noise_level in tqdm(NOISE_LEVELS[:5], leave=False):
+        for noise_level in tqdm(NOISE_LEVELS[5:], leave=False):
             run_model_with(
                 noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5,
                 lr=1e-3, epochs=30, heads=1, comment='_IMDB'
             )
         logger.info('Saving results table')
-        filename1 = 'results/AttentionedYoonKim_IMDB_heads1_first5.csv'
+        filename1 = 'results/AttentionedYoonKim_IMDB_heads1_last5.csv'
         pd.DataFrame(results).to_csv(filename1)
         logger.info('Saved with name %s' % filename1)
 
