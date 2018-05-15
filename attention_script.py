@@ -457,7 +457,7 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
         writer.add_scalar('accuracy_train', acc, global_step=global_step)
         writer.add_scalar('f1_train', f1, global_step=global_step)
         if epoch % log_every == 0:
-            logger.info('In-batch accuracy  :', acc)
+            logger.info('In-batch accuracy  : %s', acc)
 
         # validation
         metrics = get_metrics(model, val_dataloader)
