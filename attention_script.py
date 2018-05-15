@@ -56,10 +56,10 @@ MAX_WORD_LEN = 8
 MAX_TEXT_LEN = 32
 
 ALPHABET = ['<UNK>'] + ['\n'] + [s for s in """ 0123456789-,;.!?:'’’/\|_@#$%ˆ&* ̃‘+-=<>()[]{}"""]
-ALPHABET += [s for s in 'абвгдеёжзийклмнопрстуфхцчщъыьэюя']
+# ALPHABET += [s for s in 'абвгдеёжзийклмнопрстуфхцчщъыьэюя']
 ALPHABET += [s for s in 'abcdefghijklmnopqrstuvwxyz']
 
-ALPHABET = [c for c in ALPHABET if c not in ('(', ')')]  # выключаем эмоджи
+# ALPHABET = [c for c in ALPHABET if c not in ('(', ')')]  # выключаем эмоджи
 
 ALPHABET_LEN = len(ALPHABET)
 char2int = {s: i for s, i in zip(ALPHABET, range(ALPHABET_LEN))}
@@ -212,18 +212,6 @@ if args.madrugado:
     basepath = '../data/IMDB/splits/'
 if args.aijun:
     basepath = '/media/data/nlp/sentiment/IMDB/splits/'
-
-
-train = HieracialMokoron(basepath + 'train.csv', 'text_spellchecked')
-valid = HieracialMokoron(basepath + 'validation.csv', 'text_spellchecked')
-test = HieracialMokoron(basepath + 'test.csv', 'text_spellchecked')
-
-test_original = HieracialMokoron(basepath + 'test.csv', 'text_original')
-
-dataloader = torch.utils.data.DataLoader(train, BATCH_SIZE, shuffle=True, num_workers=4)
-val_dataloader = torch.utils.data.DataLoader(valid, BATCH_SIZE, shuffle=True, num_workers=4)
-
-results = []
 
 # https://github.com/akurniawan/pytorch-transformer
 class MultiHeadAttention(nn.Module):
@@ -536,12 +524,22 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
 
 if __name__ == '__main__':
     logger.info('Script is started')
+    train = HieracialMokoron(basepath + 'train.csv', 'text_spellchecked')
+    valid = HieracialMokoron(basepath + 'validation.csv', 'text_spellchecked')
+    test = HieracialMokoron(basepath + 'test.csv', 'text_spellchecked')
+
+    test_original = HieracialMokoron(basepath + 'test.csv', 'text_original')
+
+    dataloader = torch.utils.data.DataLoader(train, BATCH_SIZE, shuffle=True, num_workers=4)
+    val_dataloader = torch.utils.data.DataLoader(valid, BATCH_SIZE, shuffle=True, num_workers=4)
+
+    results = []
+
     # logger.info('Testing the script...')
     # logger.info('Running one epoch and evaluation to check evetything is ok')
     # logger.info('...')
     # logger.info("At least to check it won't crush")
 
-    results = []
     # run_model_with(
     #     noise_level=0, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5,
     #     lr=1e-3, epochs=1, heads=1, comment='_test'
@@ -550,13 +548,13 @@ if __name__ == '__main__':
 
     if not args.test:
         logger.info('Models with one attention head')
-        for noise_level in tqdm(NOISE_LEVELS, leave=False):
+        for noise_level in tqdm(NOISE_LEVELS[:5], leave=False):
             run_model_with(
                 noise_level=noise_level, n_filters=256, cnn_kernel_size=5, hidden_dim_out=128, dropout=0.5,
                 lr=1e-3, epochs=30, heads=1, comment='_IMDB'
             )
         logger.info('Saving results table')
-        filename1 = 'results/AttentionedYoonKim_IMDB_heads1.csv'
+        filename1 = 'results/AttentionedYoonKim_IMDB_heads1_first5.csv'
         pd.DataFrame(results).to_csv(filename1)
         logger.info('Saved with name %s' % filename1)
 
