@@ -530,8 +530,8 @@ if __name__ == '__main__':
 
     test_original = HieracialMokoron(basepath + 'test.csv', 'text_original')
 
-    dataloader = torch.utils.data.DataLoader(train, BATCH_SIZE, shuffle=True, num_workers=4)
-    val_dataloader = torch.utils.data.DataLoader(valid, BATCH_SIZE, shuffle=True, num_workers=4)
+    dataloader = torch.utils.data.DataLoader(train, BATCH_SIZE, shuffle=True)
+    val_dataloader = torch.utils.data.DataLoader(valid, BATCH_SIZE, shuffle=True)
 
     results = []
 
