@@ -22,11 +22,15 @@ import torchtext
 from tensorboardX import SummaryWriter
 from tqdm import tqdm as tqdm
 from pymystem3 import Mystem
+import nltk
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--test', default=False, action='store_true')
 parser.add_argument('--aijun', default=False, action='store_true')
 parser.add_argument('--madrugado', default=False, action='store_true')
+parser.add_argument('--num-workers', type=int, default=1)
 args = parser.parse_args()
 
 assert args.aijun ^ args.madrugado, '--aijun or --madrugado should be specified'
@@ -97,7 +101,8 @@ class HieracialMokoron(torch.utils.data.Dataset):
         return text, label
 
     def _tokenize(self, text):
-        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
+        return word_tokenize(text)
+        # return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
 
     def _noise_generator(self, string):
         noised = ""
@@ -313,7 +318,7 @@ class AttentionedYoonKimModel(nn.Module):
         assert cnn_kernel_size % 2  # for 'same' padding
 
         super(AttentionedYoonKimModel, self).__init__()
-        self.dropout = dropout
+        self.dropout_prob = dropout
         self.init_function = init_function
         self.embedding_dim = embedding_dim
         self.n_filters = n_filters
@@ -335,8 +340,9 @@ class AttentionedYoonKimModel(nn.Module):
         # I am not sure this formula is always correct:
         self.conv_dim = n_filters * max(1, int(((MAX_WORD_LEN - cnn_kernel_size) / _conv_stride - pool_kernel_size) / _pool_stride + 1))
 
-        self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out, dropout=dropout)
-        self.attention = MultiHeadAttention(hidden_dim_out, hidden_dim_out, hidden_dim_out, dropout_p=self.dropout, h=self.heads)
+        self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out, dropout=self.dropout_prob)
+        self.attention = MultiHeadAttention(hidden_dim_out, hidden_dim_out, hidden_dim_out, dropout_p=self.dropout_prob, h=self.heads)
+        self.dropout = nn.Dropout(self.dropout_prob)
         self.projector = nn.Linear(hidden_dim_out, 2)
 
     def forward(self, x):
@@ -354,6 +360,7 @@ class AttentionedYoonKimModel(nn.Module):
 
         x, _ = self.words_rnn(words_tensor)
         x = self.attention(x, x)
+        x = self.dropout(x)
         x = self.projector(x[-1])
         return x
 
@@ -475,7 +482,7 @@ def run_model_with(noise_level, n_filters, cnn_kernel_size, hidden_dim_out, drop
             logger.error(e)
             logger.error('Continuing (probably) without saving')
 
-        
+
     logger.info('Calculating validation metrics... Time %s min' % ((time() - start_time) / 60.))
     metrics_train = get_metrics(model, dataloader)
     acc_train = metrics_train['accuracy']
@@ -530,8 +537,8 @@ if __name__ == '__main__':
 
     test_original = HieracialMokoron(basepath + 'test.csv', 'text_original')
 
-    dataloader = torch.utils.data.DataLoader(train, BATCH_SIZE, shuffle=True)
-    val_dataloader = torch.utils.data.DataLoader(valid, BATCH_SIZE, shuffle=True)
+    dataloader = torch.utils.data.DataLoader(train, BATCH_SIZE, shuffle=True, num_workers=args.num_workers)
+    val_dataloader = torch.utils.data.DataLoader(valid, BATCH_SIZE, shuffle=True, num_workers=args.num_workers)
 
     results = []
 
