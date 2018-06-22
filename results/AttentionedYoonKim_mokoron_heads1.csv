@@ -1,0 +1,2305 @@
+,acc_test,acc_train,data_desc,dropout,epochs,f1_test,f1_train,init_function,lr,model_desc,model_type,noise_level_test,noise_level_train,run_name,task,trainable_params
+0,0.7970014716703459,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.801891026600042,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+1,0.7930770174147658,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.7984952079539008,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+2,0.7889992641648271,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.7951419896410074,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+3,0.777317880794702,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.7845510367535818,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+4,0.7553654648025508,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.765936225761976,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+5,0.7363257297032132,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.7493296024250904,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+6,0.7193708609271523,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.736004153326988,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+7,0.7018027961736572,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.7206617266930897,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+8,0.6839281334314447,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.7053477005744991,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+9,0.6704378219278881,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.6950551788703225,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+10,0.6568248712288447,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.6832857021589654,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+11,0.7971241108658327,0.8024808157258488,"MaxWordLen 8, MaxTexLen 32",0.5,1,0.8021764477263894,0.8076913235933783,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.0,runs/May14_13-46-48_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_test_no_emoji,Mokoron binary classification,342186
+12,0.8044824625950454,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8024901663208102,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+13,0.7981052244297278,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7961489644924621,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+14,0.7909001716948737,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7890765138863115,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+15,0.7643181260730929,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7632511010502326,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+16,0.7373988226637234,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7377124483233807,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+17,0.7068923227863625,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7098458176520579,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+18,0.6821805248957566,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6860880625037854,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+19,0.6564876134412558,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6623063475797216,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+20,0.6411577140053961,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6482116020438834,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+21,0.6277287220995831,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6357035703570358,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+22,0.6138091734118224,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6212868310282622,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+23,0.8024589158695119,0.9408441080626511,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8007175775571433,0.9408246690939681,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.0,runs/May14_13-57-42_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+24,0.8081003188619083,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8038115537723726,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+25,0.8051876379690949,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8013381690845423,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+26,0.8032254108413048,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7994124265533192,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+27,0.7852587687024773,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7816163631828387,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+28,0.7651152808437577,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.763396028289941,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+29,0.7412926171204317,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7410544405572945,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+30,0.7233259749816041,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7266448564158487,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+31,0.7017721363747854,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7077135731241925,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+32,0.6839281334314447,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6923145799134458,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+33,0.6678623988226637,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6795444460878568,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+34,0.6547706647044396,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6691543750367279,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+35,0.8039612460142261,0.9168637653736992,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8002374406398401,0.9159247348978128,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.005,runs/May14_15-07-56_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+36,0.8180340936963454,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8209599082928595,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+37,0.8132511650723572,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8162649693825224,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+38,0.8086215354427275,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8124060828274329,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+39,0.7963882756929115,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8012569205446656,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+40,0.7730255089526613,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.779521696399321,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+41,0.7533112582781457,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7627668357117585,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+42,0.7352219769438313,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7475149105367793,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+43,0.7174086337993623,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7327863624503523,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+44,0.7005764042187883,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7191256830601093,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+45,0.6823951434878587,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7045097983284365,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+46,0.669793966151582,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6943813847900114,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+47,0.8064446897228355,0.9053532008830022,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.810038215027232,0.9068007142302617,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.01,runs/May14_16-18-00_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+48,0.8183100318861908,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8139870676125306,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+49,0.8159492273730684,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8114221091320328,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+50,0.8115648761344125,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8065592345461413,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+51,0.7999448123620309,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7947403189782629,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+52,0.7822847682119205,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7750926424476609,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+53,0.7674147657591366,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7612513375715994,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+54,0.7504598969830758,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7424611587507516,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+55,0.7378893794456708,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7285083680015243,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+56,0.719401520726024,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7086092715231787,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+57,0.7038570026980623,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6924962592722295,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+58,0.6905506499877361,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.6782287117033825,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+59,0.8014471425067452,0.8668269736150531,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.795992943548387,0.8637054369898199,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.025,runs/May14_17-28-38_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+60,0.8241353936718175,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8221285040932772,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+61,0.8213453519744911,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.819658939679985,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+62,0.8174515575177826,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8156313866352882,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+63,0.8071805248957566,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8048651835303609,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+64,0.7936595535933284,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7927700455721148,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+65,0.7809663968604366,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7804548248309773,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+66,0.767046848172676,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.76717533860391,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+67,0.7552121658081923,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7574284498997388,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+68,0.7417218543046358,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.746417820590006,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+69,0.7263306352710326,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.730446336896781,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+70,0.7165808192298259,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.723531522909439,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+71,0.7951925435369144,0.8311192578576685,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7935978247435422,0.8303468303468304,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.05,runs/May14_18-38-40_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+72,0.8242273730684326,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8207933481291613,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+73,0.8215293107677214,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8181221684111859,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+74,0.8207014961981849,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8172842592013997,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+75,0.8117794947265146,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8081742336655938,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+76,0.798074564630856,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7938266967192588,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+77,0.7885700269806231,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7850508073062777,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+78,0.7748344370860927,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7707006369426752,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+79,0.7636436104979152,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7586487586487586,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+80,0.7479764532744665,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7438135012154835,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+81,0.7367549668874173,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7310992796742876,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+82,0.7256867794947265,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7198020732203814,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+83,0.7890912435614422,0.8083149374540103,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7846611363280639,0.8047879671881064,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.075,runs/May14_19-48-24_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.075_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+84,0.8174208977189109,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8207459137292676,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+85,0.8152440519990188,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.819060773480663,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+86,0.8141709590385087,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8181790910454478,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+87,0.8079470198675497,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8128249566724436,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+88,0.7978906058376257,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8048087172805876,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+89,0.7879874908020603,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7978247522147179,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+90,0.7752023546725534,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7864134234444186,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+91,0.7631837135148394,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7776626367299942,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+92,0.7506745155751778,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7681341240875913,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+93,0.7431628648516065,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7636486753378665,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+94,0.7308376257051754,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7546737459829538,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+95,0.7731788079470199,0.7907797224850205,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7846538976538393,0.8022209386819699,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.1,runs/May14_20-57-15_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.1_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+96,0.8161331861662987,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.819459915103712,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+97,0.813588422859946,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8169777242624924,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+98,0.8139256806475349,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8172373294787244,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+99,0.8083762570517538,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8121430718364894,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+100,0.7974920284522934,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8019905866834548,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+101,0.7882021093941624,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7940983606557377,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+102,0.7763674270296786,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7831619002318806,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+103,0.7670161883738043,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7743831833971674,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+104,0.7576342899190581,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7660481221699369,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+105,0.7442972774098602,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7545615067686875,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+106,0.7384105960264901,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7489111241907003,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+107,0.7674454255580083,0.779545096184169,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7743969542845245,0.7869023199100741,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.125,runs/May14_22-06-14_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.125_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+108,0.8108290409614913,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8051414855987873,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+109,0.8094493500122639,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8040112263883196,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+110,0.806597988717194,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8007958062274995,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+111,0.8039305862153544,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7981694808268897,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+112,0.7939048319843022,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7884966333144547,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+113,0.780598479273976,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7757442807897211,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+114,0.7762754476330636,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7720613500765314,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+115,0.7667402501839587,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7635651687488345,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+116,0.7563772381653177,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7545409613246016,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+117,0.7456156487613441,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.744101409493261,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+118,0.7341182241844494,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.734606438976619,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+119,0.7541390728476821,0.7655773678124671,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7519717917787881,0.7629468704947547,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.15,runs/May14_23-15-10_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.15_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+120,0.8013858229090017,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7901794390101703,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+121,0.7992396369879814,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7874991886804699,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+122,0.8004353691439784,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7894140865120193,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+123,0.7951925435369144,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7832857513625746,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+124,0.7844309541329408,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7715798706994573,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+125,0.7784216335540839,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7656386808055258,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+126,0.7695609516801569,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7551951012963325,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+127,0.7623558989453029,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7475326536594901,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+128,0.7490802060338484,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7326887901750719,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+129,0.7414459161147903,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7258185128588615,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+130,0.7330451312239392,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7169099717137563,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+131,0.74518641157714,0.7519249973720172,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7315134873203036,0.7376334970851254,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.175,runs/May15_00-24-08_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.175_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+132,0.8020909982830513,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.804150611365636,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+133,0.801140544518028,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.803084583156233,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+134,0.79939293598234,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.8016611597805329,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+135,0.7949166053470689,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7982749781356494,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+136,0.7889992641648271,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7932960893854749,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+137,0.7787588913416728,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7848282442748092,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+138,0.7714005396124601,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7786486165538535,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+139,0.7645940642629384,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7735370457763096,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+140,0.7507664949717929,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7613119182546907,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+141,0.7408327201373559,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7534058753172496,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+142,0.7363257297032132,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.7514450867052024,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186
+143,0.7373068432671082,0.7426613581414906,"MaxWordLen 8, MaxTexLen 32",0.5,30,0.751421608448416,0.7573187278889225,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=104, out_features=104, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(104, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0.2,runs/May15_01-33-04_madrugado_AttentionedYoonKim_lr3_dropout0.5_noise_level0.2_spacy_wordlen8_heads1_mokoron_no_emoji,Mokoron binary classification,342186

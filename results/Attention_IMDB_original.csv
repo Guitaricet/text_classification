@@ -1,0 +1,385 @@
+,acc_test,acc_train,data_desc,dropout,epochs,f1_test,f1_train,init_function,lr,model_desc,model_type,noise_level_test,noise_level_train,run_name,task,trainable_params
+0,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+1,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+2,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+3,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+4,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+5,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+6,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+7,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+8,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+9,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+10,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+11,0.5080022075055187,0.5076014401345528,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6737419945105214,0.673389433866884,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0,runs/May16_01-49-06_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+12,0.70948,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6947421510528307,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.0,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+13,0.6982,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6803372452654324,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.005,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+14,0.688,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6677174746528074,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.01,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+15,0.66852,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6411466678214178,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.025,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+16,0.63552,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.5925594705777142,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.05,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+17,0.61232,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.5562677410493545,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.075,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+18,0.58308,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.5156823567678083,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.1,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+19,0.56964,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.4944791617723066,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.125,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+20,0.55152,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.47023247023247017,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.15,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+21,0.54356,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.4524734897557699,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.175,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+22,0.53808,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.4421794995652594,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,0.2,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416
+23,0.70948,0.9890823529411765,"MaxWordLen 8, MaxTexLen 128",0.5,30,0.6947421510528307,0.9890833803877283,,0.001,"AttentionedYoonKimModel(
+  (embedding): Linear(in_features=74, out_features=74, bias=True)
+  (chars_cnn): Sequential(
+    (0): Conv1d(74, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+    (1): ReLU()
+    (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  )
+  (words_rnn): GRU(256, 128, dropout=0.5)
+  (attention): MultiHeadAttention(
+    (query_layer): Linear(in_features=128, out_features=128, bias=False)
+    (key_layer): Linear(in_features=128, out_features=128, bias=False)
+    (value_layer): Linear(in_features=128, out_features=128, bias=False)
+    (bn): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True)
+  )
+  (projector): Linear(in_features=128, out_features=2, bias=True)
+)",charCNN,-1.0,0,runs/May16_11-09-44_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_unchanged,Mokoron binary classification,298416

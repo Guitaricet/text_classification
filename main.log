@@ -1,0 +1,114 @@
+Script is started
+Models with one attention head
+Writer: runs/May15_13-54-29_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_IMDB_no_emoji
+Script is started
+Models with one attention head
+Writer: runs/May15_13-55-28_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0_spacy_wordlen8_heads1_IMDB
+Epoch 0. Global step 665. T=0.7902378956476848 min
+Loss               : 0.2796928882598877
+Validation accuracy: 0.6698666666666667, f1: 0.6750656167979002
+
+
+Epoch 10. Global step 7315. T=7.5731492161750795 min
+Loss               : 0.2865474820137024
+Validation accuracy: 0.7184, f1: 0.7371826779492284
+
+
+Epoch 20. Global step 13965. T=12.858041834831237 min
+Loss               : 0.5384481549263
+Validation accuracy: 0.7077333333333333, f1: 0.7145833333333333
+
+
+Calculating validation metrics... Time 16.735216315587362 min
+Original dataset: acc 0.64684, f1 0.6548610296704586
+Final test metrics: {'f1': 0.6534358330718544, 'accuracy': 0.64656}, Time 28.813943103949228 min
+
+
+Writer: runs/May15_14-24-15_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0.005_spacy_wordlen8_heads1_IMDB
+Epoch 0. Global step 665. T=0.5916715383529663 min
+Loss               : 0.4598234295845032
+Validation accuracy: 0.6584, f1: 0.6640440597954367
+
+
+Epoch 10. Global step 7315. T=7.273968688646952 min
+Loss               : 0.14661474525928497
+Validation accuracy: 0.7098666666666666, f1: 0.6967670011148271
+
+
+Epoch 20. Global step 13965. T=14.505357726414998 min
+Loss               : 0.20841649174690247
+Validation accuracy: 0.6938666666666666, f1: 0.6784313725490195
+
+
+Calculating validation metrics... Time 21.735484608014424 min
+Original dataset: acc 0.65412, f1 0.6776754761993514
+Final test metrics: {'f1': 0.6813203189032114, 'accuracy': 0.65784}, Time 35.70697075923284 min
+
+
+Writer: runs/May15_14-59-57_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0.01_spacy_wordlen8_heads1_IMDB
+Epoch 0. Global step 665. T=0.5604671160380046 min
+Loss               : 0.7143657207489014
+Validation accuracy: 0.6408, f1: 0.6101302460202606
+
+
+Epoch 10. Global step 7315. T=7.897107382615407 min
+Loss               : 1.3608638048171997
+Validation accuracy: 0.7016, f1: 0.6818311060562979
+
+
+Epoch 20. Global step 13965. T=14.932387781143188 min
+Loss               : 0.6581446528434753
+Validation accuracy: 0.7018666666666666, f1: 0.6841807909604519
+
+
+Calculating validation metrics... Time 19.826050341129303 min
+Original dataset: acc 0.68308, f1 0.684857404240086
+Final test metrics: {'f1': 0.6819035441722939, 'accuracy': 0.68156}, Time 32.736555167039235 min
+
+
+Writer: runs/May15_15-32-41_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0.025_spacy_wordlen8_heads1_IMDB
+Epoch 0. Global step 665. T=0.5734209418296814 min
+Loss               : 0.2755953073501587
+Validation accuracy: 0.6408, f1: 0.6720233747260775
+
+
+Epoch 10. Global step 7315. T=7.245132188002269 min
+Loss               : 0.3145720362663269
+Validation accuracy: 0.7008, f1: 0.6814310051107325
+
+
+Epoch 20. Global step 13965. T=13.953470885753632 min
+Loss               : 0.5609864592552185
+Validation accuracy: 0.6965333333333333, f1: 0.6803370786516854
+
+
+Calculating validation metrics... Time 20.086823642253876 min
+Original dataset: acc 0.63896, f1 0.6375973660965228
+Final test metrics: {'f1': 0.6365132239033592, 'accuracy': 0.63772}, Time 34.14511504968007 min
+
+
+Writer: runs/May15_16-06-50_phobos-aijun_AttentionedYoonKim_lr3_dropout0.5_noise_level0.05_spacy_wordlen8_heads1_IMDB
+Epoch 0. Global step 665. T=0.6292901476224263 min
+Loss               : 0.49264442920684814
+Validation accuracy: 0.6317333333333334, f1: 0.6550087434424182
+
+
+Epoch 10. Global step 7315. T=8.020600295066833 min
+Loss               : 0.5526923537254333
+Validation accuracy: 0.6869333333333333, f1: 0.6762272476558191
+
+
+Epoch 20. Global step 13965. T=14.763209704558054 min
+Loss               : 0.08337277173995972
+Validation accuracy: 0.7037333333333333, f1: 0.7170868347338935
+
+
+Calculating validation metrics... Time 19.237532949447633 min
+Original dataset: acc 0.6216, f1 0.5889101338432123
+Final test metrics: {'f1': 0.5828239476308146, 'accuracy': 0.61508}, Time 31.596152027448017 min
+
+
+Saving results table
+Saved with name results/AttentionedYoonKim_IMDB_heads1_first5.csv
+Success!
+Total execution time: 163.0min

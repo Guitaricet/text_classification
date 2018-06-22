@@ -1,0 +1,661 @@
+,acc_test,acc_train,data_desc,dropout,epochs,f1_test,f1_train,init_function,lr,model_desc,model_type,noise_level_test,noise_level_train,run_name,task,trainable_params
+0,0.7500919793966152,0.9004388731209924,Maxlen 32,0.5,30,0.7588818222156486,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+1,0.7409553593328427,0.9004388731209924,Maxlen 32,0.5,30,0.7512292789211789,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+2,0.7334743684081433,0.9004388731209924,Maxlen 32,0.5,30,0.7449760905917212,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+3,0.710663478047584,0.9004388731209924,Maxlen 32,0.5,30,0.7251812807594863,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+4,0.6753433897473633,0.9004388731209924,Maxlen 32,0.5,30,0.697673090649536,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+5,0.643579838116262,0.9004388731209924,Maxlen 32,0.5,30,0.6705025367761683,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+6,0.6256745155751778,0.9004388731209924,Maxlen 32,0.5,30,0.6569252817039931,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+7,0.6079224920284523,0.9004388731209924,Maxlen 32,0.5,30,0.6423137167151488,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+8,0.5917954378219279,0.9004388731209924,Maxlen 32,0.5,30,0.6280797809933516,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+9,0.5789489820946775,0.9004388731209924,Maxlen 32,0.5,30,0.6167499232551,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+10,0.5709467745891587,0.9004388731209924,Maxlen 32,0.5,30,0.6123760456484405,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+11,0.7464434633308805,0.9004388731209924,Maxlen 32,0.5,30,0.7552964847910995,0.9036421904010987,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.0,runs/May15_00-58-41_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0_mokoron_no_emoji,Mokoron binary classification,429058
+12,0.7599031150355654,0.8658283401660886,Maxlen 32,0.5,30,0.762962738747465,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+13,0.7570210939416238,0.8658283401660886,Maxlen 32,0.5,30,0.760812483022968,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+14,0.7471792985038018,0.8658283401660886,Maxlen 32,0.5,30,0.7512068549360367,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+15,0.7302550895266127,0.8658283401660886,Maxlen 32,0.5,30,0.7357481828557698,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+16,0.6987981358842286,0.8658283401660886,Maxlen 32,0.5,30,0.7082962171150307,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+17,0.6810767721363747,0.8658283401660886,Maxlen 32,0.5,30,0.6934637826368834,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+18,0.6580819229825853,0.8658283401660886,Maxlen 32,0.5,30,0.6748119204525572,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+19,0.6393487858719646,0.8658283401660886,Maxlen 32,0.5,30,0.6578434509438902,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+20,0.6253372577875889,0.8658283401660886,Maxlen 32,0.5,30,0.6454065347339099,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+21,0.614514348785872,0.8658283401660886,Maxlen 32,0.5,30,0.637738784683205,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+22,0.6009320578857003,0.8658283401660886,Maxlen 32,0.5,30,0.626363531978413,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+23,0.7514716703458425,0.8658283401660886,Maxlen 32,0.5,30,0.7552388429252973,0.867834168187525,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.005,runs/May15_01-35-23_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.005_mokoron_no_emoji,Mokoron binary classification,429058
+24,0.7651766004415012,0.8432671081677704,Maxlen 32,0.5,30,0.7727636849132177,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+25,0.7599337748344371,0.8432671081677704,Maxlen 32,0.5,30,0.7675316192625141,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+26,0.7544150110375276,0.8432671081677704,Maxlen 32,0.5,30,0.7620179452136193,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+27,0.7386558744174638,0.8432671081677704,Maxlen 32,0.5,30,0.7457950614338542,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+28,0.7156610252636743,0.8432671081677704,Maxlen 32,0.5,30,0.7237414358057791,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+29,0.6970811871474123,0.8432671081677704,Maxlen 32,0.5,30,0.7043332535312424,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+30,0.6745462349766985,0.8432671081677704,Maxlen 32,0.5,30,0.6829734492130335,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+31,0.6569475104243316,0.8432671081677704,Maxlen 32,0.5,30,0.6647088789667676,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+32,0.6469217561932794,0.8432671081677704,Maxlen 32,0.5,30,0.6539247505709821,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+33,0.6318677949472652,0.8432671081677704,Maxlen 32,0.5,30,0.6383760503568954,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+34,0.6229764532744665,0.8432671081677704,Maxlen 32,0.5,30,0.6280736775247254,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+35,0.7498467010056414,0.8432671081677704,Maxlen 32,0.5,30,0.7578428753747068,0.8481244747765412,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.01,runs/May15_02-13-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.01_mokoron_no_emoji,Mokoron binary classification,429058
+36,0.7709713024282561,0.7989396089561652,Maxlen 32,0.5,30,0.7733478973238667,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+37,0.7664643119941134,0.7989396089561652,Maxlen 32,0.5,30,0.7684591300118553,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+38,0.7625705175374049,0.7989396089561652,Maxlen 32,0.5,30,0.7649772382397573,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+39,0.7559480009811136,0.7989396089561652,Maxlen 32,0.5,30,0.7590069633666363,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+40,0.7428869266617611,0.7989396089561652,Maxlen 32,0.5,30,0.7471659430776653,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+41,0.7217929850380181,0.7989396089561652,Maxlen 32,0.5,30,0.727654721171739,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+42,0.7023853323522198,0.7989396089561652,Maxlen 32,0.5,30,0.7083846546699912,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+43,0.6961920529801324,0.7989396089561652,Maxlen 32,0.5,30,0.7046409729053027,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+44,0.68509320578857,0.7989396089561652,Maxlen 32,0.5,30,0.6953942880868353,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+45,0.6761712043168997,0.7989396089561652,Maxlen 32,0.5,30,0.6872371927746521,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+46,0.6644898209467746,0.7989396089561652,Maxlen 32,0.5,30,0.677321381181258,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+47,0.7514103507480991,0.7989396089561652,Maxlen 32,0.5,30,0.7552819026922611,0.8012211360462472,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.025,runs/May15_02-53-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.025_mokoron_no_emoji,Mokoron binary classification,429058
+48,0.7674454255580083,0.766438032166509,Maxlen 32,0.5,30,0.7693336982635404,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+49,0.7652072602403728,0.766438032166509,Maxlen 32,0.5,30,0.7670499482874004,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+50,0.7649313220505274,0.766438032166509,Maxlen 32,0.5,30,0.7673070502898418,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+51,0.7577569291145451,0.766438032166509,Maxlen 32,0.5,30,0.7609452058939216,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+52,0.7465661025263675,0.766438032166509,Maxlen 32,0.5,30,0.752173652335552,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+53,0.7316654402747118,0.766438032166509,Maxlen 32,0.5,30,0.7392288898158632,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+54,0.7255028207014962,0.766438032166509,Maxlen 32,0.5,30,0.7360632056837947,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+55,0.7083026735344616,0.766438032166509,Maxlen 32,0.5,30,0.7216989410869946,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+56,0.7046848172675987,0.766438032166509,Maxlen 32,0.5,30,0.7198371146015125,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+57,0.6915930831493745,0.766438032166509,Maxlen 32,0.5,30,0.7104573846463832,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+58,0.6872087319107186,0.766438032166509,Maxlen 32,0.5,30,0.7078297726101151,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+59,0.739514348785872,0.766438032166509,Maxlen 32,0.5,30,0.7460696993245263,0.7720890872023695,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.05,runs/May15_03-34-31_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.05_mokoron_no_emoji,Mokoron binary classification,429058
+60,0.7579102281089036,0.7462288447387785,Maxlen 32,0.5,30,0.7621686746987952,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+61,0.7570824135393672,0.7462288447387785,Maxlen 32,0.5,30,0.7615206332962104,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+62,0.75481358842286,0.7462288447387785,Maxlen 32,0.5,30,0.7599291525321965,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+63,0.7495707628157959,0.7462288447387785,Maxlen 32,0.5,30,0.7553465524471334,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+64,0.7423350502820701,0.7462288447387785,Maxlen 32,0.5,30,0.7492391239482008,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+65,0.7297645327446652,0.7462288447387785,Maxlen 32,0.5,30,0.7379437473984658,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+66,0.7241231297522688,0.7462288447387785,Maxlen 32,0.5,30,0.7324889998810798,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+67,0.7198614177090998,0.7462288447387785,Maxlen 32,0.5,30,0.7293783135384889,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+68,0.7070149619818494,0.7462288447387785,Maxlen 32,0.5,30,0.7164559966767551,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+69,0.7044701986754967,0.7462288447387785,Maxlen 32,0.5,30,0.7143238196852495,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+70,0.6952109394162375,0.7462288447387785,Maxlen 32,0.5,30,0.7060701930753083,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+71,0.730990924699534,0.7462288447387785,Maxlen 32,0.5,30,0.739288048968919,0.7541999694547677,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.075,runs/May15_04-18-16_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.075_mokoron_no_emoji,Mokoron binary classification,429058
+72,0.7518702477311748,0.7349613686534217,Maxlen 32,0.5,30,0.7526967150496562,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+73,0.7516556291390728,0.7349613686534217,Maxlen 32,0.5,30,0.7528679521601171,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+74,0.7492028452293353,0.7349613686534217,Maxlen 32,0.5,30,0.7509286888740027,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+75,0.7465661025263675,0.7349613686534217,Maxlen 32,0.5,30,0.749150279193979,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+76,0.7379506990434143,0.7349613686534217,Maxlen 32,0.5,30,0.7423507069001898,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+77,0.7328305126318372,0.7349613686534217,Maxlen 32,0.5,30,0.7385067818989317,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+78,0.7281089036055923,0.7349613686534217,Maxlen 32,0.5,30,0.7352835820895521,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+79,0.7196774589158695,0.7349613686534217,Maxlen 32,0.5,30,0.7275544563306416,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+80,0.7138520971302428,0.7349613686534217,Maxlen 32,0.5,30,0.7239165803875165,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+81,0.7093144468972283,0.7349613686534217,Maxlen 32,0.5,30,0.7214338181283972,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+82,0.701710816777042,0.7349613686534217,Maxlen 32,0.5,30,0.7155512674326814,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+83,0.7287834191807702,0.7349613686534217,Maxlen 32,0.5,30,0.7364909145070003,0.7420701648945353,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.1,runs/May15_05-05-50_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.1_mokoron_no_emoji,Mokoron binary classification,429058
+84,0.7449104733872945,0.721171029118049,Maxlen 32,0.5,30,0.7545577910201192,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+85,0.7437147412312975,0.721171029118049,Maxlen 32,0.5,30,0.7537051769350894,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+86,0.7425496688741722,0.721171029118049,Maxlen 32,0.5,30,0.7529058646970543,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+87,0.7383186166298749,0.721171029118049,Maxlen 32,0.5,30,0.7498021282209129,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+88,0.7338422859946039,0.721171029118049,Maxlen 32,0.5,30,0.7469465092552107,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+89,0.7281089036055923,0.721171029118049,Maxlen 32,0.5,30,0.7423740630991809,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+90,0.7264532744665195,0.721171029118049,Maxlen 32,0.5,30,0.7418253371144163,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+91,0.7170100564140299,0.721171029118049,Maxlen 32,0.5,30,0.7347243777662816,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+92,0.7150784890851116,0.721171029118049,Maxlen 32,0.5,30,0.7329674434642682,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+93,0.7051140544518028,0.721171029118049,Maxlen 32,0.5,30,0.7246650635520441,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+94,0.7034277655138582,0.721171029118049,Maxlen 32,0.5,30,0.7234784597352849,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+95,0.715691685062546,0.721171029118049,Maxlen 32,0.5,30,0.7330973145669633,0.7379988146977479,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.125,runs/May15_06-02-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.125_mokoron_no_emoji,Mokoron binary classification,429058
+96,0.7354979151336767,0.7184379270471986,Maxlen 32,0.5,30,0.7275368726905221,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+97,0.7340569045867059,0.7184379270471986,Maxlen 32,0.5,30,0.726372239747634,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+98,0.7343941623742948,0.7184379270471986,Maxlen 32,0.5,30,0.7273814394058596,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+99,0.7330757910228108,0.7184379270471986,Maxlen 32,0.5,30,0.7270846394984326,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+100,0.7266065734608781,0.7184379270471986,Maxlen 32,0.5,30,0.7220646448274788,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+101,0.7259320578857003,0.7184379270471986,Maxlen 32,0.5,30,0.7221065066683247,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+102,0.720719892077508,0.7184379270471986,Maxlen 32,0.5,30,0.7197144527523924,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+103,0.7177458915869512,0.7184379270471986,Maxlen 32,0.5,30,0.7180398162327719,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+104,0.7148945302918813,0.7184379270471986,Maxlen 32,0.5,30,0.7178615856063594,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+105,0.7117978906058376,0.7184379270471986,Maxlen 32,0.5,30,0.7153585271317829,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+106,0.7009443218052489,0.7184379270471986,Maxlen 32,0.5,30,0.7053350250740137,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+107,0.7138827569291145,0.7184379270471986,Maxlen 32,0.5,30,0.7152794727849646,0.7206330995280436,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.15,runs/May15_06-59-26_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.15_mokoron_no_emoji,Mokoron binary classification,429058
+108,0.733167770419426,0.7118416903185115,Maxlen 32,0.5,30,0.7298631157463451,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+109,0.7319720382634289,0.7118416903185115,Maxlen 32,0.5,30,0.7290310582108983,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+110,0.7316654402747118,0.7118416903185115,Maxlen 32,0.5,30,0.7286874573749148,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+111,0.7269131714495953,0.7118416903185115,Maxlen 32,0.5,30,0.7240962735805222,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+112,0.7224061810154525,0.7118416903185115,Maxlen 32,0.5,30,0.7220482593479463,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+113,0.7202599950944322,0.7118416903185115,Maxlen 32,0.5,30,0.7190713713898639,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+114,0.721149129261712,0.7118416903185115,Maxlen 32,0.5,30,0.7216526396327466,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+115,0.7143119941133186,0.7118416903185115,Maxlen 32,0.5,30,0.7145220588235295,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+116,0.7114299730193769,0.7118416903185115,Maxlen 32,0.5,30,0.712030351242198,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+117,0.7049300956585725,0.7118416903185115,Maxlen 32,0.5,30,0.7082044751682736,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+118,0.7042555800833946,0.7118416903185115,Maxlen 32,0.5,30,0.7067372005350846,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+119,0.7094370860927153,0.7118416903185115,Maxlen 32,0.5,30,0.7111991467316776,0.7136888830863632,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.175,runs/May15_07-48-45_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.175_mokoron_no_emoji,Mokoron binary classification,429058
+120,0.7190336031395634,0.7067565436770735,Maxlen 32,0.5,30,0.6997772244790984,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.0,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+121,0.7199840569045867,0.7067565436770735,Maxlen 32,0.5,30,0.7015652060255531,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.005,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+122,0.7192788815305372,0.7067565436770735,Maxlen 32,0.5,30,0.7012529365700861,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.01,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+123,0.7179298503801815,0.7067565436770735,Maxlen 32,0.5,30,0.7015506390709141,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.025,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+124,0.7164581800343389,0.7067565436770735,Maxlen 32,0.5,30,0.7023495333118764,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.05,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+125,0.71415869511896,0.7067565436770735,Maxlen 32,0.5,30,0.7027199387774624,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.075,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+126,0.7111233750306598,0.7067565436770735,Maxlen 32,0.5,30,0.7014764590330144,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.1,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+127,0.7111233750306598,0.7067565436770735,Maxlen 32,0.5,30,0.7038596932361075,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.125,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+128,0.7081800343389747,0.7067565436770735,Maxlen 32,0.5,30,0.7031191515907673,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.15,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+129,0.7074135393671818,0.7067565436770735,Maxlen 32,0.5,30,0.7036979538609618,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.175,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+130,0.7048994358597007,0.7067565436770735,Maxlen 32,0.5,30,0.7028128570105289,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,0.2,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
+131,0.7022013735589895,0.7067565436770735,Maxlen 32,0.5,30,0.7017166722967786,0.7059025078080728,,0.0001,"SimpleRNN(
+  (rnn): GRU(300, 256)
+  (dropout): Dropout(p=0.5)
+  (projector): Linear(in_features=256, out_features=2, bias=True)
+)",FasttextGRU,-1.0,0.2,runs/May15_08-48-19_phobos-aijun_FastTextGRU_lr4_dropout0.5_embed_layers1_hidden256_noise_level0.2_mokoron_no_emoji,Mokoron binary classification,429058
