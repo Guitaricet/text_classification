@@ -1,0 +1,10 @@
+numpy
+pandas
+sklearn
+torch==0.3.1
+torchtext
+tensorboardx
+matplotlib
+seaborn
+tqdm
+spacy
