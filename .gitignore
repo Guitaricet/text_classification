@@ -1,8 +1,12 @@
+# Project-specific:
 .data
+data
+results
 .ipynb_checkpoints
 models
 .idea
 .vscode
+runs
 
 
 # Created by https://www.gitignore.io/api/macos,python,pycharm,visualstudiocode

@@ -1,5 +1,8 @@
 from random import random, choice
 
+import numpy as np
+import pandas as pd
+
 import torch
 import torchtext
 
@@ -9,15 +12,15 @@ from pymystem3 import Mystem
 
 import cfg
 
-# TODO: move noise generator somewhere?
-# alphabet from the paper
-# https://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification.pdf
+# TODO: move textlen params from class to object properties
+# TODO: move char2int to classes
+# NOTE: move noise generator somewhere?
 char2int = {s: i for s, i in zip(cfg.alphabet, range(len(cfg.alphabet)))}
 
 
-class HieracialIMDB(torchtext.datasets.imdb.IMDB):
+class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
     """
-    Dataset class for hieracial (chars -> words -> text) networks, IMDB dataset
+    Dataset class for hierarchical (chars -> words -> text) networks, IMDB dataset
 
     Zero vector used for padding
     """
@@ -28,7 +31,7 @@ class HieracialIMDB(torchtext.datasets.imdb.IMDB):
     # TODO: add __init__
 
     def __getitem__(self, idx):
-        item = super(HieracialIMDB, self).__getitem__(idx)
+        item = super(HierarchicalIMDB, self).__getitem__(idx)
         _text_tensor = self.preprocess(item.text)
 
         label = int(item.label == 'pos')
@@ -58,9 +61,9 @@ class HieracialIMDB(torchtext.datasets.imdb.IMDB):
         return noised
 
 
-class HieracialMokoron(torch.utils.data.Dataset):
+class HierarchicalMokoron(torch.utils.data.Dataset):
     """
-    Dataset class for hieracial (chars -> words -> text) networks which reads data from .csv
+    Dataset class for hierarchical (chars -> words -> text) networks which reads data from .csv
 
     Mokoron, because it was firstly used for Mokoron twitter sentiment dataset 
     Zero vector used for padding
@@ -99,7 +102,7 @@ class HieracialMokoron(torch.utils.data.Dataset):
         return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
 
     def _noise_generator(self, string):
-        noised = ""
+        noised = ''
         for c in string:
             if random() > self.noise_level:
                 noised += c
@@ -146,9 +149,10 @@ class HieracialMokoron(torch.utils.data.Dataset):
             return texts
 
 
-class FastTextNoisedIMDB(torchtext.datasets.imdb.IMDB):
+class FastTextIMDB(torchtext.datasets.imdb.IMDB):
     noise_level = 0
     alphabet = cfg.alphabet
+    embeddings = None
 
     def __init__(self,
                  path,
@@ -158,23 +162,25 @@ class FastTextNoisedIMDB(torchtext.datasets.imdb.IMDB):
                  max_text_len=cfg.max_text_len,
                  **kwargs):
         """
-        IMDB with fasttext embeddings dataset
+        IMDB with FastText embeddings dataset
 
         Zero vector used for padding
         """
-        super(FastTextNoisedIMDB, self).__init__(path, text_field, label_field, **kwargs)
+        super(FastTextIMDB, self).__init__(path, text_field, label_field, **kwargs)
         if isinstance(embeddings, str):
+            print('Loading embeddings from file')
             self.embeddings = FastText.load_fasttext_format(embeddings)
         elif isinstance(embeddings, FastText):
+            print('Got embeddings')
             self.embeddings = embeddings
         else:
-            raise ValueError('embeddings should be path to fasttext file of gensim FastText object')
+            raise ValueError('embeddings should be path to FastText file of gensim FastText object')
         self.max_text_len = max_text_len
+        self.unk_vec = np.random.rand(self.embeddings.vector_size)
 
     def __getitem__(self, idx):
-        item = super(FastTextNoisedIMDB, self).__getitem__(idx)
-        vectors = []
-        # indicies orded different from previous models — (word_vec, word_num) instead of (word_num, word_vec)
+        item = super(FastTextIMDB, self).__getitem__(idx)
+        # indices ordered differently from previous models — (word_vec, word_num) instead of (word_num, word_vec)
         _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size])
 
         for i, token in enumerate(item.text):
@@ -185,8 +191,8 @@ class FastTextNoisedIMDB(torchtext.datasets.imdb.IMDB):
             if token in self.embeddings:
                 token_vec = self.embeddings[token]
             else:
-                # TODO: make oher vector for unk
-                token_vec = self.embeddings['unk']  # is this real <UNK> token?
+                token_vec = self.unk_vec
+
             token_tensor = torch.FloatTensor(token_vec)
             _text_tensor[i, :] = token_tensor
 
@@ -203,21 +209,91 @@ class FastTextNoisedIMDB(torchtext.datasets.imdb.IMDB):
         return noised
 
 
+class FastTextMokoron(torch.utils.data.Dataset):
+    """
+    Zero vector used for padding
+    """
+    noise_level = 0
+    alphabet = cfg.alphabet
+
+    def __init__(self, filepath, text_field, label_field, embeddings, maxlen=cfg.max_text_len):
+        if isinstance(embeddings, str):
+            self.embeddings = FastText.load_fasttext_format(embeddings)
+        elif isinstance(embeddings, FastText):
+            self.embeddings = embeddings
+        else:
+            raise ValueError('embeddings should be path to FastText file of gensim FastText object')
+
+        self.mystem = Mystem()
+        self.text_field = text_field
+        self.label_field = label_field
+        self.data = pd.read_csv(filepath)
+        self.max_text_len = maxlen
+        self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
+        self.unk_vec = np.random.rand(self.embeddings.vector_size)
+
+    def __len__(self):
+        return len(self.data)
+
+    def _tokenize(self, text):
+        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
+
+    def __getitem__(self, idx):
+        line = self.data.iloc[idx]
+        text = line[self.text_field].lower()
+        label = int(line[self.label_field] == 1.)
+
+        if self.noise_level > 0:
+            text = self._noise_generator(text)
+
+        text = self._tokenize(text)
+        text = self._preprocess(text)
+        return text, label
+
+    def _preprocess(self, text):
+        # indicies orded different from previous models — (word_vec, word_num) instead of (word_num, word_vec)
+        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size])
+
+        for i, token in enumerate(text):
+            if i >= self.max_text_len:
+                break
+
+            if token in self.embeddings:
+                token_vec = self.embeddings[token]
+            else:
+                token_vec = self.unk_vec
+
+            token_tensor = torch.FloatTensor(token_vec)
+            _text_tensor[i, :] = token_tensor
+
+        return _text_tensor
+
+    def _noise_generator(self, string):
+        noised = ""
+        for c in string:
+            if random() > self.noise_level:
+                noised += c
+            if random() < self.noise_level:
+                noised += choice(self.alphabet)
+        return noised
+
+
 class CharIMDB(torchtext.datasets.imdb.IMDB):
     noise_level = 0
     alphabet = cfg.alphabet
+    maxlen = cfg.max_text_len * cfg.max_word_len
 
     def __getitem__(self, idx):
         item = super(CharIMDB, self).__getitem__(idx)
         text = item.text
-        text = self._noise_generator(text, self.noise_level)
+        text = self._noise_generator(text)
         label = int(item.label == 'pos')
         return self._preprocess(text), label
 
-    def _preprocess(text, maxlen=MAXLEN):
-        one_hotted_text = np.zeros((maxlen, ALPHABET_LEN))
+    def _preprocess(self, text):
+        one_hotted_text = np.zeros((self.maxlen, len(self.alphabet)))
         for i, char in enumerate(text):
-            if i >= MAXLEN:
+            if i >= self.maxlen:
                 break
             one_hotted_text[i, char2int.get(char, char2int['<UNK>'])] = 1.
 
@@ -233,18 +309,20 @@ class CharIMDB(torchtext.datasets.imdb.IMDB):
         return noised
 
 
-class MokoronDatasetOneHot(torch.utils.data.Dataset):
+class CharMokoron(torch.utils.data.Dataset):
     """
     Zero vector for padding.
     """
     noise_level = 0
     alphabet = cfg.alphabet
+    maxlen = cfg.max_text_len * cfg.max_word_len
 
-    def __init__(self, filepath, text_field, maxlen=MAXLEN):
+    def __init__(self, filepath, text_field, maxlen=None):
 
         self.data = pd.read_csv(filepath)
         self.text_field = text_field
-        self.maxlen = maxlen
+        if maxlen is not None:
+            self.maxlen = maxlen
         self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
 
     def __len__(self):
@@ -296,7 +374,7 @@ class MokoronDatasetOneHot(torch.utils.data.Dataset):
                 else:
                     symb = ''
             else:
-                symb = ALPHABET[i]
+                symb = self.alphabet[i]
             text += symb
         return text
 
@@ -308,16 +386,20 @@ def model_params_num(model):
 
 
 def mk_dataline(model_type, epochs, lr, noise_level_train, noise_level_test, acc_train, acc_test,
-                f1_train, f1_test, dropout, model, run_name, task, init_function=None):
+                f1_train, f1_test, dropout, model, run_name,):
     # TODO: do not use cfg here?
     return {
-        'task': task,
         'model_type': model_type,
-        'trainable_params': model_params_num(model), 'dropout': dropout, 'init_function': init_function,
-        'epochs': epochs, 'lr': lr,
-        'noise_level_train': noise_level_train, 'noise_level_test': noise_level_test,
-        'acc_train': acc_train, 'acc_test': acc_test,
-        'f1_train': f1_train, 'f1_test': f1_test,
+        'trainable_params': model_params_num(model),
+        'dropout': dropout,
+        'epochs': epochs,
+        'lr': lr,
+        'noise_level_train': noise_level_train,
+        'noise_level_test': noise_level_test,
+        'acc_train': acc_train,
+        'acc_test': acc_test,
+        'f1_train': f1_train,
+        'f1_test': f1_test,
         'model_desc': str(model),
         'run_name': run_name,
         'data_desc': 'MaxWordLen %s, MaxTexLen %s' % (cfg.max_word_len, cfg.max_text_len)

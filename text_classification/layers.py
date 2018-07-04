@@ -7,9 +7,6 @@ from torch.autograd import Variable
 import cfg
 
 
-CUDA = torch.cuda.is_available()
-
-
 # https://github.com/akurniawan/pytorch-transformer
 class MultiHeadAttention(nn.Module):
     def __init__(self,
@@ -32,7 +29,7 @@ class MultiHeadAttention(nn.Module):
         self._num_units = num_units
         self._h = h
         self._key_dim = Variable(torch.FloatTensor([key_dim]))
-        if CUDA:
+        if cfg.cuda:
             self._key_dim = self._key_dim.cuda()
         self._dropout_p = dropout_p
         self._is_masked = is_masked
@@ -94,15 +91,17 @@ class MultiHeadAttention(nn.Module):
 
 
 class AttentionedYoonKimModel(nn.Module):
+    name = 'AttentionedYoonKimModel'
+
     def __init__(self,
                  n_filters,
                  cnn_kernel_size,
                  hidden_dim_out,
+                 heads=1,
                  dropout=0.5,
                  init_function=None,
                  embedding_dim=len(cfg.alphabet),
-                 pool_kernel_size=cfg.max_word_len,
-                 heads=1):
+                 pool_kernel_size=cfg.max_word_len):
         """
         CharCNN-WordRNN model with multi-head attention
 
@@ -141,7 +140,7 @@ class AttentionedYoonKimModel(nn.Module):
     def forward(self, x):
         batch_size = x.size(1)
         # TODO: hadrcode! (for CUDA)
-        words_tensor = Variable(torch.zeros(cfg.max_text_len, batch_size, self.conv_dim)).cuda()
+        words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim).cuda()
 
         for i in range(cfg.max_text_len):
             word = x[i * cfg.max_word_len : (i + 1) * cfg.max_word_len, :]
@@ -159,8 +158,10 @@ class AttentionedYoonKimModel(nn.Module):
 
 
 class YoonKimModel(nn.Module):
+    name = 'YoonKimModel'
+
     def __init__(self, n_filters, cnn_kernel_size, hidden_dim_out,
-                 dropout=0.5, init_function=None, embedding_dim=len(cfg.alphabet), pool_kernel_size=cfg.max_word_len):
+                 dropout=0.5, embedding_dim=len(cfg.alphabet), pool_kernel_size=cfg.max_word_len):
         """
         Paper: https://arxiv.org/abs/1508.06615
 
@@ -174,7 +175,6 @@ class YoonKimModel(nn.Module):
 
         super(YoonKimModel, self).__init__()
         self.dropout_prob = dropout
-        self.init_function = init_function
         self.embedding_dim = embedding_dim
         self.n_filters = n_filters
         self.cnn_kernel_size = cnn_kernel_size
@@ -186,8 +186,7 @@ class YoonKimModel(nn.Module):
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=pool_kernel_size)
         )
-        if init_function is not None:
-            self.chars_cnn[0].weight = init_function(self.chars_cnn[0].weight)
+        torch.nn.init.xavier_normal_(self.chars_cnn[0].weight)
 
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default
@@ -196,7 +195,7 @@ class YoonKimModel(nn.Module):
         self.dropout = nn.Dropout(self.dropout_prob)
         self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out)
         self.projector = nn.Linear(hidden_dim_out, 2)
-        
+
     def forward(self, x):
         batch_size = x.size(1)
         # TODO: hadrcode! (for CUDA)
@@ -216,17 +215,19 @@ class YoonKimModel(nn.Module):
         return x
 
 
-class SimpleRNN(nn.Module):
-    def __init__(self, hidden_dim, embedding_dim, num_layers=1, dropout=0.5, type_='GRU'):
-        super(SimpleRNN, self).__init__()
+class RNNBinaryClassifier(nn.Module):
+    name = 'RNNBinaryClassifier'
+
+    def __init__(self, input_dim, hidden_dim, num_layers=1, dropout=0.5, type_='GRU'):
+        super(RNNBinaryClassifier, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
         self.dropout_prob = dropout
 
         if type_ == 'GRU':
-            self.rnn = nn.GRU(embedding_dim, hidden_dim, num_layers=num_layers)
+            self.rnn = nn.GRU(input_dim, hidden_dim, num_layers=num_layers)
         elif type_ == 'LSTM': 
-            self.rnn = nn.LSTM(embedding_dim, hidden_dim, num_layers=num_layers)
+            self.rnn = nn.LSTM(input_dim, hidden_dim, num_layers=num_layers)
         # elif type_ == 'QRNN':
         #     self.rnn = QRNN(embedding_dim, hidden_dim, num_layers=num_layers)
         # elif type_ == 'SRU':
@@ -242,3 +243,52 @@ class SimpleRNN(nn.Module):
         x = self.projector(x)
         return x
 
+
+class CharCNN(nn.Module):
+    name = 'CharCNN'
+
+    # Note: use max-over-time pooling via torch.max?
+    def __init__(self, n_filters, cnn_kernel_size, maxlen, alphabet_len, dropout=0.5):
+        """
+        :param dropout: dropout probability (1 - keep prob)
+        """
+        super(CharCNN, self).__init__()
+        self.dropout_prob = dropout
+        self.n_filters = n_filters
+        self.cnn_kernel_size = cnn_kernel_size  # 15
+        self.cnn_stride = 2
+        self.pool_kernel_size = 64  # MAXLEN  # 64
+        self.pool_stride = 32  # self.pool_kernel_size  # 32
+
+        self.embedding = nn.Linear(alphabet_len, alphabet_len)
+        self.conv = nn.Sequential(
+            nn.Conv1d(alphabet_len, self.n_filters, kernel_size=self.cnn_kernel_size, stride=self.cnn_stride),
+            nn.ReLU(),
+            nn.MaxPool1d(kernel_size=self.pool_kernel_size, stride=self.pool_stride)
+        )
+        torch.nn.init.xavier_normal_(self.conv[0].weight)
+
+        conv_dim = self.n_filters * (int(
+            ((maxlen - self.cnn_kernel_size) / self.cnn_stride - self.pool_kernel_size) / self.pool_stride) + 1)
+        self.dropout = nn.Dropout(self.dropout_prob)
+        self.fc = nn.Linear(conv_dim, 2)
+
+    def forward(self, x):
+        """
+        :param x: Tensor of shape (seq_len, batch_size, signal_dim)
+        """
+        x = self.embedding(x)
+        x = x.permute(1, 2, 0)
+        x = self.conv(x)
+        x = x.view(x.size(0), -1)
+        x = self.dropout(x)
+        x = self.fc(x)
+        return x
+
+
+str2model = {
+    AttentionedYoonKimModel.name.lower(): AttentionedYoonKimModel,
+    YoonKimModel.name.lower(): YoonKimModel,
+    RNNBinaryClassifier.name.lower(): RNNBinaryClassifier,
+    CharCNN.name.lower(): CharCNN
+}
