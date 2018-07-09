@@ -10,6 +10,38 @@ import cfg
 from text_classification.logger import logger
 
 
+class CosineLRWithRestarts:
+    def __init__(self, optimizer, max_lr, cycle_len, n_batches):
+        """
+        :param max_lr: max lr rate
+        :param cycle_len: cycle len in epochs
+        :param n_batches: length of epoch in batches
+        """
+        self._optimizer = optimizer
+        self.max_lr = max_lr
+        self.cycle_len = cycle_len
+        self.n_batches = n_batches
+        self._period = self.n_batches * self.cycle_len
+        self._cycle_iter = 0
+        self._cycle_number = 0
+
+    def __next__(self):
+        cos_out = np.cos(np.pi * self._cycle_iter / self._period) + 1
+        self._cycle_iter += 1
+        if self._cycle_iter == self._period:
+            self._cycle_iter = 0
+            self._cycle_number += 1
+        return self.max_lr / 2 * cos_out
+
+    def batch_step(self):
+        """
+        Updates lr of optimizer
+        """
+        lr = self.__next__()
+        for param in self._optimizer.param_groups:
+            param['lr'] = lr
+
+
 def get_dataloaders(dataset,
                     testset,
                     batch_size,

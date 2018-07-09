@@ -23,4 +23,4 @@ class train:
 
 
 class experiment:
-    noise_levels = np.concatenate([np.arange(0.05, 0.2, 0.01), np.arange(0, 0.05, 0.005)])
+    noise_levels = [0]  # np.concatenate([np.arange(0.05, 0.2, 0.01), np.arange(0, 0.05, 0.005)])
