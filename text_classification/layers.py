@@ -99,7 +99,6 @@ class AttentionedYoonKimModel(nn.Module):
                  hidden_dim_out,
                  heads=1,
                  dropout=0.5,
-                 init_function=None,
                  embedding_dim=len(cfg.alphabet),
                  pool_kernel_size=cfg.max_word_len):
         """
@@ -111,7 +110,6 @@ class AttentionedYoonKimModel(nn.Module):
 
         super(AttentionedYoonKimModel, self).__init__()
         self.dropout_prob = dropout
-        self.init_function = init_function
         self.embedding_dim = embedding_dim
         self.n_filters = n_filters
         self.cnn_kernel_size = cnn_kernel_size
@@ -124,8 +122,7 @@ class AttentionedYoonKimModel(nn.Module):
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=pool_kernel_size)
         )
-        if init_function is not None:
-            self.chars_cnn[0].weight = init_function(self.chars_cnn[0].weight)
+        torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
 
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default

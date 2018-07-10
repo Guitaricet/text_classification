@@ -20,6 +20,8 @@ class train:
     val_size = 0.15
     num_workers = 4
     evals_per_noise_level = 1
+    lr = 1e-3
+    epochs = 20
 
 
 class experiment:

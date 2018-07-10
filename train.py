@@ -2,15 +2,13 @@ import os
 from time import time
 
 import numpy as np
-import pandas as pd
 
 import torch
 import torch.nn.functional as F
 from tensorboardX import SummaryWriter
-from tqdm import tqdm
 
 import cfg
-from text_classification import trainutils, datautils
+from text_classification import trainutils
 from text_classification.logger import logger
 from text_classification.trainutils import CosineLRWithRestarts
 
@@ -23,8 +21,8 @@ def train(model,
           train_dataloader,
           val_dataloader,
           noise_level,
-          lr=1e-3,
-          epochs=10,
+          lr=cfg.train.lr,
+          epochs=cfg.train.epochs,
           comment='',
           log_every=10,
           save_model_path=None,
@@ -41,7 +39,7 @@ def train(model,
     :param comment: comment for TensorBoard runs name
     :param log_every: log every epochs
     :param save_model_path: path for directory for trained model saving
-    :param use_annealing: use CosineLRWithRestarts for lr
+    :param use_annealing: use CosineLRWithRestarts schedule for learning rate
     :return: model, results where model is trained model, results is list of dicts
     """
     assert noise_level in cfg.experiment.noise_levels
@@ -98,8 +96,8 @@ def train(model,
 
         # evaluation
         model.eval()
-        train_metrics = trainutils.get_metrics(model, train_dataloader, 0.1)
-        val_metrics = trainutils.get_metrics(model, val_dataloader)
+        train_metrics = trainutils.get_metrics(model, train_dataloader, 0.05)
+        val_metrics = trainutils.get_metrics(model, val_dataloader, 0.25)
         model.train()
 
         writer.add_scalar('accuracy_train', train_metrics['accuracy'], global_step=global_step)
@@ -126,7 +124,7 @@ def train(model,
     return model
 
 
-def evaluate(model, test_dataloader, noise_levels, evals_per_noise):
+def evaluate_on_noise(model, test_dataloader, noise_levels, evals_per_noise):
     is_training = model.training
     if is_training:
         model.eval()
@@ -136,70 +134,12 @@ def evaluate(model, test_dataloader, noise_levels, evals_per_noise):
     for _ in range(evals_per_noise):
         for noise_level in noise_levels:
             metrics = trainutils.get_metrics(model, test_dataloader, noise_level)
+            metrics = {'noise_level_test': noise_level,
+                       'acc_test': metrics['accuracy'],
+                       'f1_test': metrics['f1']}
             results.append(metrics)
 
     if is_training:
         model.train()
 
     return results
-
-
-# def evaluate(model, test_dataloader, noise_level_train, noise_level_test, evals_per_noise_level):
-#     model.eval()
-#
-#     results = []
-#     test_metrics = None
-#
-#     noise_levels = cfg.experiment.noise_levels
-#
-#     for _ in range(evals_per_noise_level):
-#         metrics = trainutils.get_metrics(model, test_noised, noise_level=test_noise)
-#
-#         if test_noise == noise_level_train:  # train noise level
-#             test_metrics = metrics
-#
-#         results.append(datautils.mk_dataline(
-#             model_type=model.name,
-#             noise_level_train=noise_level_train,
-#             noise_level_test=test_noise,
-#             acc_test=metrics['accuracy'],
-#             f1_test=metrics['f1'],
-#             dropout=dropout,
-#             model=model,
-#             run_name=run_name
-#         ))
-#         _maybe_save_results(results, save_results_path)
-#
-#     metrics = trainutils.get_metrics(model, test_original, noise_level=0)
-#     results.append(datautils.mk_dataline(
-#         model_type=model.name,
-#         epochs=epochs,
-#         lr=lr,
-#         noise_level_train=noise_level_train,
-#         acc_train=train_metrics['accuracy'],
-#         f1_train=train_metrics['f1'],
-#         noise_level_test=-1,
-#         acc_test=metrics['accuracy'],
-#         f1_test=metrics['f1'],
-#         dropout=dropout,
-#         model=model,
-#         run_name=run_name
-#     ))
-#     _maybe_save_results(results, save_results_path)
-#
-#     logger.info('Original dataset accuracy: {:.4f}, f1: {:.4f}'.format(metrics['accuracy'], metrics['f1']))
-#     writer.add_scalar('accuracy_test_original', metrics['accuracy'], global_step=global_step)
-#     writer.add_scalar('f1_test_original', metrics['f1'], global_step=global_step)
-#
-#     logger.info('Final test accuracy:{:.4f}, f1: {:.4f}. Time {} min'
-#                 .format(test_metrics['accuracy'], test_metrics['f1'], ((time() - start_time) / 60.)))
-#
-#
-# def _maybe_save_results(results, savepath):
-#     if savepath is not None:
-#         old_results_df = pd.DataFrame()
-#         if os.path.exists(savepath):
-#             old_results_df = pd.read_csv(savepath)
-#         results_df = pd.DataFrame(results)
-#         results_df = pd.concat([old_results_df, results_df], sort=False)
-#         results_df.to_csv(savepath)

@@ -1,14 +1,13 @@
 """
-Main experiment script for IMDB dataset
+Main experiment script for .csv datasets
+Currently mokoron sentiment analysis dataset and airline tweets.
 """
-import os
 import argparse
 from time import time
 
 import pandas as pd
 
-import torch
-import torchtext
+from torch.utils.data import DataLoader
 
 from gensim.models import FastText
 
@@ -17,20 +16,25 @@ from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
 from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimModel, AttentionedYoonKimModel
-from text_classification.datautils import CharIMDB, FastTextIMDB, HierarchicalIMDB
+from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
 
 
 MAXLEN = 512  # for CharCNN
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-name')
+parser.add_argument('--dataset-name', choices=['mokoron', 'airline-tweets'])
 parser.add_argument('--comment', default='')
+parser.add_argument('--datapath', default='data/mokoron')
 
 
-def experiment(model_class, train_data, test_data, save_results_path, comment, **model_params):
+def experiment(model_class, train_data, val_data, test_data, test_original_data,
+               save_results_path, comment, **model_params):
     train_dataloader, val_dataloader, test_dataloader = \
-        trainutils.get_dataloaders(train_data, test_data, batch_size=cfg.train.batch_size,
-                                   valid_size=cfg.train.val_size)
+        trainutils.get_dataloaders(train_data, test_data, validset=val_data, batch_size=cfg.train.batch_size)
+    test_original_dataloader = DataLoader(
+        test_original_data, batch_size=cfg.train.batch_size, num_workers=cfg.train.num_workers
+    )
 
     noise_levels = cfg.experiment.noise_levels
     all_results = []
@@ -44,7 +48,7 @@ def experiment(model_class, train_data, test_data, save_results_path, comment, *
                               train_dataloader,
                               val_dataloader,
                               test_dataloader,
-                              test_dataloader,
+                              test_original_dataloader,
                               noise_level,
                               comment=comment,
                               save_model_path='models')
@@ -82,26 +86,26 @@ if __name__ == '__main__':
     if not cfg.cuda:
         logger.warning('Not using CUDA!')
 
-    # Chose data format
-    if args.model_name == 'CharCNN':
-        text_field = torchtext.data.Field(
-            lower=True, include_lengths=False, tensor_type=torch.FloatTensor, batch_first=True,
-            tokenize=lambda x: x, use_vocab=False, sequential=False
-        )
-        label_field = torchtext.data.Field(sequential=False, use_vocab=False)
-
+    basepath = args.datapath.strip('/') + '/'
+    if args.dataset_name == 'mokoron':
+        text_filed = 'text_spellchecked'
+        text_original_field = 'text_original'
+        label_field = 'sentiment'
+    elif args.dataset_name == 'airline-tweets':
+        raise NotImplementedError
     else:
-        text_field = torchtext.data.Field(
-            lower=True, include_lengths=False, tensor_type=torch.FloatTensor, batch_first=True,
-            tokenize='spacy', use_vocab=False
-        )
-        label_field = torchtext.data.Field(sequential=False, use_vocab=False)
+        raise ValueError('Incorrect dataset name')
 
-    # Chose model
+    # Chose data
     logger.info('Creating datasets and preprocessing raw texts...')
+
     if args.model_name == 'CharCNN':
-        CharIMDB.maxlen = MAXLEN
-        train_data, test_data = CharIMDB.splits(text_field, label_field)
+        CharMokoron.maxlen = MAXLEN
+        train_data = CharMokoron(basepath + 'train.csv', text_filed, label_field)
+        valid_data = CharMokoron(basepath + 'validation.csv', text_filed, label_field)
+        test_data = CharMokoron(basepath + 'test.csv', text_filed, label_field)
+
+        test_original_data = CharMokoron(basepath + 'test.csv', text_original_field, label_field)
 
         model_class = CharCNN
         model_params = {'n_filters': 128, 'cnn_kernel_size': 5, 'maxlen': MAXLEN, 'alphabet_len': len(cfg.alphabet)}
@@ -109,19 +113,31 @@ if __name__ == '__main__':
     elif args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
-        train_data, test_data = FastTextIMDB.splits(text_field, label_field, embeddings=embeddings)
+        train_data = FastTextMokoron(basepath + 'train.csv', text_filed, label_field, embeddings)
+        valid_data = FastTextMokoron(basepath + 'validation.csv', text_filed, label_field, embeddings)
+        test_data = FastTextMokoron(basepath + 'test.csv', text_filed, label_field, embeddings)
+
+        test_original_data = FastTextMokoron(basepath + 'test.csv', text_original_field, label_field, embeddings)
 
         model_class = RNNBinaryClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256}
 
     elif args.model_name == 'YoonKim':
-        train_data, test_data = HierarchicalIMDB.splits(text_field, label_field)
+        train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
+        valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field)
+        test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field)
+
+        test_original_data = HierarchicalMokoron(basepath + 'test.csv', text_original_field, label_field)
 
         model_class = YoonKimModel
         model_params = {'n_filters': 256, 'cnn_kernel_size': 5, 'hidden_dim_out': 128}
 
     elif args.model_name == 'AttentionedYoonKim':
-        train_data, test_data = HierarchicalIMDB.splits(text_field, label_field)
+        train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
+        valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field)
+        test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field)
+
+        test_original_data = HierarchicalMokoron(basepath + 'test.csv', text_original_field, label_field)
 
         model_class = AttentionedYoonKimModel
         model_params = {'n_filters': 128, 'cnn_kernel_size': 5, 'hidden_dim_out': 128, 'heads': 1}
@@ -129,7 +145,7 @@ if __name__ == '__main__':
     else:
         raise ValueError('Wrong model name')
 
-    save_results_path = 'results/%s_IMDB.csv' % args.model_name
+    save_results_path = 'results/%s_%s.csv' % (args.model_name, args.dataset_name)
     if os.path.exists(save_results_path):
         if input('File at path %s already exists, delete it? (y/n)').lower() != 'y':
             logger.warning('Cancelling execution due to existing output file')
@@ -139,6 +155,7 @@ if __name__ == '__main__':
     experiment(model_class,
                train_data,
                test_data,
+               test_original_data,
                save_results_path=save_results_path,
                comment=args.comment,
                **model_params)

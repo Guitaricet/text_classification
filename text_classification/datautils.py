@@ -74,10 +74,11 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
     max_word_len = cfg.max_word_len
 
     # TODO: rename maxwordlen and maxtextlen
-    def __init__(self, filepath, text_field, maxwordlen=cfg.max_word_len, maxtextlen=cfg.max_text_len):
+    def __init__(self, filepath, text_field, label_field, maxwordlen=cfg.max_word_len, maxtextlen=cfg.max_text_len):
 
         self.mystem = Mystem()
         self.text_field = text_field
+        self.label_field = label_field
         self.data = pd.read_csv(filepath)
         self.maxwordlen = maxwordlen
         self.maxtextlen = maxtextlen
@@ -89,7 +90,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         line = self.data.iloc[idx]
         text = line[self.text_field].lower()
-        label = int(line.sentiment == 1.)
+        label = int(line[self.label_field] == 1.)
 
         if self.noise_level > 0:
             text = self._noise_generator(text)
@@ -317,10 +318,11 @@ class CharMokoron(torch.utils.data.Dataset):
     alphabet = cfg.alphabet
     maxlen = cfg.max_text_len * cfg.max_word_len
 
-    def __init__(self, filepath, text_field, maxlen=None):
+    def __init__(self, filepath, text_field, label_field, maxlen=None):
 
         self.data = pd.read_csv(filepath)
         self.text_field = text_field
+        self.label_field = label_field
         if maxlen is not None:
             self.maxlen = maxlen
         self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
@@ -331,7 +333,7 @@ class CharMokoron(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         line = self.data.iloc[idx]
         text = line[self.text_field]
-        label = int(line.sentiment == 1.)
+        label = int(line[self.label_field] == 1.)
 
         if self.noise_level > 0:
             text = self._noise_generator(text)
