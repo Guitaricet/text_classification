@@ -98,6 +98,9 @@ if __name__ == '__main__':
         text_filed = 'text_spellchecked'
         text_original_field = 'text_original'
         label_field = 'sentiment'
+
+        alphabet = cfg.alphabet + cfg.russian_chars
+        alphabet = [c for c in alphabet if c not in ('(', ')')]
     elif args.dataset_name == 'airline-tweets':
         raise NotImplementedError
     else:
@@ -108,6 +111,7 @@ if __name__ == '__main__':
 
     if args.model_name == 'CharCNN':
         CharMokoron.maxlen = MAXLEN
+        CharMokoron.alphabet = alphabet
         train_data = CharMokoron(basepath + 'train.csv', text_filed, label_field)
         valid_data = CharMokoron(basepath + 'validation.csv', text_filed, label_field)
         test_data = CharMokoron(basepath + 'test.csv', text_filed, label_field)
@@ -138,6 +142,7 @@ if __name__ == '__main__':
         epochs = 20
 
     elif args.model_name == 'YoonKim':
+        HierarchicalMokoron.alphabet = alphabet
         train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
         valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field)
         test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field)
@@ -154,6 +159,7 @@ if __name__ == '__main__':
         epochs = 20
 
     elif args.model_name == 'AttentionedYoonKim':
+        HierarchicalMokoron.alphabet = alphabet
         train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
         valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field)
         test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field)
