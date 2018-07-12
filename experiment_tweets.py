@@ -187,6 +187,7 @@ if __name__ == '__main__':
     logger.info('Starting the experiment')
     experiment(model_class,
                train_data,
+               valid_data,
                test_data,
                test_original_data,
                save_results_path=save_results_path,
