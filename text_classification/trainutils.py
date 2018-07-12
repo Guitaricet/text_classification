@@ -68,6 +68,7 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
+    pin_memory = True  # workaround for pytorch bug
     if valid_size is not None:
         len_dataset = len(dataset)
         indices = list(range(len_dataset))
@@ -84,21 +85,21 @@ def get_dataloaders(dataset,
         valid_sampler = SubsetRandomSampler(valid_idx)
 
         train_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=train_sampler, num_workers=num_workers
+            dataset, batch_size=batch_size, sampler=train_sampler, num_workers=num_workers, pin_memory=cfg.pin_memory
         )
         valid_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=valid_sampler, num_workers=num_workers
+            dataset, batch_size=batch_size, sampler=valid_sampler, num_workers=num_workers, pin_memory=cfg.pin_memory
         )
     else:
         train_loader = DataLoader(
-            dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
+            dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=cfg.pin_memory
         )
         valid_loader = DataLoader(
-            validset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
+            validset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=cfg.pin_memory
         )
 
     test_loader = DataLoader(
-        testset, batch_size=batch_size, num_workers=num_workers
+        testset, batch_size=batch_size, num_workers=num_workers, pin_memory=cfg.pin_memory
     )
 
     return train_loader, valid_loader, test_loader
@@ -113,22 +114,23 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
     :param noise_level: 0 <= noise_level <= 1
     :param frac: 0 < frac <=1, which part of test_data to use for evaluation
     """
-    # is_training_mode = model.training
-    # model.eval()
-    if model.training:
+    is_training_mode = model.training
+    if is_training_mode:
         logger.warning('Model is evaluating in training mode!')
+        model.eval()
+        logger.info('Switched model to test mode')
 
     if isinstance(test_data, torch.utils.data.Dataset):
-        assert False, 'Do not use '
-        if noise_level is not None:
-            test_data.noise_level = noise_level
-
+        assert False, 'Do not use it such way'
         test_dataloader = DataLoader(
             test_data, batch_size=cfg.train.batch_size, shuffle=True, num_workers=cfg.train.num_workers
         )
     else:
         assert isinstance(test_data, torch.utils.data.DataLoader)
         test_dataloader = test_data
+
+    if noise_level is not None:
+        test_dataloader.dataset.noise_level = noise_level
 
     predictions = []
     labels = []
@@ -151,8 +153,9 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
 
         acc = accuracy_score(labels, predictions)
         f1 = f1_score(labels, predictions)
-        # if is_training_mode:
-        #     model.train()
+
+    if is_training_mode:
+        model.train()
 
     return {'accuracy': acc, 'f1': f1}
 

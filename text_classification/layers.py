@@ -120,6 +120,7 @@ class AttentionedYoonKimModel(nn.Module):
         self.chars_cnn = nn.Sequential(
             nn.Conv1d(embedding_dim, n_filters, kernel_size=cnn_kernel_size, stride=1, padding=int(cnn_kernel_size - 1) // 2),  # 'same' padding
             nn.ReLU(),
+            # nn.BatchNorm1d(n_filters),
             nn.MaxPool1d(kernel_size=pool_kernel_size)
         )
         torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
@@ -181,6 +182,7 @@ class YoonKimModel(nn.Module):
         self.chars_cnn = nn.Sequential(
             nn.Conv1d(embedding_dim, n_filters, kernel_size=cnn_kernel_size, stride=1, padding=int(cnn_kernel_size - 1) // 2),  # 'same' padding
             nn.ReLU(),
+            # nn.BatchNorm1d(n_filters),
             nn.MaxPool1d(kernel_size=pool_kernel_size)
         )
         torch.nn.init.xavier_normal_(self.chars_cnn[0].weight)
@@ -261,6 +263,7 @@ class CharCNN(nn.Module):
         self.conv = nn.Sequential(
             nn.Conv1d(alphabet_len, self.n_filters, kernel_size=self.cnn_kernel_size, stride=self.cnn_stride),
             nn.ReLU(),
+            # nn.BatchNorm1d(self.n_filters),
             nn.MaxPool1d(kernel_size=self.pool_kernel_size, stride=self.pool_stride)
         )
         torch.nn.init.xavier_normal_(self.conv[0].weight)

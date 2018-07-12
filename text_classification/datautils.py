@@ -28,7 +28,6 @@ class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
     alphabet = cfg.alphabet
     max_text_len = cfg.max_text_len
     max_word_len = cfg.max_word_len
-    # TODO: add __init__
 
     def __getitem__(self, idx):
         item = super(HierarchicalIMDB, self).__getitem__(idx)

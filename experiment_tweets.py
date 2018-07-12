@@ -2,8 +2,9 @@
 Main experiment script for .csv datasets
 Currently mokoron sentiment analysis dataset and airline tweets.
 """
+import os
 import argparse
-from time import time
+from time import time, sleep
 
 import pandas as pd
 
@@ -19,7 +20,8 @@ from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimMode
 from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
 
 
-MAXLEN = 512  # for CharCNN
+MAXLEN = 170  # for CharCNN
+cfg.max_text_len = 128
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-name')
@@ -29,15 +31,17 @@ parser.add_argument('--datapath', default='data/mokoron')
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
-               save_results_path, comment, **model_params):
+               save_results_path, comment, lr, epochs, **model_params):
     train_dataloader, val_dataloader, test_dataloader = \
         trainutils.get_dataloaders(train_data, test_data, validset=val_data, batch_size=cfg.train.batch_size)
-    test_original_dataloader = DataLoader(
-        test_original_data, batch_size=cfg.train.batch_size, num_workers=cfg.train.num_workers
-    )
+    test_original_dataloader = DataLoader(test_original_data,
+                                          batch_size=cfg.train.batch_size,
+                                          num_workers=cfg.train.num_workers,
+                                          pin_memory=cfg.pin_memory)
 
     noise_levels = cfg.experiment.noise_levels
-    all_results = []
+    all_results = pd.DataFrame()
+
     for i, noise_level in enumerate(noise_levels):
         logger.info('Training model for noise level {:.3f} ({}/{})'
                     .format(noise_level, i, len(noise_levels)))
@@ -47,17 +51,19 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
         trained_model = train(model,
                               train_dataloader,
                               val_dataloader,
-                              test_dataloader,
-                              test_original_dataloader,
                               noise_level,
+                              lr=lr,
+                              epochs=epochs,
                               comment=comment,
                               save_model_path='models')
 
         logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
-
+        sleep(2)  # workaround from ConnectionResetError
+        # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
+        model.eval()
         train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
         results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
-        results_dicts_original = evaluate_on_noise(trained_model, test_dataloader, [0], 1)
+        results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)
 
         results_df_noised = pd.DataFrame(results_dicts_noised)
         results_df_original = pd.DataFrame(results_dicts_original)
@@ -66,12 +72,13 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
 
         results_df['model_type'] = trained_model.name
         results_df['noise_level_train'] = noise_level
-        results_df['acc_train'] = train_metrics['acc']
+        results_df['acc_train'] = train_metrics['accuracy']
         results_df['f1_train'] = train_metrics['f1']
         all_results = pd.concat([all_results, results_df], sort=False)
-        pd.DataFrame(all_results).to_csv(save_results_path)
+        logger.info('Saving the results')
+        all_results.to_csv(save_results_path)
 
-    pd.DataFrame(all_results).to_csv(save_results_path)
+    all_results.to_csv(save_results_path)
 
 
 if __name__ == '__main__':
@@ -108,7 +115,13 @@ if __name__ == '__main__':
         test_original_data = CharMokoron(basepath + 'test.csv', text_original_field, label_field)
 
         model_class = CharCNN
-        model_params = {'n_filters': 128, 'cnn_kernel_size': 5, 'maxlen': MAXLEN, 'alphabet_len': len(cfg.alphabet)}
+        model_params = {'n_filters': 128,
+                        'cnn_kernel_size': 5,
+                        'dropout': 0.5,
+                        'maxlen': MAXLEN,
+                        'alphabet_len': len(cfg.alphabet)}
+        lr = 1e-3
+        epochs = 30
 
     elif args.model_name == 'FastText':
         logger.info('Loading embeddings...')
@@ -120,7 +133,9 @@ if __name__ == '__main__':
         test_original_data = FastTextMokoron(basepath + 'test.csv', text_original_field, label_field, embeddings)
 
         model_class = RNNBinaryClassifier
-        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256}
+        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5}
+        lr = 0.0006
+        epochs = 20
 
     elif args.model_name == 'YoonKim':
         train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
@@ -130,7 +145,13 @@ if __name__ == '__main__':
         test_original_data = HierarchicalMokoron(basepath + 'test.csv', text_original_field, label_field)
 
         model_class = YoonKimModel
-        model_params = {'n_filters': 256, 'cnn_kernel_size': 5, 'hidden_dim_out': 128}
+        model_params = {'n_filters': 32,
+                        'cnn_kernel_size': 5,
+                        'hidden_dim_out': 64,
+                        'embedding_dim': 90,
+                        'dropout': 0.5}
+        lr = 1e-3
+        epochs = 20
 
     elif args.model_name == 'AttentionedYoonKim':
         train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
@@ -140,7 +161,13 @@ if __name__ == '__main__':
         test_original_data = HierarchicalMokoron(basepath + 'test.csv', text_original_field, label_field)
 
         model_class = AttentionedYoonKimModel
-        model_params = {'n_filters': 128, 'cnn_kernel_size': 5, 'hidden_dim_out': 128, 'heads': 1}
+        model_params = {'n_filters': 128,
+                        'cnn_kernel_size': 5,
+                        'hidden_dim_out': 128,
+                        'embedding_dim': 74,
+                        'heads': 1}
+        lr = 1e-3
+        epochs = 20
 
     else:
         raise ValueError('Wrong model name')
@@ -158,5 +185,7 @@ if __name__ == '__main__':
                test_original_data,
                save_results_path=save_results_path,
                comment=args.comment,
+               lr=lr,
+               epochs=epochs,
                **model_params)
     logger.info('Total execution time: {:.1f}min'.format((time() - start_time) / 60.))

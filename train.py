@@ -89,8 +89,8 @@ def train(model,
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1e-1)
             optimizer.step()
 
-            if cfg.cuda:
-                torch.cuda.synchronize()
+            # if cfg.cuda:
+            #     torch.cuda.synchronize()
 
             global_step += 1
 
