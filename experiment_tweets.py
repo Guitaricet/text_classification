@@ -20,9 +20,6 @@ from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimMode
 from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
 
 
-MAXLEN = 170  # for CharCNN
-cfg.max_text_len = 128
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-name')
 parser.add_argument('--dataset-name', choices=['mokoron', 'airline-tweets'])
@@ -83,6 +80,12 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
 
 
 if __name__ == '__main__':
+    """
+    Tweets
+    """
+    MAXLEN = 170  # for CharCNN
+    cfg.max_text_len = 128
+
     start_time = time()
     logger.info('The script is started')
 

@@ -237,11 +237,13 @@ class RNNBinaryClassifier(nn.Module):
         #     self.rnn = sru.SRU(embedding_dim, hidden_dim, num_layers=num_layers)
         else:
             raise ValueError('Wrong type_', type_)
+        # self.layernorm = nn.LayerNorm(hidden_dim)
         self.dropout = nn.Dropout(self.dropout_prob)
         self.projector = nn.Linear(hidden_dim, 2)
 
     def forward(self, x):
         x, _ = self.rnn(x)
+        # x = self.layernorm(x)
         x = self.dropout(x[-1])
         x = self.projector(x)
         return x

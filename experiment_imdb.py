@@ -20,8 +20,6 @@ from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimMode
 from text_classification.datautils import CharIMDB, FastTextIMDB, HierarchicalIMDB
 
 
-MAXLEN = 512  # for CharCNN
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-name')
 parser.add_argument('--comment', default='')
@@ -77,6 +75,11 @@ def experiment(model_class, train_data, test_data,
 
 
 if __name__ == '__main__':
+    """
+    IMDB
+    """
+    MAXLEN = 512  # for CharCNN
+
     start_time = time()
     logger.info('The script is started')
 
@@ -120,11 +123,12 @@ if __name__ == '__main__':
 
     elif args.model_name == 'FastText':
         logger.info('Loading embeddings...')
+        logger.info('maxlen: %s' % cfg.max_text_len)
         embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
         train_data, test_data = FastTextIMDB.splits(text_field, label_field, embeddings=embeddings)
 
         model_class = RNNBinaryClassifier
-        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5}
+        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.2}
         lr = 0.0006
         epochs = 20
 
