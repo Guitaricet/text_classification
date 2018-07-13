@@ -49,6 +49,7 @@ def experiment(model_class, train_data, test_data,
                               lr=lr,
                               epochs=epochs,
                               comment=comment,
+                              log_every=1,
                               save_model_path='models')
 
         logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))

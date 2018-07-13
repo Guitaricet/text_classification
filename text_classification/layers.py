@@ -92,6 +92,7 @@ class MultiHeadAttention(nn.Module):
 
 class AttentionedYoonKimModel(nn.Module):
     name = 'AttentionedYoonKimModel'
+    alphabet = cfg.alphabet
 
     def __init__(self,
                  n_filters,
@@ -116,7 +117,7 @@ class AttentionedYoonKimModel(nn.Module):
         self.hidden_dim_out = hidden_dim_out
         self.heads = heads
 
-        self.embedding = nn.Linear(len(cfg.alphabet), embedding_dim)
+        self.embedding = nn.Linear(len(self.alphabet), embedding_dim)
         self.chars_cnn = nn.Sequential(
             nn.Conv1d(embedding_dim, n_filters, kernel_size=cnn_kernel_size, stride=1, padding=int(cnn_kernel_size - 1) // 2),  # 'same' padding
             nn.ReLU(),
@@ -157,6 +158,7 @@ class AttentionedYoonKimModel(nn.Module):
 
 class YoonKimModel(nn.Module):
     name = 'YoonKimModel'
+    alphabet = cfg.alphabet
 
     def __init__(self, n_filters, cnn_kernel_size, hidden_dim_out,
                  dropout=0.5, embedding_dim=len(cfg.alphabet), pool_kernel_size=cfg.max_word_len):
@@ -178,7 +180,7 @@ class YoonKimModel(nn.Module):
         self.cnn_kernel_size = cnn_kernel_size
         self.hidden_dim_out = hidden_dim_out
 
-        self.embedding = nn.Linear(len(cfg.alphabet), embedding_dim)
+        self.embedding = nn.Linear(len(self.alphabet), embedding_dim)
         self.chars_cnn = nn.Sequential(
             nn.Conv1d(embedding_dim, n_filters, kernel_size=cnn_kernel_size, stride=1, padding=int(cnn_kernel_size - 1) // 2),  # 'same' padding
             nn.ReLU(),

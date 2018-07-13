@@ -53,6 +53,7 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                               val_dataloader,
                               noise_level,
                               lr=lr,
+                              log_every=1,
                               epochs=epochs,
                               comment=comment,
                               save_model_path='models')
@@ -123,7 +124,7 @@ if __name__ == '__main__':
                         'cnn_kernel_size': 5,
                         'dropout': 0.5,
                         'maxlen': MAXLEN,
-                        'alphabet_len': len(cfg.alphabet)}
+                        'alphabet_len': len(alphabet)}
         lr = 1e-3
         epochs = 30
 
