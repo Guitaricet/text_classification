@@ -49,7 +49,7 @@ class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
                     break
                 _text_tensor[i*self.max_word_len + j, char2int.get(char, char2int['<UNK>'])] = 1.
         return _text_tensor
-    
+
     def _noise_generator(self, string):
         noised = ""
         for c in string:
@@ -133,7 +133,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
             for j, char in enumerate(token):
                 if j >= self.maxwordlen:
                     break
-                _text_tensor[i*self.maxwordlen + j, char2int.get(char, char2int['<UNK>'])] = 1.
+                _text_tensor[i*self.maxwordlen + j, self.char2int.get(char, self.char2int['<UNK>'])] = 1.
 
         return _text_tensor
 
