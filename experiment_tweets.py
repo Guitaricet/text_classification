@@ -131,11 +131,12 @@ if __name__ == '__main__':
     elif args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
-        train_data = FastTextMokoron(basepath + 'train.csv', text_filed, label_field, embeddings)
-        valid_data = FastTextMokoron(basepath + 'validation.csv', text_filed, label_field, embeddings)
-        test_data = FastTextMokoron(basepath + 'test.csv', text_filed, label_field, embeddings)
+        train_data = FastTextMokoron(basepath + 'train.csv', text_filed, label_field, embeddings, alphabet=alphabet)
+        valid_data = FastTextMokoron(basepath + 'validation.csv', text_filed, label_field, embeddings, alphabet=alphabet)
+        test_data = FastTextMokoron(basepath + 'test.csv', text_filed, label_field, embeddings, alphabet=alphabet)
 
-        test_original_data = FastTextMokoron(basepath + 'test.csv', text_original_field, label_field, embeddings)
+        test_original_data = FastTextMokoron(
+            basepath + 'test.csv', text_original_field, label_field, embeddings, alphabet=alphabet)
 
         model_class = RNNBinaryClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5}
@@ -143,35 +144,38 @@ if __name__ == '__main__':
         epochs = 20
 
     elif args.model_name == 'YoonKim':
-        HierarchicalMokoron.alphabet = alphabet
-        train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
-        valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field)
-        test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field)
+        train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field, alphabet=alphabet)
+        valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field, alphabet=alphabet)
+        test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field, alphabet=alphabet)
 
-        test_original_data = HierarchicalMokoron(basepath + 'test.csv', text_original_field, label_field)
+        test_original_data = HierarchicalMokoron(
+            basepath + 'test.csv', text_original_field, label_field, alphabet=alphabet)
 
         model_class = YoonKimModel
         model_params = {'n_filters': 32,
                         'cnn_kernel_size': 5,
                         'hidden_dim_out': 64,
                         'embedding_dim': 90,
-                        'dropout': 0.5}
+                        'dropout': 0.5,
+                        'alphabet_len': len(alphabet)}
         lr = 1e-3
         epochs = 20
 
     elif args.model_name == 'AttentionedYoonKim':
-        HierarchicalMokoron.alphabet = alphabet
-        train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field)
-        valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field)
-        test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field)
+        train_data = HierarchicalMokoron(basepath + 'train.csv', text_filed, label_field, alphabet=alphabet)
+        valid_data = HierarchicalMokoron(basepath + 'validation.csv', text_filed, label_field, alphabet=alphabet)
+        test_data = HierarchicalMokoron(basepath + 'test.csv', text_filed, label_field, alphabet=alphabet)
 
-        test_original_data = HierarchicalMokoron(basepath + 'test.csv', text_original_field, label_field)
+        test_original_data = HierarchicalMokoron(
+            basepath + 'test.csv', text_original_field, label_field, alphabet=alphabet)
 
         model_class = AttentionedYoonKimModel
         model_params = {'n_filters': 128,
                         'cnn_kernel_size': 5,
                         'hidden_dim_out': 128,
                         'embedding_dim': 74,
+                        'dropout': 0.5,
+                        'alphabet_len': len(alphabet),
                         'heads': 1}
         lr = 1e-3
         epochs = 20

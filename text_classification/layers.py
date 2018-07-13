@@ -92,7 +92,6 @@ class MultiHeadAttention(nn.Module):
 
 class AttentionedYoonKimModel(nn.Module):
     name = 'AttentionedYoonKimModel'
-    alphabet = cfg.alphabet
 
     def __init__(self,
                  n_filters,
@@ -101,7 +100,8 @@ class AttentionedYoonKimModel(nn.Module):
                  heads=1,
                  dropout=0.5,
                  embedding_dim=len(cfg.alphabet),
-                 pool_kernel_size=cfg.max_word_len):
+                 pool_kernel_size=cfg.max_word_len,
+                 alphabet_len=None):
         """
         CharCNN-WordRNN model with multi-head attention
 
@@ -110,6 +110,7 @@ class AttentionedYoonKimModel(nn.Module):
         assert cnn_kernel_size % 2  # for 'same' padding
 
         super(AttentionedYoonKimModel, self).__init__()
+        self.alphabet_len = alphabet_len or len(cfg.alphabet)
         self.dropout_prob = dropout
         self.embedding_dim = embedding_dim
         self.n_filters = n_filters
@@ -117,7 +118,7 @@ class AttentionedYoonKimModel(nn.Module):
         self.hidden_dim_out = hidden_dim_out
         self.heads = heads
 
-        self.embedding = nn.Linear(len(self.alphabet), embedding_dim)
+        self.embedding = nn.Linear(self.alphabet_len, embedding_dim)
         self.chars_cnn = nn.Sequential(
             nn.Conv1d(embedding_dim, n_filters, kernel_size=cnn_kernel_size, stride=1, padding=int(cnn_kernel_size - 1) // 2),  # 'same' padding
             nn.ReLU(),
@@ -158,10 +159,9 @@ class AttentionedYoonKimModel(nn.Module):
 
 class YoonKimModel(nn.Module):
     name = 'YoonKimModel'
-    alphabet = cfg.alphabet
 
     def __init__(self, n_filters, cnn_kernel_size, hidden_dim_out,
-                 dropout=0.5, embedding_dim=len(cfg.alphabet), pool_kernel_size=cfg.max_word_len):
+                 dropout=0.5, embedding_dim=None, pool_kernel_size=cfg.max_word_len, alphabet_len=None):
         """
         Paper: https://arxiv.org/abs/1508.06615
 
@@ -174,13 +174,15 @@ class YoonKimModel(nn.Module):
         assert cnn_kernel_size % 2  # for 'same' padding
 
         super(YoonKimModel, self).__init__()
+        self.embedding_dim = embedding_dim or len(cfg.alphabet)
+        self.alphabet_len = alphabet_len or len(cfg.alphabet)
         self.dropout_prob = dropout
         self.embedding_dim = embedding_dim
         self.n_filters = n_filters
         self.cnn_kernel_size = cnn_kernel_size
         self.hidden_dim_out = hidden_dim_out
 
-        self.embedding = nn.Linear(len(self.alphabet), embedding_dim)
+        self.embedding = nn.Linear(self.alphabet_len, embedding_dim)
         self.chars_cnn = nn.Sequential(
             nn.Conv1d(embedding_dim, n_filters, kernel_size=cnn_kernel_size, stride=1, padding=int(cnn_kernel_size - 1) // 2),  # 'same' padding
             nn.ReLU(),
@@ -203,7 +205,7 @@ class YoonKimModel(nn.Module):
         words_tensor = Variable(torch.zeros(cfg.max_text_len, batch_size, self.conv_dim)).cuda()
         
         for i in range(cfg.max_text_len):
-            word = x[i * cfg.max_word_len : (i + 1) * cfg.max_word_len, :]
+            word = x[i * cfg.max_word_len: (i + 1) * cfg.max_word_len, :]
             word = self.embedding(word)
             word = word.permute(1, 2, 0)
             word = self.chars_cnn(word)

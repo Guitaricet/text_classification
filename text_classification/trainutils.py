@@ -68,7 +68,6 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
-    pin_memory = True  # workaround for pytorch bug
     if valid_size is not None:
         len_dataset = len(dataset)
         indices = list(range(len_dataset))

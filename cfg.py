@@ -12,7 +12,7 @@ russian_chars = [s for s in 'абвгдеёжзийклмнопрстуфхцч�
 max_word_len = 8
 max_text_len = 256
 
-pin_memory = True
+pin_memory = False
 
 class data:
     fasttext_path = '/data/embeddings/wiki.simple.bin'

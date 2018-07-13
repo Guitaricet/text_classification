@@ -73,8 +73,15 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
     max_word_len = cfg.max_word_len
 
     # TODO: rename maxwordlen and maxtextlen
-    def __init__(self, filepath, text_field, label_field, maxwordlen=cfg.max_word_len, maxtextlen=cfg.max_text_len):
+    def __init__(self,
+                 filepath,
+                 text_field,
+                 label_field,
+                 maxwordlen=cfg.max_word_len,
+                 maxtextlen=cfg.max_text_len,
+                 alphabet=None):
 
+        self.alphabet = alphabet or cfg.alphabet
         self.mystem = Mystem()
         self.text_field = text_field
         self.label_field = label_field
@@ -214,9 +221,8 @@ class FastTextMokoron(torch.utils.data.Dataset):
     Zero vector used for padding
     """
     noise_level = 0
-    alphabet = cfg.alphabet
 
-    def __init__(self, filepath, text_field, label_field, embeddings, maxlen=cfg.max_text_len):
+    def __init__(self, filepath, text_field, label_field, embeddings, maxlen=cfg.max_text_len, alphabet=None):
         if isinstance(embeddings, str):
             self.embeddings = FastText.load_fasttext_format(embeddings)
         elif isinstance(embeddings, FastText):
@@ -224,12 +230,12 @@ class FastTextMokoron(torch.utils.data.Dataset):
         else:
             raise ValueError('embeddings should be path to FastText file of gensim FastText object')
 
+        self.alphabet = alphabet or cfg.alphabet
         self.mystem = Mystem()
         self.text_field = text_field
         self.label_field = label_field
         self.data = pd.read_csv(filepath)
         self.max_text_len = maxlen
-        self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
         self.unk_vec = np.random.rand(self.embeddings.vector_size)
 
     def __len__(self):
@@ -314,16 +320,16 @@ class CharMokoron(torch.utils.data.Dataset):
     Zero vector for padding.
     """
     noise_level = 0
-    alphabet = cfg.alphabet
     maxlen = cfg.max_text_len * cfg.max_word_len
 
-    def __init__(self, filepath, text_field, label_field, maxlen=None):
+    def __init__(self, filepath, text_field, label_field, maxlen=None, alphabet=None):
 
         self.data = pd.read_csv(filepath)
         self.text_field = text_field
         self.label_field = label_field
         if maxlen is not None:
             self.maxlen = maxlen
+        self.alphabet = alphabet or cfg.alphabet
         self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
 
     def __len__(self):
