@@ -125,7 +125,6 @@ class AttentionedYoonKimModel(nn.Module):
             # nn.BatchNorm1d(n_filters),
             nn.MaxPool1d(kernel_size=pool_kernel_size)
         )
-        torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
 
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default
@@ -136,6 +135,11 @@ class AttentionedYoonKimModel(nn.Module):
         self.attention = MultiHeadAttention(hidden_dim_out, hidden_dim_out, hidden_dim_out, dropout_p=self.dropout_prob, h=self.heads)
         self.dropout = nn.Dropout(self.dropout_prob)
         self.projector = nn.Linear(hidden_dim_out, 2)
+
+        # Initializers
+        torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
+        torch.nn.init.xavier_normal_(self.embedding.weight)
+        torch.nn.init.xavier_normal_(self.projector.weight)
 
     def forward(self, x):
         batch_size = x.size(1)
@@ -189,7 +193,6 @@ class YoonKimModel(nn.Module):
             # nn.BatchNorm1d(n_filters),
             nn.MaxPool1d(kernel_size=pool_kernel_size)
         )
-        torch.nn.init.xavier_normal_(self.chars_cnn[0].weight)
 
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default
@@ -199,11 +202,16 @@ class YoonKimModel(nn.Module):
         self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out)
         self.projector = nn.Linear(hidden_dim_out, 2)
 
+        # Initializers
+        torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
+        torch.nn.init.xavier_normal_(self.embedding.weight)
+        torch.nn.init.xavier_normal_(self.projector.weight)
+
     def forward(self, x):
         batch_size = x.size(1)
         # TODO: hadrcode! (for CUDA)
-        words_tensor = Variable(torch.zeros(cfg.max_text_len, batch_size, self.conv_dim)).cuda()
-        
+        words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim).cuda()
+
         for i in range(cfg.max_text_len):
             word = x[i * cfg.max_word_len: (i + 1) * cfg.max_word_len, :]
             word = self.embedding(word)
@@ -229,7 +237,7 @@ class RNNBinaryClassifier(nn.Module):
 
         if type_ == 'GRU':
             self.rnn = nn.GRU(input_dim, hidden_dim, num_layers=num_layers)
-        elif type_ == 'LSTM': 
+        elif type_ == 'LSTM':
             self.rnn = nn.LSTM(input_dim, hidden_dim, num_layers=num_layers)
         # elif type_ == 'QRNN':
         #     self.rnn = QRNN(embedding_dim, hidden_dim, num_layers=num_layers)
@@ -240,6 +248,9 @@ class RNNBinaryClassifier(nn.Module):
         # self.layernorm = nn.LayerNorm(hidden_dim)
         self.dropout = nn.Dropout(self.dropout_prob)
         self.projector = nn.Linear(hidden_dim, 2)
+
+        # Initializers
+        torch.nn.init.xavier_normal_(self.projector.weight)
 
     def forward(self, x):
         x, _ = self.rnn(x)
@@ -277,8 +288,10 @@ class CharCNN(nn.Module):
         conv_dim = self.n_filters * (int(
             ((maxlen - self.cnn_kernel_size) / self.cnn_stride - self.pool_kernel_size) / self.pool_stride) + 1)
         self.dropout = nn.Dropout(self.dropout_prob)
-        self.fc = nn.Linear(conv_dim, 2)
+        self.projector = nn.Linear(conv_dim, 2)
 
+        torch.nn.init.xavier_normal_(self.embedding.weight)
+        torch.nn.init.xavier_normal_(self.projector.weight)
     def forward(self, x):
         """
         :param x: Tensor of shape (seq_len, batch_size, signal_dim)
@@ -288,7 +301,7 @@ class CharCNN(nn.Module):
         x = self.conv(x)
         x = x.view(x.size(0), -1)
         x = self.dropout(x)
-        x = self.fc(x)
+        x = self.projector(x)
         return x
 
 

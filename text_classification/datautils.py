@@ -35,7 +35,7 @@ class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
 
         label = int(item.label == 'pos')
         return _text_tensor, label
-    
+
     def preprocess(self, text, with_noise=True):
         _text_tensor = torch.zeros([self.max_word_len * self.max_text_len, len(self.alphabet)])
 
@@ -64,7 +64,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
     """
     Dataset class for hierarchical (chars -> words -> text) networks which reads data from .csv
 
-    Mokoron, because it was firstly used for Mokoron twitter sentiment dataset 
+    Mokoron, because it was firstly used for Mokoron twitter sentiment dataset
     Zero vector used for padding
     """
     noise_level = 0
@@ -126,7 +126,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
 
     def _preprocess(self, text):
         _text_tensor = torch.zeros([self.maxwordlen * self.maxtextlen, len(self.alphabet)])
-        
+
         for i, token in enumerate(text):
             if i >= self.maxtextlen:
                 break
