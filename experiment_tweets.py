@@ -56,7 +56,7 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                               save_model_path='models')
 
         logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
-        sleep(2)  # workaround from ConnectionResetError
+        sleep(2)  # workaround for ConnectionResetError
         # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
         model.eval()
         train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
@@ -86,10 +86,16 @@ if __name__ == '__main__':
     MAXLEN = 170  # for CharCNN
     cfg.max_text_len = 128
 
+    args = parser.parse_args()
+
+    save_results_path = 'results/%s_%s.csv' % (args.model_name, args.dataset_name)
+    if os.path.exists(save_results_path):
+        if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':
+            logger.warning('Cancelling execution due to existing output file')
+            exit(1)
+
     start_time = time()
     logger.info('The script is started')
-
-    args = parser.parse_args()
 
     if cfg.train.evals_per_noise_level == 1:
         logger.warning('Only one eval for noise level on test!')
@@ -115,12 +121,11 @@ if __name__ == '__main__':
 
     if args.model_name == 'CharCNN':
         CharMokoron.maxlen = MAXLEN
-        CharMokoron.alphabet = alphabet
-        train_data = CharMokoron(basepath + 'train.csv', text_filed, label_field)
-        valid_data = CharMokoron(basepath + 'validation.csv', text_filed, label_field)
-        test_data = CharMokoron(basepath + 'test.csv', text_filed, label_field)
+        train_data = CharMokoron(basepath + 'train.csv', text_filed, label_field, alphabet=alphabet)
+        valid_data = CharMokoron(basepath + 'validation.csv', text_filed, label_field, alphabet=alphabet)
+        test_data = CharMokoron(basepath + 'test.csv', text_filed, label_field, alphabet=alphabet)
 
-        test_original_data = CharMokoron(basepath + 'test.csv', text_original_field, label_field)
+        test_original_data = CharMokoron(basepath + 'test.csv', text_original_field, label_field, alphabet=alphabet)
 
         model_class = CharCNN
         model_params = {'n_filters': 128,
@@ -185,12 +190,6 @@ if __name__ == '__main__':
 
     else:
         raise ValueError('Wrong model name')
-
-    save_results_path = 'results/%s_%s.csv' % (args.model_name, args.dataset_name)
-    if os.path.exists(save_results_path):
-        if input('File at path %s already exists, delete it? (y/n)').lower() != 'y':
-            logger.warning('Cancelling execution due to existing output file')
-            exit(1)
 
     logger.info('Starting the experiment')
     experiment(model_class,
