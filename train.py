@@ -96,8 +96,8 @@ def train(model,
 
         # evaluation
         model.eval()
-        train_metrics = trainutils.get_metrics(model, train_dataloader, 0.05)
-        val_metrics = trainutils.get_metrics(model, val_dataloader, 0.25)
+        train_metrics = trainutils.get_metrics(model, train_dataloader, frac=0.05)
+        val_metrics = trainutils.get_metrics(model, val_dataloader, frac=0.25)
         model.train()
 
         writer.add_scalar('accuracy_train', train_metrics['accuracy'], global_step=global_step)
@@ -133,7 +133,7 @@ def evaluate_on_noise(model, test_dataloader, noise_levels, evals_per_noise):
 
     for _ in range(evals_per_noise):
         for noise_level in noise_levels:
-            metrics = trainutils.get_metrics(model, test_dataloader, noise_level)
+            metrics = trainutils.get_metrics(model, test_dataloader, noise_level=noise_level)
             metrics = {'noise_level_test': noise_level,
                        'acc_test': metrics['accuracy'],
                        'f1_test': metrics['f1']}

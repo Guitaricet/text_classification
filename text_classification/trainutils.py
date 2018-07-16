@@ -131,6 +131,10 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
         assert isinstance(test_data, torch.utils.data.DataLoader)
         test_dataloader = test_data
 
+    if noise_level is not None:
+        prev_noise_level = test_dataloader.dataset.noise_level
+        test_dataloader.dataset.noise_level = noise_level
+
     predictions = []
     labels = []
 
@@ -155,5 +159,8 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
 
     if is_training_mode:
         model.train()
+
+    if noise_level is not None:
+        test_dataloader.dataset.noise_level = prev_noise_level
 
     return {'accuracy': acc, 'f1': f1}
