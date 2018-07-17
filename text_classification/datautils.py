@@ -247,6 +247,9 @@ class FastTextMokoron(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         line = self.data.iloc[idx]
         text = line[self.text_field].lower()
+        # for mokoron dataset we should remove smiles
+        if ')' not in self.alphabet:
+            text = [t for t in text if t not in ('(', ')')]
         label = int(line[self.label_field] == 1.)
 
         if self.noise_level > 0:

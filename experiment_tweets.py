@@ -20,6 +20,9 @@ from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimMode
 from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
 
 
+# TODO: add run name to results csv
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-name')
 parser.add_argument('--dataset-name', choices=['mokoron', 'airline-tweets'])
