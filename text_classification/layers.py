@@ -101,7 +101,8 @@ class AttentionedYoonKimModel(nn.Module):
                  dropout=0.5,
                  embedding_dim=len(cfg.alphabet),
                  pool_kernel_size=cfg.max_word_len,
-                 alphabet_len=None):
+                 alphabet_len=None,
+                 num_classes=2):
         """
         CharCNN-WordRNN model with multi-head attention
 
@@ -134,7 +135,7 @@ class AttentionedYoonKimModel(nn.Module):
         self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out, dropout=self.dropout_prob)
         self.attention = MultiHeadAttention(hidden_dim_out, hidden_dim_out, hidden_dim_out, dropout_p=self.dropout_prob, h=self.heads)
         self.dropout = nn.Dropout(self.dropout_prob)
-        self.projector = nn.Linear(hidden_dim_out, 2)
+        self.projector = nn.Linear(hidden_dim_out, num_classes)
 
         # Initializers
         torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
@@ -143,7 +144,7 @@ class AttentionedYoonKimModel(nn.Module):
 
     def forward(self, x):
         batch_size = x.size(1)
-        # TODO: hadrcode! (for CUDA)
+        # TODO: hadrcode! (for CUDA), vectorize dataset and get rid of this variable
         words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim).cuda()
 
         for i in range(cfg.max_text_len):
@@ -164,15 +165,22 @@ class AttentionedYoonKimModel(nn.Module):
 class YoonKimModel(nn.Module):
     name = 'YoonKimModel'
 
-    def __init__(self, n_filters, cnn_kernel_size, hidden_dim_out,
-                 dropout=0.5, embedding_dim=None, pool_kernel_size=cfg.max_word_len, alphabet_len=None):
+    def __init__(self,
+                 n_filters,
+                 cnn_kernel_size,
+                 hidden_dim_out,
+                 dropout=0.5,
+                 embedding_dim=None,
+                 pool_kernel_size=cfg.max_word_len,
+                 alphabet_len=None,
+                 num_classes=2):
         """
         Paper: https://arxiv.org/abs/1508.06615
 
-        Модель принципиально работает так же, но есть некоторые сильные упрощения:
+        The model in principal similar to one in the paper, but have differences
 
-        нету highway-слоя
-        тут используется фильтры только одного размера (а не трёх, как в оригинальной статье)
+        No highway layer
+        Only one kernel size (not three different kernels like in the paper)
         Default pooling is MaxOverTime pooling
         """
         assert cnn_kernel_size % 2  # for 'same' padding
@@ -196,11 +204,15 @@ class YoonKimModel(nn.Module):
 
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default
-        # I am not sure this formula is always correct:
         self.conv_dim = n_filters * max(1, int(((cfg.max_word_len - cnn_kernel_size) / _conv_stride - pool_kernel_size) / _pool_stride + 1))
         self.dropout = nn.Dropout(self.dropout_prob)
         self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out)
-        self.projector = nn.Linear(hidden_dim_out, 2)
+        self.projector = nn.Linear(hidden_dim_out, num_classes)
+
+        # Initializations
+        torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
+        torch.nn.init.xavier_normal_(self.embedding.weight)
+        torch.nn.init.xavier_normal_(self.projector.weight)
 
         # Initializers
         torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
@@ -209,7 +221,7 @@ class YoonKimModel(nn.Module):
 
     def forward(self, x):
         batch_size = x.size(1)
-        # TODO: hadrcode! (for CUDA)
+        # TODO: hadrcode! (for CUDA), vectorize dataset and get rid of this variable
         words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim).cuda()
 
         for i in range(cfg.max_text_len):
@@ -226,11 +238,11 @@ class YoonKimModel(nn.Module):
         return x
 
 
-class RNNBinaryClassifier(nn.Module):
-    name = 'RNNBinaryClassifier'
+class RNNClassifier(nn.Module):
+    name = 'RNNClassifier'
 
-    def __init__(self, input_dim, hidden_dim, num_layers=1, dropout=0.5, type_='GRU'):
-        super(RNNBinaryClassifier, self).__init__()
+    def __init__(self, input_dim, hidden_dim, num_layers=1, dropout=0.5, type_='GRU', num_classes=2):
+        super(RNNClassifier, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
         self.dropout_prob = dropout
@@ -247,7 +259,7 @@ class RNNBinaryClassifier(nn.Module):
             raise ValueError('Wrong type_', type_)
         # self.layernorm = nn.LayerNorm(hidden_dim)
         self.dropout = nn.Dropout(self.dropout_prob)
-        self.projector = nn.Linear(hidden_dim, 2)
+        self.projector = nn.Linear(hidden_dim, num_classes)
 
         # Initializers
         torch.nn.init.xavier_normal_(self.projector.weight)
@@ -264,17 +276,17 @@ class CharCNN(nn.Module):
     name = 'CharCNN'
 
     # Note: use max-over-time pooling via torch.max?
-    def __init__(self, n_filters, cnn_kernel_size, maxlen, alphabet_len, dropout=0.5):
+    def __init__(self, n_filters, cnn_kernel_size, maxlen, alphabet_len, dropout=0.5, num_classes=2):
         """
         :param dropout: dropout probability (1 - keep prob)
         """
         super(CharCNN, self).__init__()
         self.dropout_prob = dropout
         self.n_filters = n_filters
-        self.cnn_kernel_size = cnn_kernel_size  # 15
+        self.cnn_kernel_size = cnn_kernel_size
         self.cnn_stride = 2
-        self.pool_kernel_size = 64  # MAXLEN  # 64
-        self.pool_stride = 32  # self.pool_kernel_size  # 32
+        self.pool_kernel_size = 64
+        self.pool_stride = 32
 
         self.embedding = nn.Linear(alphabet_len, alphabet_len)
         self.conv = nn.Sequential(
@@ -303,11 +315,3 @@ class CharCNN(nn.Module):
         x = self.dropout(x)
         x = self.projector(x)
         return x
-
-
-str2model = {
-    AttentionedYoonKimModel.name.lower(): AttentionedYoonKimModel,
-    YoonKimModel.name.lower(): YoonKimModel,
-    RNNBinaryClassifier.name.lower(): RNNBinaryClassifier,
-    CharCNN.name.lower(): CharCNN
-}

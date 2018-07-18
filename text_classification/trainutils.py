@@ -84,21 +84,21 @@ def get_dataloaders(dataset,
         valid_sampler = SubsetRandomSampler(valid_idx)
 
         train_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=train_sampler, num_workers=num_workers, pin_memory=cfg.pin_memory
+            dataset, batch_size=batch_size, sampler=train_sampler, num_workers=num_workers
         )
         valid_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=valid_sampler, num_workers=num_workers, pin_memory=cfg.pin_memory
+            dataset, batch_size=batch_size, sampler=valid_sampler, num_workers=num_workers
         )
     else:
         train_loader = DataLoader(
-            dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=cfg.pin_memory
+            dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
         )
         valid_loader = DataLoader(
-            validset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=cfg.pin_memory
+            validset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
         )
 
     test_loader = DataLoader(
-        testset, batch_size=batch_size, num_workers=num_workers, pin_memory=cfg.pin_memory
+        testset, batch_size=batch_size, num_workers=num_workers
     )
 
     return train_loader, valid_loader, test_loader
@@ -117,10 +117,13 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
     if is_training_mode:
         logger.warning('Model is evaluating in training mode!')
         model.eval()
-        logger.info('Switched model to test mode')
+        logger.info('Set the model into eval mode')
 
     if isinstance(test_data, torch.utils.data.Dataset):
-        assert False, 'Do not use it such way'
+        assert False, 'Do not use '
+        if noise_level is not None:
+            test_data.noise_level = noise_level
+
         test_dataloader = DataLoader(
             test_data, batch_size=cfg.train.batch_size, shuffle=True, num_workers=cfg.train.num_workers
         )
@@ -129,6 +132,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
         test_dataloader = test_data
 
     if noise_level is not None:
+        prev_noise_level = test_dataloader.dataset.noise_level
         test_dataloader.dataset.noise_level = noise_level
 
     predictions = []
@@ -147,26 +151,23 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
             prediction = model(text)
             _, idx = torch.max(prediction, 1)
 
+            if i == 0:
+                _, symb = text[9]
+                logger.info('Texts ninth symbols:\n %s' % symb)
+                logger.info('Prediction:\n %s' % prediction)
+
             predictions.extend(idx.tolist())
             labels.extend(label.tolist())
 
+        # logger.info(labels)
+        # logger.info(predictions)
         acc = accuracy_score(labels, predictions)
         f1 = f1_score(labels, predictions)
 
     if is_training_mode:
         model.train()
 
+    if noise_level is not None:
+        test_dataloader.dataset.noise_level = prev_noise_level
+
     return {'accuracy': acc, 'f1': f1}
-
-
-# TODO: code this
-# def evaluate_for_noise_levels(model, dataset, noise_levels, evals_per_noise_level=10):
-#     """
-#     Evaluate model on different noise levels and prepare results
-#
-#     :param model:
-#     :param noise_levels:
-#     :param evals_per_noise_level:
-#     :return: list of dicts
-#     """
-#     pass

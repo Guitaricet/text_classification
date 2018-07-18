@@ -69,16 +69,14 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
     """
     noise_level = 0
     alphabet = cfg.alphabet
-    max_text_len = cfg.max_text_len
-    max_word_len = cfg.max_word_len
 
     # TODO: rename maxwordlen and maxtextlen
     def __init__(self,
                  filepath,
                  text_field,
                  label_field,
-                 maxwordlen=cfg.max_word_len,
-                 maxtextlen=cfg.max_text_len,
+                 max_word_len=cfg.max_word_len,
+                 max_text_len=cfg.max_text_len,
                  alphabet=None):
 
         self.alphabet = alphabet or cfg.alphabet
@@ -86,9 +84,10 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
         self.text_field = text_field
         self.label_field = label_field
         self.data = pd.read_csv(filepath)
-        self.maxwordlen = maxwordlen
-        self.maxtextlen = maxtextlen
-        self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
+        self.max_word_len = max_word_len
+        self.max_text_len = max_text_len
+        self.char2int = {s: i for i, s in enumerate(self.alphabet)}
+        self.label2int = {l: i for i, l in enumerate(self.data[self.label_field].unique())}
 
     def __len__(self):
         return len(self.data)
@@ -96,7 +95,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         line = self.data.iloc[idx]
         text = line[self.text_field].lower()
-        label = int(line[self.label_field] == 1.)
+        label = self.label2int[line[self.label_field]]
 
         if self.noise_level > 0:
             text = self._noise_generator(text)
@@ -104,9 +103,6 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
         text = self._tokenize(text)
         text = self._preprocess(text)
         return text, label
-
-    def _tokenize(self, text):
-        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
 
     def _noise_generator(self, string):
         noised = ''
@@ -117,23 +113,19 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
                 noised += choice(self.alphabet)
         return noised
 
-    def _one_hot(self, char):
-        zeros = np.zeros(len(self.alphabet))
-        if char in self.char2int:
-            zeros[self.char2int[char]] = 1.
-        else:
-            zeros[self.char2int['<UNK>']] = 1.
+    def _tokenize(self, text):
+        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
 
     def _preprocess(self, text):
-        _text_tensor = torch.zeros([self.maxwordlen * self.maxtextlen, len(self.alphabet)])
+        _text_tensor = torch.zeros([self.max_word_len * self.max_text_len, len(self.alphabet)])
 
         for i, token in enumerate(text):
-            if i >= self.maxtextlen:
+            if i >= self.max_text_len:
                 break
             for j, char in enumerate(token):
-                if j >= self.maxwordlen:
+                if j >= self.max_word_len:
                     break
-                _text_tensor[i*self.maxwordlen + j, self.char2int.get(char, self.char2int['<UNK>'])] = 1.
+                _text_tensor[i * self.max_word_len + j, self.char2int.get(char, self.char2int['<UNK>'])] = 1.
 
         return _text_tensor
 
@@ -222,7 +214,7 @@ class FastTextMokoron(torch.utils.data.Dataset):
     """
     noise_level = 0
 
-    def __init__(self, filepath, text_field, label_field, embeddings, maxlen=cfg.max_text_len, alphabet=None):
+    def __init__(self, filepath, text_field, label_field, embeddings, max_text_len=cfg.max_text_len, alphabet=None):
         if isinstance(embeddings, str):
             self.embeddings = FastText.load_fasttext_format(embeddings)
         elif isinstance(embeddings, FastText):
@@ -235,19 +227,20 @@ class FastTextMokoron(torch.utils.data.Dataset):
         self.text_field = text_field
         self.label_field = label_field
         self.data = pd.read_csv(filepath)
-        self.max_text_len = maxlen
+        self.max_text_len = max_text_len
         self.unk_vec = np.random.rand(self.embeddings.vector_size)
+        self.label2int = {l: i for i, l in enumerate(self.data[self.label_field].unique())}
 
     def __len__(self):
         return len(self.data)
 
-    def _tokenize(self, text):
-        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
-
     def __getitem__(self, idx):
         line = self.data.iloc[idx]
         text = line[self.text_field].lower()
-        label = int(line[self.label_field] == 1.)
+        # for mokoron dataset we should remove smiles
+        if ')' not in self.alphabet:
+            text = [t for t in text if t not in ('(', ')')]
+        label = self.label2int[line[self.label_field]]
 
         if self.noise_level > 0:
             text = self._noise_generator(text)
@@ -255,6 +248,9 @@ class FastTextMokoron(torch.utils.data.Dataset):
         text = self._tokenize(text)
         text = self._preprocess(text)
         return text, label
+
+    def _tokenize(self, text):
+        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
 
     def _preprocess(self, text):
         # indicies orded different from previous models — (word_vec, word_num) instead of (word_num, word_vec)
@@ -331,6 +327,7 @@ class CharMokoron(torch.utils.data.Dataset):
             self.maxlen = maxlen
         self.alphabet = alphabet or cfg.alphabet
         self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
+        self.label2int = {l: i for i, l in enumerate(self.data[self.label_field].unique())}
 
     def __len__(self):
         return len(self.data)
@@ -338,7 +335,7 @@ class CharMokoron(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         line = self.data.iloc[idx]
         text = line[self.text_field]
-        label = int(line[self.label_field] == 1.)
+        label = self.label2int[line[self.label_field]]
 
         if self.noise_level > 0:
             text = self._noise_generator(text)

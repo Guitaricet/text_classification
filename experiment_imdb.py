@@ -16,7 +16,7 @@ import cfg
 from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
-from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimModel, AttentionedYoonKimModel
+from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
 from text_classification.datautils import CharIMDB, FastTextIMDB, HierarchicalIMDB
 
 
@@ -47,11 +47,11 @@ def experiment(model_class, train_data, test_data,
                               lr=lr,
                               epochs=epochs,
                               comment=comment,
-                              log_every=1,
+                              log_every=cfg.train.log_every,
                               save_model_path='models')
 
         logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
-        sleep(2)  # workaround from ConnectionResetError
+        sleep(2)  # workaround for ConnectionResetError
         # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
         model.eval()
         train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
@@ -80,10 +80,16 @@ if __name__ == '__main__':
     """
     MAXLEN = 512  # for CharCNN
 
+    args = parser.parse_args()
+
+    save_results_path = 'results/%s_IMDB.csv' % args.model_name
+    if os.path.exists(save_results_path):
+        if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':
+            logger.warning('Cancelling execution due to existing output file')
+            exit(1)
+
     start_time = time()
     logger.info('The script is started')
-
-    args = parser.parse_args()
 
     if cfg.train.evals_per_noise_level == 1:
         logger.warning('Only one eval for noise level on test!')
@@ -127,7 +133,7 @@ if __name__ == '__main__':
         embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
         train_data, test_data = FastTextIMDB.splits(text_field, label_field, embeddings=embeddings)
 
-        model_class = RNNBinaryClassifier
+        model_class = RNNClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.2}
         lr = 0.0006
         epochs = 20
@@ -158,12 +164,6 @@ if __name__ == '__main__':
 
     else:
         raise ValueError('Wrong model name')
-
-    save_results_path = 'results/%s_IMDB.csv' % args.model_name
-    if os.path.exists(save_results_path):
-        if input('File at path %s already exists, delete it? (y/n)').lower() != 'y':
-            logger.warning('Cancelling execution due to existing output file')
-            exit(1)
 
     logger.info('Starting the experiment')
     experiment(model_class,

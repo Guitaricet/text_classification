@@ -10,3 +10,4 @@ tqdm
 spacy
 gensim
 pymystem3
+nltk
