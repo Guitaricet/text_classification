@@ -14,6 +14,7 @@ max_text_len = 256
 
 pin_memory = False
 
+
 class data:
     fasttext_path = '/data/embeddings/wiki.simple.bin'
     # word2vec_path =
@@ -26,6 +27,7 @@ class train:
     evals_per_noise_level = 10
     lr = 1e-3
     epochs = 20
+    log_every = 2
 
 
 class experiment:

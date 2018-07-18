@@ -16,7 +16,7 @@ import cfg
 from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
-from text_classification.layers import CharCNN, RNNBinaryClassifier, YoonKimModel, AttentionedYoonKimModel
+from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
 from text_classification.datautils import CharIMDB, FastTextIMDB, HierarchicalIMDB
 
 
@@ -47,7 +47,7 @@ def experiment(model_class, train_data, test_data,
                               lr=lr,
                               epochs=epochs,
                               comment=comment,
-                              log_every=1,
+                              log_every=cfg.train.log_every,
                               save_model_path='models')
 
         logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
@@ -133,7 +133,7 @@ if __name__ == '__main__':
         embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
         train_data, test_data = FastTextIMDB.splits(text_field, label_field, embeddings=embeddings)
 
-        model_class = RNNBinaryClassifier
+        model_class = RNNClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.2}
         lr = 0.0006
         epochs = 20

@@ -78,7 +78,8 @@ def train(model,
             else:
                 label = torch.LongTensor(label)
 
-            # TODO: change dataloaders and remove premute
+            # TODO: change dataloaders and remove permute
+            # TODO: use embedding lookup instead of one-hot vectors
             text = text.permute(1, 0, 2)
             prediction = model(text)
             loss = loss_f(prediction, label)
@@ -124,6 +125,7 @@ def train(model,
     return model
 
 
+# TODO: move to trainutils?
 def evaluate_on_noise(model, test_dataloader, noise_levels, evals_per_noise):
     is_training = model.training
     if is_training:
