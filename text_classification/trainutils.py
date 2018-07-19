@@ -151,10 +151,10 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
             prediction = model(text)
             _, idx = torch.max(prediction, 1)
 
-            if i == 0:
-                _, symb = text[9]
-                logger.info('Texts ninth symbols:\n %s' % symb)
-                logger.info('Prediction:\n %s' % prediction)
+            # if i == 0:
+            #     _, symb = text[9]
+            #     logger.info('Texts ninth symbols:\n %s' % symb)
+            #     logger.info('Prediction:\n %s' % prediction)
 
             predictions.extend(idx.tolist())
             labels.extend(label.tolist())

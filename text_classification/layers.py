@@ -99,9 +99,11 @@ class AttentionedYoonKimModel(nn.Module):
                  hidden_dim_out,
                  heads=1,
                  dropout=0.5,
-                 embedding_dim=len(cfg.alphabet),
+                 embedding_dim=None,
                  pool_kernel_size=cfg.max_word_len,
                  alphabet_len=None,
+                 max_text_len=None,
+                 max_word_len=None,
                  num_classes=2):
         """
         CharCNN-WordRNN model with multi-head attention
@@ -113,11 +115,13 @@ class AttentionedYoonKimModel(nn.Module):
         super(AttentionedYoonKimModel, self).__init__()
         self.alphabet_len = alphabet_len or len(cfg.alphabet)
         self.dropout_prob = dropout
-        self.embedding_dim = embedding_dim
+        self.embedding_dim = embedding_dim or self.alphabet_len
         self.n_filters = n_filters
         self.cnn_kernel_size = cnn_kernel_size
         self.hidden_dim_out = hidden_dim_out
         self.heads = heads
+        self.max_text_len = max_text_len or cfg.max_text_len
+        self.max_word_len = max_word_len or cfg.max_word_len
 
         self.embedding = nn.Linear(self.alphabet_len, embedding_dim)
         self.chars_cnn = nn.Sequential(
@@ -130,7 +134,7 @@ class AttentionedYoonKimModel(nn.Module):
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default
         # I am not sure this formula is always correct:
-        self.conv_dim = n_filters * max(1, int(((cfg.max_word_len - cnn_kernel_size) / _conv_stride - pool_kernel_size) / _pool_stride + 1))
+        self.conv_dim = n_filters * max(1, int(((self.max_word_len - cnn_kernel_size) / _conv_stride - pool_kernel_size) / _pool_stride + 1))
 
         self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out, dropout=self.dropout_prob)
         self.attention = MultiHeadAttention(hidden_dim_out, hidden_dim_out, hidden_dim_out, dropout_p=self.dropout_prob, h=self.heads)
@@ -144,11 +148,13 @@ class AttentionedYoonKimModel(nn.Module):
 
     def forward(self, x):
         batch_size = x.size(1)
-        # TODO: hadrcode! (for CUDA), vectorize dataset and get rid of this variable
-        words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim).cuda()
+        # TODO: vectorize this and get rid of words_tensor
+        words_tensor = torch.zeros(self.max_text_len, batch_size, self.conv_dim)
+        if cfg.cuda:
+            words_tensor = words_tensor.cuda()
 
-        for i in range(cfg.max_text_len):
-            word = x[i * cfg.max_word_len : (i + 1) * cfg.max_word_len, :]
+        for i in range(self.max_text_len):
+            word = x[i * self.max_word_len: (i + 1) * self.max_word_len, :]
             word = self.embedding(word)
             word = word.permute(1, 2, 0)
             word = self.chars_cnn(word)
@@ -173,6 +179,8 @@ class YoonKimModel(nn.Module):
                  embedding_dim=None,
                  pool_kernel_size=cfg.max_word_len,
                  alphabet_len=None,
+                 max_text_len=None,
+                 max_word_len=None,
                  num_classes=2):
         """
         Paper: https://arxiv.org/abs/1508.06615
@@ -193,6 +201,8 @@ class YoonKimModel(nn.Module):
         self.n_filters = n_filters
         self.cnn_kernel_size = cnn_kernel_size
         self.hidden_dim_out = hidden_dim_out
+        self.max_text_len = max_text_len or cfg.max_text_len
+        self.max_word_len = max_word_len or cfg.max_word_len
 
         self.embedding = nn.Linear(self.alphabet_len, embedding_dim)
         self.chars_cnn = nn.Sequential(
@@ -204,7 +214,7 @@ class YoonKimModel(nn.Module):
 
         _conv_stride = 1  # by default
         _pool_stride = pool_kernel_size  # by default
-        self.conv_dim = n_filters * max(1, int(((cfg.max_word_len - cnn_kernel_size) / _conv_stride - pool_kernel_size) / _pool_stride + 1))
+        self.conv_dim = n_filters * max(1, int(((self.max_word_len - cnn_kernel_size) / _conv_stride - pool_kernel_size) / _pool_stride + 1))
         self.dropout = nn.Dropout(self.dropout_prob)
         self.words_rnn = nn.GRU(self.conv_dim, hidden_dim_out)
         self.projector = nn.Linear(hidden_dim_out, num_classes)
@@ -216,19 +226,20 @@ class YoonKimModel(nn.Module):
 
     def forward(self, x):
         batch_size = x.size(1)
-        # TODO: hadrcode! (for CUDA), vectorize dataset and get rid of this variable
-        words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim)
+        # TODO: vectorize this and get rid of words_tensor
+        words_tensor = torch.zeros(self.max_text_len, batch_size, self.conv_dim)
         if cfg.cuda:
             words_tensor = words_tensor.cuda()
 
-        for i in range(cfg.max_text_len):
-            word = x[i * cfg.max_word_len: (i + 1) * cfg.max_word_len, :]
+        for i in range(self.max_text_len):
+            word = x[i * self.max_word_len: (i + 1) * self.max_word_len, :]
             word = self.embedding(word)
             word = word.permute(1, 2, 0)
             word = self.chars_cnn(word)
             word = word.view(word.size(0), -1)
             words_tensor[i, :] = word
 
+        # words_tensor = torch.nn.utils.rnn.pack_padded_sequence(...)
         x, _ = self.words_rnn(words_tensor)
         x = self.dropout(x)
         x = self.projector(x[-1])
@@ -297,10 +308,11 @@ class CharCNN(nn.Module):
         conv_dim = self.n_filters * (int(
             ((maxlen - self.cnn_kernel_size) / self.cnn_stride - self.pool_kernel_size) / self.pool_stride) + 1)
         self.dropout = nn.Dropout(self.dropout_prob)
-        self.projector = nn.Linear(conv_dim, 2)
+        self.projector = nn.Linear(conv_dim, num_classes)
 
         torch.nn.init.xavier_normal_(self.embedding.weight)
         torch.nn.init.xavier_normal_(self.projector.weight)
+
     def forward(self, x):
         """
         :param x: Tensor of shape (seq_len, batch_size, signal_dim)

@@ -88,7 +88,7 @@ if __name__ == '__main__':
     Tweets
     """
     MAXLEN = 170  # for CharCNN
-    MAX_TEXT_LEN = 128
+    MAX_TEXT_LEN = 32
 
     args = parser.parse_args()
 
@@ -189,7 +189,8 @@ if __name__ == '__main__':
                         'hidden_dim_out': 64,
                         'embedding_dim': 90,
                         'dropout': 0.5,
-                        'alphabet_len': len(alphabet)}
+                        'alphabet_len': len(alphabet),
+                        'max_text_len': MAX_TEXT_LEN}
         lr = 1e-3
         epochs = 20
 
@@ -211,7 +212,8 @@ if __name__ == '__main__':
                         'embedding_dim': 74,
                         'dropout': 0.5,
                         'alphabet_len': len(alphabet),
-                        'heads': 1}
+                        'heads': 1,
+                        'max_text_len': MAX_TEXT_LEN}
         lr = 1e-3
         epochs = 20
 

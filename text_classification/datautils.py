@@ -1,3 +1,4 @@
+import re
 from random import random, choice
 
 import numpy as np
@@ -239,7 +240,7 @@ class FastTextMokoron(torch.utils.data.Dataset):
         text = line[self.text_field].lower()
         # for mokoron dataset we should remove smiles
         if ')' not in self.alphabet:
-            text = [t for t in text if t not in ('(', ')')]
+            text = re.sub('[(,)]', '', text)
         label = self.label2int[line[self.label_field]]
 
         if self.noise_level > 0:
