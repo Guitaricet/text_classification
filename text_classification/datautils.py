@@ -79,7 +79,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
                  max_text_len=cfg.max_text_len,
                  alphabet=None):
 
-        self.alphabet = alphabet or cfg.alphabet
+        self.alphabet = alphabet or self.alphabet
         self.mystem = Mystem()
         self.text_field = text_field
         self.label_field = label_field

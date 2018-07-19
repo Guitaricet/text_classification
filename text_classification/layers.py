@@ -214,15 +214,12 @@ class YoonKimModel(nn.Module):
         torch.nn.init.xavier_normal_(self.embedding.weight)
         torch.nn.init.xavier_normal_(self.projector.weight)
 
-        # Initializers
-        torch.nn.init.kaiming_normal_(self.chars_cnn[0].weight)
-        torch.nn.init.xavier_normal_(self.embedding.weight)
-        torch.nn.init.xavier_normal_(self.projector.weight)
-
     def forward(self, x):
         batch_size = x.size(1)
         # TODO: hadrcode! (for CUDA), vectorize dataset and get rid of this variable
-        words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim).cuda()
+        words_tensor = torch.zeros(cfg.max_text_len, batch_size, self.conv_dim)
+        if cfg.cuda:
+            words_tensor = words_tensor.cuda()
 
         for i in range(cfg.max_text_len):
             word = x[i * cfg.max_word_len: (i + 1) * cfg.max_word_len, :]
