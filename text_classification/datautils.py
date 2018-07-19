@@ -88,7 +88,7 @@ class HierarchicalMokoron(torch.utils.data.Dataset):
         self.max_word_len = max_word_len
         self.max_text_len = max_text_len
         self.char2int = {s: i for i, s in enumerate(self.alphabet)}
-        self.label2int = {l: i for i, l in enumerate(self.data[self.label_field].unique())}
+        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
 
     def __len__(self):
         return len(self.data)
@@ -230,7 +230,7 @@ class FastTextMokoron(torch.utils.data.Dataset):
         self.data = pd.read_csv(filepath)
         self.max_text_len = max_text_len
         self.unk_vec = np.random.rand(self.embeddings.vector_size)
-        self.label2int = {l: i for i, l in enumerate(self.data[self.label_field].unique())}
+        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
 
     def __len__(self):
         return len(self.data)
@@ -328,7 +328,7 @@ class CharMokoron(torch.utils.data.Dataset):
             self.maxlen = maxlen
         self.alphabet = alphabet or cfg.alphabet
         self.char2int = {s: i for s, i in zip(self.alphabet, range(len(self.alphabet)))}
-        self.label2int = {l: i for i, l in enumerate(self.data[self.label_field].unique())}
+        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
 
     def __len__(self):
         return len(self.data)

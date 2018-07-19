@@ -188,11 +188,11 @@ if __name__ == '__main__':
                         'cnn_kernel_size': 5,
                         'hidden_dim_out': 64,
                         'embedding_dim': 90,
-                        'dropout': 0.5,
+                        'dropout': 0.7,
                         'alphabet_len': len(alphabet),
                         'max_text_len': MAX_TEXT_LEN}
         lr = 1e-3
-        epochs = 20
+        epochs = 25
 
     elif args.model_name == 'AttentionedYoonKim':
         train_data = HierarchicalMokoron(
@@ -210,12 +210,12 @@ if __name__ == '__main__':
                         'cnn_kernel_size': 5,
                         'hidden_dim_out': 128,
                         'embedding_dim': 74,
-                        'dropout': 0.5,
+                        'dropout': 0.7,
                         'alphabet_len': len(alphabet),
                         'heads': 1,
                         'max_text_len': MAX_TEXT_LEN}
         lr = 1e-3
-        epochs = 20
+        epochs = 25
 
     else:
         raise ValueError('Wrong model name')
