@@ -115,19 +115,22 @@ if __name__ == '__main__':
 
         alphabet = cfg.alphabet + cfg.russian_chars
         alphabet = [c for c in alphabet if c not in ('(', ')')]
+        
+        n_classes = 2
     elif args.dataset_name == 'airline-tweets':
-        raise NotImplementedError()
         text_filed = 'text_spellchecked'
         text_original_field = 'text_original'
         label_field = 'airline_sentiment'
 
         alphabet = cfg.alphabet
+        n_classes = 3
     elif args.dataset_name == 'airline-tweets-binary':
         text_filed = 'text_spellchecked'
         text_original_field = 'text_original'
         label_field = 'airline_sentiment'
 
         alphabet = cfg.alphabet
+        n_classes = 2
     else:
         raise ValueError('Incorrect dataset name')
 
@@ -147,7 +150,8 @@ if __name__ == '__main__':
                         'cnn_kernel_size': 5,
                         'dropout': 0.5,
                         'maxlen': MAXLEN,
-                        'alphabet_len': len(alphabet)}
+                        'alphabet_len': len(alphabet),
+                        'num_classes': n_classes}
         lr = 1e-3
         epochs = 30
 
@@ -165,7 +169,7 @@ if __name__ == '__main__':
             basepath + 'test.csv', text_original_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = RNNClassifier
-        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5}
+        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes}
         lr = 0.0006
         epochs = 20
 
@@ -190,7 +194,8 @@ if __name__ == '__main__':
                         'embedding_dim': 90,
                         'dropout': 0.7,
                         'alphabet_len': len(alphabet),
-                        'max_text_len': MAX_TEXT_LEN}
+                        'max_text_len': MAX_TEXT_LEN,
+                        'num_classes': n_classes}
         lr = 1e-3
         epochs = 25
 
@@ -213,7 +218,8 @@ if __name__ == '__main__':
                         'dropout': 0.7,
                         'alphabet_len': len(alphabet),
                         'heads': 1,
-                        'max_text_len': MAX_TEXT_LEN}
+                        'max_text_len': MAX_TEXT_LEN,
+                        'num_classes': n_classes}
         lr = 1e-3
         epochs = 25
 

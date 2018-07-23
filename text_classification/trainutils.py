@@ -162,7 +162,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
         # logger.info(labels)
         # logger.info(predictions)
         acc = accuracy_score(labels, predictions)
-        f1 = f1_score(labels, predictions)
+        f1 = f1_score(labels, predictions, average='weighted')
 
     if is_training_mode:
         model.train()
