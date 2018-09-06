@@ -42,13 +42,13 @@ def train(model,
     :param use_annealing: use CosineLRWithRestarts schedule for learning rate
     :return: model, results where model is trained model, results is list of dicts
     """
-    assert noise_level in cfg.experiment.noise_levels
+    # assert noise_level in cfg.experiment.noise_levels
     if cfg.cuda:
         model.to(torch.device('cuda'))
 
     start_time = time()
 
-    train_dataloader.__class__.noise_level = noise_level
+    train_dataloader.dataset.__class__.noise_level = noise_level
 
     model_name = '_{}_lr{}_dropout{}_noise_level{:.4f}'.format(
         model.name, int(-np.log10(lr)), model.dropout_prob, noise_level
@@ -87,7 +87,7 @@ def train(model,
             writer.add_scalar('loss', loss, global_step=global_step)
 
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1e-1)
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 5)
             optimizer.step()
 
             # if cfg.cuda:

@@ -34,42 +34,43 @@ def experiment(model_class, train_data, test_data,
     noise_levels = cfg.experiment.noise_levels
     all_results = pd.DataFrame()
 
-    for i, noise_level in enumerate(noise_levels):
-        logger.info('Training model for noise level {:.3f} ({}/{})'
-                    .format(noise_level, i, len(noise_levels)))
+    for _ in range(cfg.experiment.n_trains):
+        for i, noise_level in enumerate(noise_levels):
+            logger.info('Training model for noise level {:.3f} ({}/{})'
+                        .format(noise_level, i, len(noise_levels)))
 
-        model = model_class(**model_params)
+            model = model_class(**model_params)
 
-        trained_model = train(model,
-                              train_dataloader,
-                              val_dataloader,
-                              noise_level,
-                              lr=lr,
-                              epochs=epochs,
-                              comment=comment,
-                              log_every=cfg.train.log_every,
-                              save_model_path='models')
+            trained_model = train(model,
+                                  train_dataloader,
+                                  val_dataloader,
+                                  noise_level,
+                                  lr=lr,
+                                  epochs=epochs,
+                                  comment=comment,
+                                  log_every=cfg.train.log_every,
+                                  save_model_path='models')
 
-        logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
-        sleep(2)  # workaround for ConnectionResetError
-        # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
-        model.eval()
-        train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
-        results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
-        results_dicts_original = evaluate_on_noise(trained_model, test_dataloader, [0], 1)
+            logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
+            sleep(2)  # workaround for ConnectionResetError
+            # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
+            model.eval()
+            train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
+            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
+            results_dicts_original = evaluate_on_noise(trained_model, test_dataloader, [0], 1)
 
-        results_df_noised = pd.DataFrame(results_dicts_noised)
-        results_df_original = pd.DataFrame(results_dicts_original)
-        results_df_original['noise_level_test'] = -1
-        results_df = pd.concat([results_df_noised, results_df_original], sort=False)
+            results_df_noised = pd.DataFrame(results_dicts_noised)
+            results_df_original = pd.DataFrame(results_dicts_original)
+            results_df_original['noise_level_test'] = -1
+            results_df = pd.concat([results_df_noised, results_df_original], sort=False)
 
-        results_df['model_type'] = trained_model.name
-        results_df['noise_level_train'] = noise_level
-        results_df['acc_train'] = train_metrics['accuracy']
-        results_df['f1_train'] = train_metrics['f1']
-        all_results = pd.concat([all_results, results_df], sort=False)
-        logger.info('Saving the results')
-        all_results.to_csv(save_results_path)
+            results_df['model_type'] = trained_model.name
+            results_df['noise_level_train'] = noise_level
+            results_df['acc_train'] = train_metrics['accuracy']
+            results_df['f1_train'] = train_metrics['f1']
+            all_results = pd.concat([all_results, results_df], sort=False)
+            logger.info('Saving the results')
+            all_results.to_csv(save_results_path)
 
     all_results.to_csv(save_results_path)
 

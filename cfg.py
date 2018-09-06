@@ -24,7 +24,7 @@ class train:
     batch_size = 32
     val_size = 0.15
     num_workers = 4
-    evals_per_noise_level = 10
+    evals_per_noise_level = 1
     lr = 1e-3
     epochs = 20
     log_every = 2
@@ -32,3 +32,4 @@ class train:
 
 class experiment:
     noise_levels = np.concatenate([np.arange(0, 0.05, 0.01), np.arange(0.05, 0.2, 0.025)])
+    n_trains = 10

@@ -28,57 +28,65 @@ parser.add_argument('--model-name')
 parser.add_argument('--dataset-name', choices=['mokoron', 'airline-tweets', 'airline-tweets-binary'])
 parser.add_argument('--comment', default='')
 parser.add_argument('--datapath', default='data/mokoron')
+parser.add_argument('--noise-level', type=float, default=None)
 parser.add_argument('-y', default=False, action='store_true', help='yes to all')
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
-               save_results_path, comment, lr, epochs, **model_params):
+               save_results_path, comment, lr, epochs, noise_level=None, **model_params):
+    """
+    Results columns:
+    ,acc_test,f1_test,noise_level_test,model_type,noise_level_train,acc_train,f1_train
+    """
     train_dataloader, val_dataloader, test_dataloader = \
         trainutils.get_dataloaders(train_data, test_data, validset=val_data, batch_size=cfg.train.batch_size)
     test_original_dataloader = DataLoader(test_original_data,
                                           batch_size=cfg.train.batch_size,
                                           num_workers=cfg.train.num_workers,
                                           pin_memory=cfg.pin_memory)
-
-    noise_levels = cfg.experiment.noise_levels
+    if noise_level is not None:
+        noise_levels = [noise_level]
+    else:
+        noise_levels = cfg.experiment.noise_levels
     all_results = pd.DataFrame()
 
-    for i, noise_level in enumerate(noise_levels):
-        logger.info('Training model for noise level {:.3f} ({}/{})'
-                    .format(noise_level, i, len(noise_levels)))
+    for _ in range(cfg.experiment.n_trains):
+        for i, noise_level in enumerate(noise_levels):
+            logger.info('Training model for noise level {:.3f} ({}/{})'
+                        .format(noise_level, i, len(noise_levels)))
 
-        model = model_class(**model_params)
+            model = model_class(**model_params)
 
-        trained_model = train(model,
-                              train_dataloader,
-                              val_dataloader,
-                              noise_level,
-                              lr=lr,
-                              log_every=cfg.train.log_every,
-                              epochs=epochs,
-                              comment=comment,
-                              save_model_path='models')
+            trained_model = train(model,
+                                  train_dataloader,
+                                  val_dataloader,
+                                  noise_level,
+                                  lr=lr,
+                                  log_every=cfg.train.log_every,
+                                  epochs=epochs,
+                                  comment=comment,
+                                  save_model_path='models')
 
-        logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
-        sleep(2)  # workaround for ConnectionResetError
-        # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
-        model.eval()
-        train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
-        results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
-        results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)
+            logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
+            sleep(2)  # workaround for ConnectionResetError
+            # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
+            model.eval()
+            train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
+            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
+            results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)
 
-        results_df_noised = pd.DataFrame(results_dicts_noised)
-        results_df_original = pd.DataFrame(results_dicts_original)
-        results_df_original['noise_level_test'] = -1
-        results_df = pd.concat([results_df_noised, results_df_original], sort=False)
+            results_df_noised = pd.DataFrame(results_dicts_noised)
+            results_df_original = pd.DataFrame(results_dicts_original)
+            results_df_original['noise_level_test'] = -1
+            results_df = pd.concat([results_df_noised, results_df_original], sort=False)
 
-        results_df['model_type'] = trained_model.name
-        results_df['noise_level_train'] = noise_level
-        results_df['acc_train'] = train_metrics['accuracy']
-        results_df['f1_train'] = train_metrics['f1']
-        all_results = pd.concat([all_results, results_df], sort=False)
-        logger.info('Saving the results')
-        all_results.to_csv(save_results_path)
+            results_df['model_type'] = trained_model.name
+            results_df['noise_level_train'] = noise_level
+            results_df['acc_train'] = train_metrics['accuracy']
+            results_df['f1_train'] = train_metrics['f1']
+            all_results = pd.concat([all_results, results_df], sort=False)
+            logger.info('Saving the results')
+            all_results.to_csv(save_results_path)
 
     all_results.to_csv(save_results_path)
 
@@ -239,5 +247,6 @@ if __name__ == '__main__':
                comment=args.comment,
                lr=lr,
                epochs=epochs,
+               noise_level=args.noise_level,
                **model_params)
     logger.info('Total execution time: {:.1f}min'.format((time() - start_time) / 60.))
