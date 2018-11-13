@@ -25,6 +25,9 @@ parser.add_argument('--model-name')
 parser.add_argument('--comment', default='')
 
 
+MAX_TEXT_LEN = 256
+
+
 def experiment(model_class, train_data, test_data,
                save_results_path, comment, lr, epochs, **model_params):
     train_dataloader, val_dataloader, test_dataloader = \

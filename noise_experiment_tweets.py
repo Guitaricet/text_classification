@@ -25,11 +25,13 @@ from text_classification.datautils import CharMokoron, FastTextMokoron, Hierarch
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model-name')
-parser.add_argument('--dataset-name', choices=['mokoron', 'airline-tweets', 'airline-tweets-binary'])
+parser.add_argument('--dataset-name')
 parser.add_argument('--comment', default='')
 parser.add_argument('--datapath', default='data/mokoron')
 parser.add_argument('--noise-level', type=float, default=None)
+parser.add_argument('--embeddings-path', default=None)
 parser.add_argument('-y', default=False, action='store_true', help='yes to all')
+parser.add_argument('--original-train', default=False, action='store_true', help='train_on_original_dataset')
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
@@ -72,8 +74,10 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
             # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
             model.eval()
             train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
-            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
+            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, [noise_level], cfg.train.evals_per_noise_level)
             results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)
+            # for testing
+            evaluate_on_noise(trained_model, val_dataloader, [noise_level], cfg.train.evals_per_noise_level)
 
             results_df_noised = pd.DataFrame(results_dicts_noised)
             results_df_original = pd.DataFrame(results_dicts_original)
@@ -101,6 +105,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     save_results_path = 'results/%s_%s.csv' % (args.model_name, args.dataset_name)
+    if args.original_train:
+        save_results_path += '_orig'
     if os.path.exists(save_results_path) and not args.y:
         if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':
             logger.warning('Cancelling execution due to existing output file')
@@ -115,30 +121,55 @@ if __name__ == '__main__':
     if not cfg.cuda:
         logger.warning('Not using CUDA!')
 
-    basepath = args.datapath.strip('/') + '/'
-    if args.dataset_name == 'mokoron':
-        text_filed = 'text_spellchecked'
-        text_original_field = 'text_original'
+    basepath = args.datapath.rstrip('/') + '/'
+    dataset_name = args.dataset_name.lower()
+    if dataset_name == 'mokoron':
+        text_field = 'text_spellchecked'
+        if args.original_train:
+            text_field = 'text_original'
+        text_field_original = 'text_original'
         label_field = 'sentiment'
 
         alphabet = cfg.alphabet + cfg.russian_chars
         alphabet = [c for c in alphabet if c not in ('(', ')')]
         
         n_classes = 2
-    elif args.dataset_name == 'airline-tweets':
-        text_filed = 'text_spellchecked'
-        text_original_field = 'text_original'
+    elif dataset_name == 'airline-tweets':
+        text_field = 'text_spellchecked'
+        if args.original_train:
+            text_field = 'text_original'
+        text_field_original = 'text_original'
         label_field = 'airline_sentiment'
 
         alphabet = cfg.alphabet
         n_classes = 3
-    elif args.dataset_name == 'airline-tweets-binary':
-        text_filed = 'text_spellchecked'
-        text_original_field = 'text_original'
+    elif dataset_name == 'airline-tweets-binary':
+        text_field = 'text_spellchecked'
+        if args.original_train:
+            text_field = 'text_original'
+        text_field_original = 'text_original'
         label_field = 'airline_sentiment'
 
         alphabet = cfg.alphabet
         n_classes = 2
+    elif dataset_name == 'rusentiment':
+        text_field = 'text_spellchecked'
+        if args.original_train:
+            text_field = 'text'
+        text_field_original = 'text'
+        label_field = 'label'
+
+        alphabet = cfg.alphabet
+        n_classes = 5
+    elif dataset_name == 'sentirueval':
+        text_field = 'text_spellchecked'
+        if args.original_train:
+            text_field = 'text'
+        text_field_original = 'text'
+        label_field = 'label'
+
+        alphabet = cfg.alphabet
+        n_classes = 4
     else:
         raise ValueError('Incorrect dataset name')
 
@@ -147,11 +178,11 @@ if __name__ == '__main__':
 
     if args.model_name == 'CharCNN':
         CharMokoron.maxlen = MAXLEN
-        train_data = CharMokoron(basepath + 'train.csv', text_filed, label_field, alphabet=alphabet)
-        valid_data = CharMokoron(basepath + 'validation.csv', text_filed, label_field, alphabet=alphabet)
-        test_data = CharMokoron(basepath + 'test.csv', text_filed, label_field, alphabet=alphabet)
+        train_data = CharMokoron(basepath + 'train.csv', text_field, label_field, alphabet=alphabet)
+        valid_data = CharMokoron(basepath + 'validation.csv', text_field, label_field, alphabet=alphabet)
+        test_data = CharMokoron(basepath + 'test.csv', text_field, label_field, alphabet=alphabet)
 
-        test_original_data = CharMokoron(basepath + 'test.csv', text_original_field, label_field, alphabet=alphabet)
+        test_original_data = CharMokoron(basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet)
 
         model_class = CharCNN
         model_params = {'n_filters': 128,
@@ -165,16 +196,16 @@ if __name__ == '__main__':
 
     elif args.model_name == 'FastText':
         logger.info('Loading embeddings...')
-        embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
+        embeddings = FastText.load_fasttext_format(args.embeddings_path or cfg.data.fasttext_path)
         train_data = FastTextMokoron(
-            basepath + 'train.csv', text_filed, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'train.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
         valid_data = FastTextMokoron(
-            basepath + 'validation.csv', text_filed, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
         test_data = FastTextMokoron(
-            basepath + 'test.csv', text_filed, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         test_original_data = FastTextMokoron(
-            basepath + 'test.csv', text_original_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = RNNClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes}
@@ -183,17 +214,17 @@ if __name__ == '__main__':
 
     elif args.model_name == 'YoonKim':
         train_data = HierarchicalMokoron(
-            basepath + 'train.csv', text_filed, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
         valid_data = HierarchicalMokoron(
-            basepath + 'validation.csv', text_filed, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
         test_data = HierarchicalMokoron(
-            basepath + 'test.csv', text_filed, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         # logger.warning('Sample of training data!')
         # train_data.data = train_data.data.sample(1024)
 
         test_original_data = HierarchicalMokoron(
-            basepath + 'test.csv', text_original_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = YoonKimModel
         model_params = {'n_filters': 32,
@@ -209,14 +240,14 @@ if __name__ == '__main__':
 
     elif args.model_name == 'AttentionedYoonKim':
         train_data = HierarchicalMokoron(
-            basepath + 'train.csv', text_filed, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
         valid_data = HierarchicalMokoron(
-            basepath + 'validation.csv', text_filed, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
         test_data = HierarchicalMokoron(
-            basepath + 'test.csv', text_filed, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         test_original_data = HierarchicalMokoron(
-            basepath + 'test.csv', text_original_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = AttentionedYoonKimModel
         model_params = {'n_filters': 128,

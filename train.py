@@ -126,7 +126,7 @@ def train(model,
 
 
 # TODO: move to trainutils?
-def evaluate_on_noise(model, test_dataloader, noise_levels, evals_per_noise):
+def evaluate_on_noise(model, test_dataloader, noise_levels, evals_per_noise, verbose=True):
     is_training = model.training
     if is_training:
         model.eval()
@@ -139,6 +139,8 @@ def evaluate_on_noise(model, test_dataloader, noise_levels, evals_per_noise):
             metrics = {'noise_level_test': noise_level,
                        'acc_test': metrics['accuracy'],
                        'f1_test': metrics['f1']}
+            if verbose:
+                logger.info('Test     accuracy  : {:.4f}, f1: {:.4f}'.format(metrics['acc_test'], metrics['f1_test']))
             results.append(metrics)
 
     if is_training:
