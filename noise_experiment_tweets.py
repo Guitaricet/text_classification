@@ -17,7 +17,7 @@ from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
 from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
-from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
+from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron, ELMoMokoron
 
 
 # TODO: add run name to results csv
@@ -211,6 +211,24 @@ if __name__ == '__main__':
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes}
         lr = 0.0006
         epochs = 20
+
+    elif args.model_name == 'ELMo':
+        logger.info('Loading embeddings...')
+        train_data = ELMoMokoron(
+            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+        embeddings = train_data.embedder
+        valid_data = ELMoMokoron(
+            basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+        test_data = ELMoMokoron(
+            basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+
+        test_original_data = FastTextMokoron(
+            basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+
+        model_class = RNNClassifier
+        model_params = {'input_dim': embeddings.dim, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes}
+        lr = 0.0006
+        epochs = 10
 
     elif args.model_name == 'YoonKim':
         train_data = HierarchicalMokoron(
