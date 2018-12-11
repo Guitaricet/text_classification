@@ -171,7 +171,7 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
         if isinstance(embeddings, str):
             print('Loading embeddings from file')
             self.embeddings = FastText.load_fasttext_format(embeddings)
-        elif isinstance(embeddings, FastText):
+        elif isinstance(embeddings, ELMoEmbedder):
             print('Got embeddings')
             self.embeddings = embeddings
         else:

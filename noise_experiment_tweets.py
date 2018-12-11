@@ -222,7 +222,7 @@ if __name__ == '__main__':
         test_data = ELMoMokoron(
             basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
-        test_original_data = FastTextMokoron(
+        test_original_data = ELMoMokoron(
             basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = RNNClassifier
