@@ -10,8 +10,6 @@ import torchtext
 from gensim.models import FastText
 from pymystem3 import Mystem
 
-from deeppavlov.models.embedders.elmo_embedder import ELMoEmbedder
-
 import cfg
 
 # TODO: move textlen params from class to object properties
@@ -171,7 +169,7 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
         if isinstance(embeddings, str):
             print('Loading embeddings from file')
             self.embeddings = FastText.load_fasttext_format(embeddings)
-        elif isinstance(embeddings, ELMoEmbedder):
+        elif isinstance(embeddings, FastText):
             print('Got embeddings')
             self.embeddings = embeddings
         else:
@@ -210,7 +208,7 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
         return noised
 
 
-class ELMoMokoron(torch.utils.data.Dataset):
+class FastTextMokoron(torch.utils.data.Dataset):
     """
     Zero vector used for padding
     """
@@ -220,81 +218,28 @@ class ELMoMokoron(torch.utils.data.Dataset):
                  filepath,
                  text_field,
                  label_field,
-                 embeddings='http://files.deeppavlov.ai/deeppavlov_data/elmo_ru-wiki_600k_steps.tar.gz',
+                 embeddings=None,
                  max_text_len=cfg.max_text_len,
-                 alphabet=None):
-
-        if isinstance(embeddings, str):
-            self.embedder = ELMoEmbedder(embeddings)
-        elif isinstance(embeddings, ELMoEmbedder):
-            self.embedder = embeddings
-        else:
-            raise ValueError('embeddings should be path to spec or deeppavlov ELMoEmbedder object')
-
-        self.alphabet = alphabet or cfg.alphabet
-        self.mystem = Mystem()
-        self.text_field = text_field
-        self.label_field = label_field
-        self.data = pd.read_csv(filepath)
-        self.max_text_len = max_text_len
-        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, idx):
-        line = self.data.iloc[idx]
-        text = line[self.text_field].lower()
-        # for mokoron dataset we should remove smiles
-        if ')' not in self.alphabet:
-            text = re.sub('[(,)]', '', text)
-        label = self.label2int[line[self.label_field]]
-
-        if self.noise_level > 0:
-            text = self._noise_generator(text)
-
-        text = self._tokenize(text)
-        text = self._preprocess(text)
-        return text, label
-
-    def _tokenize(self, text):
-        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
-
-    def _preprocess(self, text):
-        # indicies orded different from previous models — (word_vec, word_num) instead of (word_num, word_vec)
-        return self.embedder([text])
-
-    def _noise_generator(self, string):
-        noised = ""
-        for c in string:
-            if random() > self.noise_level:
-                noised += c
-            if random() < self.noise_level:
-                noised += choice(self.alphabet)
-        return noised
-
-
-class FastTextMokoron(torch.utils.data.Dataset):
-    """
-    Zero vector used for padding
-    """
-    noise_level = 0
-
-    def __init__(self, filepath, text_field, label_field, embeddings, max_text_len=cfg.max_text_len, alphabet=None):
+                 alphabet=None,
+                 elmo=False):
         if isinstance(embeddings, str):
             self.embeddings = FastText.load_fasttext_format(embeddings)
         elif isinstance(embeddings, FastText):
             self.embeddings = embeddings
+        elif embeddings is None:
+            assert elmo
         else:
-            raise ValueError('embeddings should be path to FastText file of gensim FastText object')
+            raise ValueError('embeddings should be path to FastText file of gensim FastText object or None')
 
         self.alphabet = alphabet or cfg.alphabet
+        self.elmo = elmo
         self.mystem = Mystem()
         self.text_field = text_field
         self.label_field = label_field
         self.data = pd.read_csv(filepath)
         self.max_text_len = max_text_len
-        self.unk_vec = np.random.rand(self.embeddings.vector_size)
+        if self.embeddings is not None:
+            self.unk_vec = np.random.rand(self.embeddings.vector_size)
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
 
     def __len__(self):
@@ -312,7 +257,8 @@ class FastTextMokoron(torch.utils.data.Dataset):
             text = self._noise_generator(text)
 
         text = self._tokenize(text)
-        text = self._preprocess(text)
+        if not self.elmo:
+            text = self._preprocess(text)
         return text, label
 
     def _tokenize(self, text):

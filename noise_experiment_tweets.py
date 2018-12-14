@@ -214,19 +214,24 @@ if __name__ == '__main__':
 
     elif args.model_name == 'ELMo':
         logger.info('Loading embeddings...')
-        train_data = ELMoMokoron(
-            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        embeddings = train_data.embedder
-        valid_data = ELMoMokoron(
-            basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        test_data = ELMoMokoron(
-            basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+        options_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_options.json"
+        weight_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5"
 
-        test_original_data = ELMoMokoron(
-            basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+        elmo = Elmo(options_file, weight_file, 2, dropout=0)
+
+        train_data = FastTextMokoron(
+            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+        embeddings = train_data.embedder
+        valid_data = FastTextMokoron(
+            basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+        test_data = FastTextMokoron(
+            basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+
+        test_original_data = FastTextMokoron(
+            basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
 
         model_class = RNNClassifier
-        model_params = {'input_dim': embeddings.dim, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes}
+        model_params = {'input_dim': embeddings.dim, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes, 'elmo': elmo}
         lr = 0.0006
         epochs = 10
 

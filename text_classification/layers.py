@@ -249,11 +249,13 @@ class YoonKimModel(nn.Module):
 class RNNClassifier(nn.Module):
     name = 'RNNClassifier'
 
-    def __init__(self, input_dim, hidden_dim, num_layers=1, dropout=0.5, type_='GRU', num_classes=2):
+    def __init__(self, input_dim, hidden_dim, num_layers=1, dropout=0.5, type_='GRU', num_classes=2, elmo=None):
         super(RNNClassifier, self).__init__()
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
         self.dropout_prob = dropout
+        if elmo is not None:
+            self.elmo = elmo
 
         if type_ == 'GRU':
             self.rnn = nn.GRU(input_dim, hidden_dim, num_layers=num_layers)
@@ -273,6 +275,9 @@ class RNNClassifier(nn.Module):
         torch.nn.init.xavier_normal_(self.projector.weight)
 
     def forward(self, x):
+        if embedder is not None:
+            x = batch_to_ids(x)
+            x = self.elmo(x)
         x, _ = self.rnn(x)
         # x = self.layernorm(x)
         x = self.dropout(x[-1])
