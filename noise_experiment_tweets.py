@@ -17,9 +17,9 @@ from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
 from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
-from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron, ELMoMokoron
+from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
 
-
+from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
 
 
