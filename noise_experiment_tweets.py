@@ -221,17 +221,16 @@ if __name__ == '__main__':
 
         train_data = FastTextMokoron(
             basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
-        embeddings = train_data.embedder
         valid_data = FastTextMokoron(
-            basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
         test_data = FastTextMokoron(
-            basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
 
         test_original_data = FastTextMokoron(
-            basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
 
         model_class = RNNClassifier
-        model_params = {'input_dim': embeddings.dim, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes, 'elmo': elmo}
+        model_params = {'input_dim': 1024, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes, 'elmo': elmo}
         lr = 0.0006
         epochs = 10
 
