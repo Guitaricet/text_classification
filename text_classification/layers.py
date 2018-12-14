@@ -275,9 +275,10 @@ class RNNClassifier(nn.Module):
         torch.nn.init.xavier_normal_(self.projector.weight)
 
     def forward(self, x):
-        if embedder is not None:
-            x = batch_to_ids(x)
-            x = self.elmo(x)
+        if self.elmo is not None:
+            x = self.elmo(x)['elmo_representations'][0]
+            x = x.permute(1, 0, 2)
+
         x, _ = self.rnn(x)
         # x = self.layernorm(x)
         x = self.dropout(x[-1])

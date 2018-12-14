@@ -14,6 +14,7 @@ max_text_len = 256
 
 pin_memory = False
 
+elmo = True
 
 class data:
     fasttext_path = '/data/embeddings/wiki.simple.bin'

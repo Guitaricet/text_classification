@@ -12,6 +12,8 @@ from text_classification import trainutils
 from text_classification.logger import logger
 from text_classification.trainutils import CosineLRWithRestarts
 
+from allennlp.modules.elmo import batch_to_ids
+
 
 # TODO: add early stopping
 # Note: save_model_path and save_results_path are different entities (dir path and file path) better to change this
@@ -73,6 +75,8 @@ def train(model,
                 lr_scheduler.batch_step()
 
             if cfg.cuda:
+                if cfg.elmo:
+                    text = batch_to_ids(text)
                 text = text.cuda()
                 label = torch.LongTensor(label).cuda()
             else:
@@ -80,7 +84,8 @@ def train(model,
 
             # TODO: change dataloaders and remove permute
             # TODO: use embedding lookup instead of one-hot vectors
-            text = text.permute(1, 0, 2)
+            if not cfg.elmo:
+                text = text.permute(1, 0, 2)
             prediction = model(text)
             loss = loss_f(prediction, label)
 

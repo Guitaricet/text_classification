@@ -9,6 +9,8 @@ from sklearn.metrics import accuracy_score, f1_score
 import cfg
 from text_classification.logger import logger
 
+from allennlp.modules.elmo import batch_to_ids
+
 
 class CosineLRWithRestarts:
     def __init__(self, optimizer, max_lr, cycle_len, n_batches):
@@ -145,9 +147,13 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
             if i >= frac * data_length:
                 break
             if cfg.cuda:
+                if cfg.elmo:
+                    text = batch_to_ids(text)
                 text = text.cuda()
 
-            text = text.permute(1, 0, 2)
+            if not cfg.elmo:
+                text = text.permute(1, 0, 2)
+
             prediction = model(text)
             _, idx = torch.max(prediction, 1)
 
