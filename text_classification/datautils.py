@@ -227,6 +227,7 @@ class FastTextMokoron(torch.utils.data.Dataset):
         elif isinstance(embeddings, FastText):
             self.embeddings = embeddings
         elif embeddings is None:
+            self.embeddings = None
             assert elmo
         else:
             raise ValueError('embeddings should be path to FastText file of gensim FastText object or None')
