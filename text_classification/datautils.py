@@ -60,7 +60,7 @@ class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
         return noised
 
 
-class HierarchicalMokoron(torch.utils.data.Dataset):
+class HierarchicalTextDataset(torch.utils.data.Dataset):
     """
     Dataset class for hierarchical (chars -> words -> text) networks which reads data from .csv
 

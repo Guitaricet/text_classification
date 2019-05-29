@@ -17,7 +17,7 @@ from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
 from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
-from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalMokoron
+from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalTextDataset
 
 from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
@@ -235,17 +235,17 @@ if __name__ == '__main__':
         epochs = 10
 
     elif args.model_name == 'YoonKim':
-        train_data = HierarchicalMokoron(
+        train_data = HierarchicalTextDataset(
             basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        valid_data = HierarchicalMokoron(
+        valid_data = HierarchicalTextDataset(
             basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        test_data = HierarchicalMokoron(
+        test_data = HierarchicalTextDataset(
             basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         # logger.warning('Sample of training data!')
         # train_data.data = train_data.data.sample(1024)
 
-        test_original_data = HierarchicalMokoron(
+        test_original_data = HierarchicalTextDataset(
             basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = YoonKimModel
@@ -261,14 +261,14 @@ if __name__ == '__main__':
         epochs = 25
 
     elif args.model_name == 'AttentionedYoonKim':
-        train_data = HierarchicalMokoron(
+        train_data = HierarchicalTextDataset(
             basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        valid_data = HierarchicalMokoron(
+        valid_data = HierarchicalTextDataset(
             basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        test_data = HierarchicalMokoron(
+        test_data = HierarchicalTextDataset(
             basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
-        test_original_data = HierarchicalMokoron(
+        test_original_data = HierarchicalTextDataset(
             basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = AttentionedYoonKimModel
