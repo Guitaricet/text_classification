@@ -151,8 +151,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
                     text = batch_to_ids(text)
                 text = text.cuda()
 
-            if not cfg.elmo:
-                text = text.permute(1, 0, 2)
+            text = text.permute(1, 0, 2)
 
             prediction = model(text)
             _, idx = torch.max(prediction, 1)

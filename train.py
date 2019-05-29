@@ -84,8 +84,7 @@ def train(model,
 
             # TODO: change dataloaders and remove permute
             # TODO: use embedding lookup instead of one-hot vectors
-            if not cfg.elmo:
-                text = text.permute(1, 0, 2)
+            text = text.permute(1, 0, 2)
             prediction = model(text)
             loss = loss_f(prediction, label)
 
