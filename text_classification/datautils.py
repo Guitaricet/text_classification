@@ -6,8 +6,8 @@ import pandas as pd
 import torch
 import torchtext
 
+from nltk.tokenize import word_tokenize
 from gensim.models import FastText
-from pymystem3 import Mystem
 
 import cfg
 from text_classification.utils import noise_generator
@@ -74,7 +74,6 @@ class HierarchicalCSVDataset(torch.utils.data.Dataset):
 
         self.data = pd.read_csv(filepath)
         self.alphabet = alphabet or self.alphabet
-        self.mystem = Mystem()
         self.text_field = text_field
         self.label_field = label_field
         self.max_word_len = max_word_len
@@ -104,7 +103,7 @@ class HierarchicalCSVDataset(torch.utils.data.Dataset):
         return noise_generator(string, self.noise_level, self.alphabet)
 
     def _tokenize(self, text):
-        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
+        return word_tokenize(text)
 
     def _numericalize(self, text):
         _text_tensor = torch.zeros([self.max_text_len, self.max_word_len])
@@ -213,7 +212,6 @@ class FastTextCSVDataset(torch.utils.data.Dataset):
 
         self.alphabet = alphabet or cfg.alphabet
         self.elmo = elmo
-        self.mystem = Mystem()
         self.text_field = text_field
         self.label_field = label_field
         self.data = pd.read_csv(filepath)
@@ -242,17 +240,23 @@ class FastTextCSVDataset(torch.utils.data.Dataset):
         return text, label
 
     def _tokenize(self, text):
-        return [res['text'] for res in self.mystem.analyze(text) if res['text'] != ' ']
+        return word_tokenize(text)
 
     def _preprocess(self, text):
         # indicies orded different from previous models — (word_vec, word_num) instead of (word_num, word_vec)
-        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size])
+        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size],
+                                   dtype=torch.float32)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
 
             token = self._noise_generator(token)
-            token_vec = self.embeddings.get(token, self.unk_vec)
+
+            # fastText object does not have .get() method
+            if token in self.embeddings:
+                token_vec = self.embeddings[token]
+            else:
+                token_vec = self.unk_vec
 
             token_tensor = torch.FloatTensor(token_vec)
             _text_tensor[i, :] = token_tensor

@@ -53,8 +53,8 @@ def train(model,
 
     train_dataloader.dataset.__class__.noise_level = noise_level
 
-    model_name = '_{}_lr{}_dropout{}_noise_level{:.4f}'.format(
-        model.name, int(-np.log10(lr)), model.dropout_prob, noise_level
+    model_name = '_{}_lr{}_noise_level{:.4f}'.format(
+        model.name, int(-np.log10(lr)), noise_level
     )
     model_name += comment
 
@@ -79,25 +79,32 @@ def train(model,
             else:
                 label = torch.LongTensor(label)
 
+            # import pdb; pdb.set_trace()
             logits = model(text)
             loss = F.cross_entropy(logits, label)
 
-            if batch_idx and batch_idx % 100 == 0:
+            if batch_idx % 100 == 0:
                 writer.add_scalar('loss', loss, global_step=global_step)
-                prediction, _ = torch.max(logits, 1)
+                prediction = torch.max(logits, 1).indices
+
+                _label = label.cpu().detach().numpy()
+                _prediction = prediction.cpu().detach().numpy()
                 train_metrics = {
-                    'f1': f1_score(label, prediction, average='macro'),
-                    'accuracy': accuracy_score(label, prediction)
+                    'f1': f1_score(_label, _prediction, average='macro'),
+                    'accuracy': accuracy_score(_label, _prediction)
                 }
-                writer.add_scalar('accuracy/train', train_metrics['accuracy'], global_step=global_step)
+                writer.add_scalar('accuracy/train', train_metrics['accuracy'],
+                                  global_step=global_step)
                 writer.add_scalar('f1/train', train_metrics['f1'], global_step=global_step)
 
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 5)
             optimizer.step()
 
-            if batch_idx and batch_idx % 1000 == 0:
+            if batch_idx % 1000 == 0:
+                model.eval()
                 val_metrics = trainutils.get_metrics(model, val_dataloader, frac=0.25)
+                model.train()
                 writer.add_scalar('accuracy/val', val_metrics['accuracy'], global_step=global_step)
                 writer.add_scalar('f1/val', val_metrics['f1'], global_step=global_step)
 

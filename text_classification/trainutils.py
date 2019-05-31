@@ -119,7 +119,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
     if is_training_mode:
         logger.warning('Model is evaluating in training mode!')
         model.eval()
-        logger.info('Set the model into eval mode')
+        logger.info('Seting the model into eval mode')
 
     if isinstance(test_data, torch.utils.data.Dataset):
         assert False, 'Do not use '
@@ -127,7 +127,8 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
             test_data.noise_level = noise_level
 
         test_dataloader = DataLoader(
-            test_data, batch_size=cfg.train.batch_size, shuffle=True, num_workers=cfg.train.num_workers
+            test_data, batch_size=cfg.train.batch_size,
+            shuffle=True, num_workers=cfg.train.num_workers
         )
     else:
         assert isinstance(test_data, torch.utils.data.DataLoader)
@@ -151,10 +152,8 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
                     text = batch_to_ids(text)
                 text = text.cuda()
 
-            text = text.permute(1, 0, 2)
-
-            prediction = model(text)
-            _, idx = torch.max(prediction, 1)
+            logits = model(text)
+            _, idx = torch.max(logits, 1)
 
             # if i == 0:
             #     _, symb = text[9]

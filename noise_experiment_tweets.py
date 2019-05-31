@@ -14,10 +14,10 @@ from gensim.models import FastText
 
 import cfg
 from train import train, evaluate_on_noise
-from text_classification import trainutils
+from text_classification import utils, trainutils
 from text_classification.logger import logger
-from text_classification.modules import CharCNN, RNNClassifier, YoonKimModel
-from text_classification.datautils import CharMokoron, FastTextCSVDataset, HierarchicalCSVDataset
+from text_classification.modules import RNNClassifier, YoonKimModel
+from text_classification.datautils import FastTextCSVDataset, HierarchicalCSVDataset
 
 from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
@@ -31,7 +31,8 @@ parser.add_argument('--datapath', default='data/mokoron')
 parser.add_argument('--noise-level', type=float, default=None)
 parser.add_argument('--embeddings-path', default=None)
 parser.add_argument('-y', default=False, action='store_true', help='yes to all')
-parser.add_argument('--original-train', default=False, action='store_true', help='train_on_original_dataset')
+parser.add_argument('--original-train', default=False, action='store_true', help='train_on_original_dataset')  # noqa E501
+parser.add_argument('--sample-data', type=float, default=1.0)
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
@@ -41,7 +42,7 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
     ,acc_test,f1_test,noise_level_test,model_type,noise_level_train,acc_train,f1_train
     """
     train_dataloader, val_dataloader, test_dataloader = \
-        trainutils.get_dataloaders(train_data, test_data, validset=val_data, batch_size=cfg.train.batch_size)
+        trainutils.get_dataloaders(train_data, test_data, validset=val_data, batch_size=cfg.train.batch_size)  # noqa E501
     test_original_dataloader = DataLoader(test_original_data,
                                           batch_size=cfg.train.batch_size,
                                           num_workers=cfg.train.num_workers,
@@ -69,15 +70,15 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                                   comment=comment,
                                   save_model_path='models')
 
-            logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))
+            logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))  # noqa E501
             sleep(2)  # workaround for ConnectionResetError
             # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
             model.eval()
             train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
-            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, [noise_level], cfg.train.evals_per_noise_level)
-            results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)
+            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, [noise_level], cfg.train.evals_per_noise_level)  # noqa E501
+            results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)  # noqa E501
             # for testing
-            evaluate_on_noise(trained_model, val_dataloader, [noise_level], cfg.train.evals_per_noise_level)
+            evaluate_on_noise(trained_model, val_dataloader, [noise_level], cfg.train.evals_per_noise_level)  # noqa E501
 
             results_df_noised = pd.DataFrame(results_dicts_noised)
             results_df_original = pd.DataFrame(results_dicts_original)
@@ -99,16 +100,15 @@ if __name__ == '__main__':
     """
     Tweets
     """
-    MAXLEN = 170  # for CharCNN
-    MAX_TEXT_LEN = 32
+    max_text_len = 64
 
     args = parser.parse_args()
 
-    save_results_path = 'results/%s_%s.csv' % (args.model_name, args.dataset_name)
+    save_results_path = f'results/{args.model_name}_{args.dataset_name}{args.comment}.csv'
     if args.original_train:
         save_results_path += '_orig'
     if os.path.exists(save_results_path) and not args.y:
-        if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':
+        if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':  # noqa E501
             logger.warning('Cancelling execution due to existing output file')
             exit(1)
 
@@ -123,130 +123,87 @@ if __name__ == '__main__':
 
     basepath = args.datapath.rstrip('/') + '/'
     dataset_name = args.dataset_name.lower()
-    if dataset_name == 'mokoron':
-        text_field = 'text_spellchecked'
-        if args.original_train:
-            text_field = 'text_original'
-        text_field_original = 'text_original'
-        label_field = 'sentiment'
 
-        alphabet = cfg.alphabet + cfg.russian_chars
-        alphabet = [c for c in alphabet if c not in ('(', ')')]
-        
-        n_classes = 2
-    elif dataset_name == 'airline-tweets':
-        text_field = 'text_spellchecked'
-        if args.original_train:
-            text_field = 'text_original'
-        text_field_original = 'text_original'
-        label_field = 'airline_sentiment'
-
-        alphabet = cfg.alphabet
-        n_classes = 3
-    elif dataset_name == 'airline-tweets-binary':
-        text_field = 'text_spellchecked'
-        if args.original_train:
-            text_field = 'text_original'
-        text_field_original = 'text_original'
-        label_field = 'airline_sentiment'
-
-        alphabet = cfg.alphabet
-        n_classes = 2
-    elif dataset_name == 'rusentiment':
-        text_field = 'text_spellchecked'
-        if args.original_train:
-            text_field = 'text'
-        text_field_original = 'text'
-        label_field = 'label'
-
-        alphabet = cfg.alphabet
-        n_classes = 5
-    elif dataset_name == 'sentirueval':
-        text_field = 'text_spellchecked'
-        if args.original_train:
-            text_field = 'text'
-        text_field_original = 'text'
-        label_field = 'label'
-
-        alphabet = cfg.alphabet
-        n_classes = 4
-    else:
-        raise ValueError('Incorrect dataset name')
+    text_field, text_field_original, label_field, n_classes, alphabet =\
+        utils.get_dataset_params(dataset_name, args.original_train)
 
     # Chose data
     logger.info('Creating datasets and preprocessing raw texts...')
 
-    if args.model_name == 'CharCNN':
-        CharMokoron.maxlen = MAXLEN
-        train_data = CharMokoron(basepath + 'train.csv', text_field, label_field, alphabet=alphabet)
-        valid_data = CharMokoron(basepath + 'validation.csv', text_field, label_field, alphabet=alphabet)
-        test_data = CharMokoron(basepath + 'test.csv', text_field, label_field, alphabet=alphabet)
-
-        test_original_data = CharMokoron(basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet)
-
-        model_class = CharCNN
-        model_params = {'n_filters': 128,
-                        'cnn_kernel_size': 5,
-                        'dropout': 0.5,
-                        'maxlen': MAXLEN,
-                        'alphabet_len': len(alphabet),
-                        'num_classes': n_classes}
-        lr = 1e-3
-        epochs = 30
-
-    elif args.model_name == 'FastText':
+    if args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         embeddings = FastText.load_fasttext_format(args.embeddings_path or cfg.data.fasttext_path)
         train_data = FastTextCSVDataset(
-            basepath + 'train.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'train.csv', text_field, label_field, embeddings,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
         valid_data = FastTextCSVDataset(
-            basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'validation.csv', text_field, label_field, embeddings,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
         test_data = FastTextCSVDataset(
-            basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field, label_field, embeddings,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
 
         test_original_data = FastTextCSVDataset(
-            basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field_original, label_field, embeddings,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
 
         model_class = RNNClassifier
-        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes}
+        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
+                        'num_classes': n_classes}
         lr = 0.0006
         epochs = 20
 
     elif args.model_name == 'ELMo':
         logger.info('Loading embeddings...')
-        options_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_options.json"
-        weight_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5"
 
-        elmo = Elmo(options_file, weight_file, 1, dropout=0)
+        elmo = Elmo(cfg.data.elmo_options_file, cfg.data.elmo_weights_file, 1, dropout=0)
 
         train_data = FastTextCSVDataset(
-            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'train.csv', text_field, label_field,
+            alphabet=alphabet, max_text_len=max_text_len, elmo=True
+        )
         valid_data = FastTextCSVDataset(
-            basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'validation.csv', text_field, label_field,
+            alphabet=alphabet, max_text_len=max_text_len, elmo=True
+        )
         test_data = FastTextCSVDataset(
-            basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'test.csv', text_field, label_field,
+            alphabet=alphabet, max_text_len=max_text_len, elmo=True
+        )
 
         test_original_data = FastTextCSVDataset(
-            basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
+            basepath + 'test.csv', text_field_original, label_field,
+            alphabet=alphabet, max_text_len=max_text_len, elmo=True
+        )
 
         model_class = RNNClassifier
-        model_params = {'input_dim': 1024, 'hidden_dim': 256, 'dropout': 0.5, 'num_classes': n_classes, 'elmo': elmo}
+        model_params = {'input_dim': 1024, 'hidden_dim': 256, 'dropout': 0.5,
+                        'num_classes': n_classes, 'elmo': elmo}
         lr = 0.0006
         epochs = 10
 
     elif args.model_name == 'YoonKim':
         train_data = HierarchicalCSVDataset(
-            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'train.csv', text_field, label_field,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
         valid_data = HierarchicalCSVDataset(
-            basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'validation.csv', text_field, label_field,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
         test_data = HierarchicalCSVDataset(
-            basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-
-        # logger.warning('Sample of training data!')
-        # train_data.data = train_data.data.sample(1024)
+            basepath + 'test.csv', text_field, label_field,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
 
         test_original_data = HierarchicalCSVDataset(
-            basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
+            basepath + 'test.csv', text_field_original, label_field,
+            alphabet=alphabet, max_text_len=max_text_len
+        )
 
         model_class = YoonKimModel
         model_params = {'n_filters': 32,
@@ -255,7 +212,7 @@ if __name__ == '__main__':
                         'embedding_dim': 90,
                         'dropout': 0.7,
                         'alphabet_len': len(alphabet),
-                        'max_text_len': MAX_TEXT_LEN,
+                        'max_text_len': max_text_len,
                         'num_classes': n_classes}
         lr = 1e-3
         epochs = 25
@@ -265,6 +222,9 @@ if __name__ == '__main__':
 
     if epochs == 1:
         logger.warning('Only one epoch!')
+
+    if args.sample_data < 1.0:
+        train_data.data = train_data.data.sample(int(args.sample_data * len(train_data)))
 
     logger.info('Starting the experiment')
     experiment(model_class,

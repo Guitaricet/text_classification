@@ -14,11 +14,14 @@ max_text_len = 256
 
 pin_memory = False
 
-elmo = True
+elmo = False
+
 
 class data:
     fasttext_path = '/data/embeddings/wiki.simple.bin'
     # word2vec_path =
+    elmo_options_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_options.json"  # noqa
+    elmo_weights_file = "https://s3-us-west-2.amazonaws.com/allennlp/models/elmo/2x4096_512_2048cnn_2xhighway/elmo_2x4096_512_2048cnn_2xhighway_weights.hdf5"  # noqa
 
 
 class train:

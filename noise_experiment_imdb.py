@@ -16,8 +16,8 @@ import cfg
 from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
-from text_classification.modules import CharCNN, RNNClassifier, YoonKimModel
-from text_classification.datautils import CharIMDB, FastTextIMDB, HierarchicalIMDB
+from text_classification.modules import RNNClassifier, YoonKimModel
+from text_classification.datautils import FastTextIMDB, HierarchicalIMDB
 
 
 parser = argparse.ArgumentParser()
@@ -82,11 +82,10 @@ if __name__ == '__main__':
     """
     IMDB
     """
-    MAXLEN = 512  # for CharCNN
 
     args = parser.parse_args()
 
-    save_results_path = 'results/%s_IMDB.csv' % args.model_name
+    save_results_path = f'results/{args.model_name}_IMDB{args.comment}.csv'
     if os.path.exists(save_results_path):
         if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':
             logger.warning('Cancelling execution due to existing output file')
@@ -101,37 +100,15 @@ if __name__ == '__main__':
     if not cfg.cuda:
         logger.warning('Not using CUDA!')
 
-    # Chose data format
-    if args.model_name == 'CharCNN':
-        text_field = torchtext.data.Field(
-            lower=True, include_lengths=False, tensor_type=torch.FloatTensor, batch_first=True,
-            tokenize=lambda x: x, use_vocab=False, sequential=False
-        )
-        label_field = torchtext.data.Field(sequential=False, use_vocab=False)
-
-    else:
-        text_field = torchtext.data.Field(
-            lower=True, include_lengths=False, tensor_type=torch.FloatTensor, batch_first=True,
-            tokenize='spacy', use_vocab=False
-        )
-        label_field = torchtext.data.Field(sequential=False, use_vocab=False)
+    text_field = torchtext.data.Field(
+        lower=True, include_lengths=False, tensor_type=torch.FloatTensor, batch_first=True,
+        tokenize='spacy', use_vocab=False
+    )
+    label_field = torchtext.data.Field(sequential=False, use_vocab=False)
 
     # Chose model
     logger.info('Creating datasets and preprocessing raw texts...')
-    if args.model_name == 'CharCNN':
-        CharIMDB.maxlen = MAXLEN
-        train_data, test_data = CharIMDB.splits(text_field, label_field)
-
-        model_class = CharCNN
-        model_params = {'n_filters': 128,
-                        'cnn_kernel_size': 5,
-                        'dropout': 0.5,
-                        'maxlen': MAXLEN,
-                        'alphabet_len': len(cfg.alphabet)}
-        lr = 1e-3
-        epochs = 30
-
-    elif args.model_name == 'FastText':
+    if args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         logger.info('maxlen: %s' % cfg.max_text_len)
         embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)

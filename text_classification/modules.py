@@ -137,8 +137,8 @@ class RNNClassifier(nn.Module):
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
         self.dropout_prob = dropout
-        if elmo is not None:
-            self.elmo = elmo
+
+        self.elmo = elmo
 
         if cell_type == 'GRU':
             self.rnn = nn.GRU(input_dim, hidden_dim, num_layers=num_layers, dropout=dropout, batch_first=True,)
@@ -162,7 +162,7 @@ class RNNClassifier(nn.Module):
             x = self.elmo(x)['elmo_representations'][0]
 
         x, _ = self.rnn(x)
-        _, x = torch.max(x, 1)
-        x = self.dropout(x)
+        x = torch.max(x, 1)  # namedtuple (values, indices)
+        x = self.dropout(x.values)
         x = self.projector(x)
         return x
