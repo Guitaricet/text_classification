@@ -7,7 +7,7 @@ import torch
 import torchtext
 
 from nltk.tokenize import word_tokenize
-from gensim.models import FastText
+from gensim.models import FastText, KeyedVectors
 
 import cfg
 from text_classification.utils import noise_generator
@@ -187,7 +187,7 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
         return noise_generator(string, self.noise_level, self.alphabet)
 
 
-class FastTextCSVDataset(torch.utils.data.Dataset):
+class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
     """
     Zero vector used for padding
     """
@@ -203,7 +203,7 @@ class FastTextCSVDataset(torch.utils.data.Dataset):
                  elmo=False):
         if isinstance(embeddings, str):
             self.embeddings = FastText.load_fasttext_format(embeddings)
-        elif isinstance(embeddings, FastText):
+        elif isinstance(embeddings, [FastText, KeyedVectors]):
             self.embeddings = embeddings
         elif embeddings is None:
             self.embeddings = None
@@ -236,15 +236,13 @@ class FastTextCSVDataset(torch.utils.data.Dataset):
             text = self._noise_generator(text)
 
         text = self._tokenize(text)
-        if not self.elmo:
-            text = self._preprocess(text)
+        if not self.elmo: text = self._preprocess(text)  # noqa E701
         return text, label
 
     def _tokenize(self, text):
         return word_tokenize(text)
 
     def _preprocess(self, text):
-        # indicies orded different from previous models — (word_vec, word_num) instead of (word_num, word_vec)
         _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size],
                                    dtype=torch.float32)
 
@@ -266,6 +264,53 @@ class FastTextCSVDataset(torch.utils.data.Dataset):
 
     def _noise_generator(self, string):
         return noise_generator(string, self.noise_level, self.alphabet)
+
+
+class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
+    """
+    Zero vector used for padding
+    """
+    noise_level = 0
+
+    def __init__(self,
+                 filepath,
+                 text_field,
+                 label_field,
+                 embeddings=None,
+                 max_text_len=cfg.max_text_len,
+                 alphabet=None,
+                 induce_vectors=False,
+                 induction_matrix=None):
+
+        super().__init__(
+            filepath, text_field, label_field, embeddings, max_text_len, alphabet, elmo=False
+        )
+
+        assert induction_matrix.shape[0] == induction_matrix.shape[1] == self.embeddings.vector_size
+        self.induce_vectors = induce_vectors
+        self.induction_matrix = induction_matrix
+        self.unk_vec = None
+
+    def _preprocess(self, text):
+        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size],
+                                   dtype=torch.float32)
+
+        for i, token in enumerate(text):
+            if i >= self.max_text_len: break  # noqa: E701
+
+            token = self._noise_generator(token)
+
+            if token in self.embeddings:
+                token_vec = self.embeddings[token]
+            else:
+                # build alacarte
+                token_vec = self.unk_vec
+
+            token_tensor = torch.FloatTensor(token_vec)
+            _text_tensor[i, :] = token_tensor
+
+        return _text_tensor
+
 
 
 # --- Functions

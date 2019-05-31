@@ -17,7 +17,7 @@ from train import train, evaluate_on_noise
 from text_classification import utils, trainutils
 from text_classification.logger import logger
 from text_classification.modules import RNNClassifier, YoonKimModel
-from text_classification.datautils import FastTextCSVDataset, HierarchicalCSVDataset
+from text_classification.datautils import KeyedVectorsCSVDataset, HierarchicalCSVDataset
 
 from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
@@ -133,20 +133,20 @@ if __name__ == '__main__':
     if args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         embeddings = FastText.load_fasttext_format(args.embeddings_path or cfg.data.fasttext_path)
-        train_data = FastTextCSVDataset(
+        train_data = KeyedVectorsCSVDataset(
             basepath + 'train.csv', text_field, label_field, embeddings,
             alphabet=alphabet, max_text_len=max_text_len
         )
-        valid_data = FastTextCSVDataset(
+        valid_data = KeyedVectorsCSVDataset(
             basepath + 'validation.csv', text_field, label_field, embeddings,
             alphabet=alphabet, max_text_len=max_text_len
         )
-        test_data = FastTextCSVDataset(
+        test_data = KeyedVectorsCSVDataset(
             basepath + 'test.csv', text_field, label_field, embeddings,
             alphabet=alphabet, max_text_len=max_text_len
         )
 
-        test_original_data = FastTextCSVDataset(
+        test_original_data = KeyedVectorsCSVDataset(
             basepath + 'test.csv', text_field_original, label_field, embeddings,
             alphabet=alphabet, max_text_len=max_text_len
         )
@@ -162,20 +162,20 @@ if __name__ == '__main__':
 
         elmo = Elmo(cfg.data.elmo_options_file, cfg.data.elmo_weights_file, 1, dropout=0)
 
-        train_data = FastTextCSVDataset(
+        train_data = KeyedVectorsCSVDataset(
             basepath + 'train.csv', text_field, label_field,
             alphabet=alphabet, max_text_len=max_text_len, elmo=True
         )
-        valid_data = FastTextCSVDataset(
+        valid_data = KeyedVectorsCSVDataset(
             basepath + 'validation.csv', text_field, label_field,
             alphabet=alphabet, max_text_len=max_text_len, elmo=True
         )
-        test_data = FastTextCSVDataset(
+        test_data = KeyedVectorsCSVDataset(
             basepath + 'test.csv', text_field, label_field,
             alphabet=alphabet, max_text_len=max_text_len, elmo=True
         )
 
-        test_original_data = FastTextCSVDataset(
+        test_original_data = KeyedVectorsCSVDataset(
             basepath + 'test.csv', text_field_original, label_field,
             alphabet=alphabet, max_text_len=max_text_len, elmo=True
         )

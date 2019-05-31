@@ -109,13 +109,14 @@ class YoonKimModel(nn.Module):
         """
         (batch_size, seq_len, word_len) = x.size()
 
-        # import pdb; pdb.set_trace()
         x = self.embedding(x)
         x = x.reshape([batch_size * seq_len, word_len, -1])
         x = x.permute([0, 2, 1])  # (batch_size * seq_len, hidden, word_len)
+
         x = self.char_cnn(x)
         x = torch.max(x, 2).values  # maxpool over word characters
-        x = x.reshape([batch_size, seq_len, -1])
+        x = x.reshape([batch_size, seq_len, -1])  # (batch_size, seq_len, hidden)
+
         x = self.highway(x)
         x = self.dropout(x)
         x, _ = self.word_rnn(x)
