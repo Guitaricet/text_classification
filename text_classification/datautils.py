@@ -106,7 +106,8 @@ class HierarchicalCSVDataset(torch.utils.data.Dataset):
         return word_tokenize(text)
 
     def _numericalize(self, text):
-        _text_tensor = torch.zeros([self.max_text_len, self.max_word_len])
+        _text_tensor = torch.zeros([self.max_text_len, self.max_word_len],
+                                   dtype=torch.long)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701

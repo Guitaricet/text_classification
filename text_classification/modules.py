@@ -76,11 +76,9 @@ class YoonKimModel(nn.Module):
         Only one kernel size (not three different kernels like in the paper)
         Default pooling is MaxOverTime pooling
         """
-        assert cnn_kernel_size % 2  # for 'same' padding
-
         super().__init__()
-        self.embedding_dim = embedding_dim or len(cfg.alphabet)
         self.alphabet_len = alphabet_len or len(cfg.alphabet)
+        self.embedding_dim = embedding_dim or self.alphabet_len
         self.dropout_prob = dropout
         self.embedding_dim = embedding_dim
         self.n_filters = n_filters
@@ -97,7 +95,7 @@ class YoonKimModel(nn.Module):
         )
         self.highway = Highway(n_filters)
         self.dropout = nn.Dropout(self.dropout_prob)
-        self.words_rnn = nn.GRU(n_filters, hidden_dim_out, batch_first=True)
+        self.word_rnn = nn.GRU(n_filters, hidden_dim_out, batch_first=True)
         self.projector = nn.Linear(hidden_dim_out, num_classes)
 
         # Initializations
@@ -106,26 +104,25 @@ class YoonKimModel(nn.Module):
         torch.nn.init.xavier_normal_(self.projector.weight)
 
     def forward(self, x):
+        """
+        :param x: (batch_size, seq_len, word_len)
+        """
+        (batch_size, seq_len, word_len) = x.size()
 
-        batch_size = x.size(1)
-        # TODO: vectorize this and get rid of words_tensor
-        words_tensor = torch.zeros(self.max_text_len, batch_size, self.conv_dim)
-        if cfg.cuda:
-            words_tensor = words_tensor.cuda()
-
-        for i in range(self.max_text_len):
-            word = x[i * self.max_word_len: (i + 1) * self.max_word_len, :]
-            word = self.embedding(word)
-            word = word.permute(1, 2, 0)
-            word = self.char_cnn(word)
-            word = self.highway(word)
-            word = word.view(word.size(0), -1)
-            words_tensor[i, :] = word
-
-        # words_tensor = torch.nn.utils.rnn.pack_padded_sequence(...)
-        x, _ = self.words_rnn(words_tensor)
+        # import pdb; pdb.set_trace()
+        x = self.embedding(x)
+        x = x.reshape([batch_size * seq_len, word_len, -1])
+        x = x.permute([0, 2, 1])  # (batch_size * seq_len, hidden, word_len)
+        x = self.char_cnn(x)
+        x = torch.max(x, 2).values  # maxpool over word characters
+        x = x.reshape([batch_size, seq_len, -1])
+        x = self.highway(x)
         x = self.dropout(x)
-        x = self.projector(x[-1])
+        x, _ = self.word_rnn(x)
+        x = torch.max(x, 1).values  # maxpool over words
+
+        x = self.dropout(x)
+        x = self.projector(x)
         return x
 
 
