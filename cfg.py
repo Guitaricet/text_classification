@@ -6,7 +6,7 @@ cuda = torch.cuda.is_available()
 
 # TODO: add russian chars
 # TODO: move this to class data
-alphabet = ['<UNK>', '\n'] + [s for s in """ abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'’/\|_@#$%ˆ&*‘+-=<>()[]{}"""]
+alphabet = ['<PAD>', '<UNK>'] + [s for s in """ abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'’/\|_@#$%ˆ&*‘+-=<>()[]{}"""]
 russian_chars = [s for s in 'абвгдеёжзийклмнопрстуфхцчщъыьэюя']
 
 max_word_len = 8
@@ -24,11 +24,12 @@ class data:
 class train:
     batch_size = 32
     val_size = 0.15
+    val_every = 1000
+    log_every = 10
     num_workers = 4
     evals_per_noise_level = 1
     lr = 1e-3
     epochs = 20
-    log_every = 2
 
 
 class experiment:

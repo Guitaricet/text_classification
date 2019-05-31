@@ -16,7 +16,7 @@ import cfg
 from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
-from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
+from text_classification.modules import CharCNN, RNNClassifier, YoonKimModel
 from text_classification.datautils import CharIMDB, FastTextIMDB, HierarchicalIMDB
 
 
@@ -151,18 +151,6 @@ if __name__ == '__main__':
                         'hidden_dim_out': 64,
                         'embedding_dim': 90,
                         'dropout': 0.5}
-        lr = 1e-3
-        epochs = 20
-
-    elif args.model_name == 'AttentionedYoonKim':
-        train_data, test_data = HierarchicalIMDB.splits(text_field, label_field)
-
-        model_class = AttentionedYoonKimModel
-        model_params = {'n_filters': 128,
-                        'cnn_kernel_size': 5,
-                        'hidden_dim_out': 128,
-                        'embedding_dim': 74,
-                        'heads': 1}
         lr = 1e-3
         epochs = 20
 

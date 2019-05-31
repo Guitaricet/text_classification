@@ -16,8 +16,8 @@ import cfg
 from train import train, evaluate_on_noise
 from text_classification import trainutils
 from text_classification.logger import logger
-from text_classification.layers import CharCNN, RNNClassifier, YoonKimModel, AttentionedYoonKimModel
-from text_classification.datautils import CharMokoron, FastTextMokoron, HierarchicalTextDataset
+from text_classification.modules import CharCNN, RNNClassifier, YoonKimModel
+from text_classification.datautils import CharMokoron, FastTextCSVDataset, HierarchicalCSVDataset
 
 from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
@@ -197,14 +197,14 @@ if __name__ == '__main__':
     elif args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         embeddings = FastText.load_fasttext_format(args.embeddings_path or cfg.data.fasttext_path)
-        train_data = FastTextMokoron(
+        train_data = FastTextCSVDataset(
             basepath + 'train.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        valid_data = FastTextMokoron(
+        valid_data = FastTextCSVDataset(
             basepath + 'validation.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        test_data = FastTextMokoron(
+        test_data = FastTextCSVDataset(
             basepath + 'test.csv', text_field, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
-        test_original_data = FastTextMokoron(
+        test_original_data = FastTextCSVDataset(
             basepath + 'test.csv', text_field_original, label_field, embeddings, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = RNNClassifier
@@ -219,14 +219,14 @@ if __name__ == '__main__':
 
         elmo = Elmo(options_file, weight_file, 1, dropout=0)
 
-        train_data = FastTextMokoron(
+        train_data = FastTextCSVDataset(
             basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
-        valid_data = FastTextMokoron(
+        valid_data = FastTextCSVDataset(
             basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
-        test_data = FastTextMokoron(
+        test_data = FastTextCSVDataset(
             basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
 
-        test_original_data = FastTextMokoron(
+        test_original_data = FastTextCSVDataset(
             basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN, elmo=True)
 
         model_class = RNNClassifier
@@ -235,17 +235,17 @@ if __name__ == '__main__':
         epochs = 10
 
     elif args.model_name == 'YoonKim':
-        train_data = HierarchicalTextDataset(
+        train_data = HierarchicalCSVDataset(
             basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        valid_data = HierarchicalTextDataset(
+        valid_data = HierarchicalCSVDataset(
             basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        test_data = HierarchicalTextDataset(
+        test_data = HierarchicalCSVDataset(
             basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         # logger.warning('Sample of training data!')
         # train_data.data = train_data.data.sample(1024)
 
-        test_original_data = HierarchicalTextDataset(
+        test_original_data = HierarchicalCSVDataset(
             basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
 
         model_class = YoonKimModel
@@ -255,30 +255,6 @@ if __name__ == '__main__':
                         'embedding_dim': 90,
                         'dropout': 0.7,
                         'alphabet_len': len(alphabet),
-                        'max_text_len': MAX_TEXT_LEN,
-                        'num_classes': n_classes}
-        lr = 1e-3
-        epochs = 25
-
-    elif args.model_name == 'AttentionedYoonKim':
-        train_data = HierarchicalTextDataset(
-            basepath + 'train.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        valid_data = HierarchicalTextDataset(
-            basepath + 'validation.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-        test_data = HierarchicalTextDataset(
-            basepath + 'test.csv', text_field, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-
-        test_original_data = HierarchicalTextDataset(
-            basepath + 'test.csv', text_field_original, label_field, alphabet=alphabet, max_text_len=MAX_TEXT_LEN)
-
-        model_class = AttentionedYoonKimModel
-        model_params = {'n_filters': 128,
-                        'cnn_kernel_size': 5,
-                        'hidden_dim_out': 128,
-                        'embedding_dim': 74,
-                        'dropout': 0.7,
-                        'alphabet_len': len(alphabet),
-                        'heads': 1,
                         'max_text_len': MAX_TEXT_LEN,
                         'num_classes': n_classes}
         lr = 1e-3
