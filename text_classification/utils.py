@@ -68,7 +68,7 @@ def pad_tensor(vec, pad, dim):
     """
     pad_size = list(vec.shape)
     pad_size[dim] = pad - vec.size(dim)
-    return torch.cat([vec, torch.zeros(*pad_size)], dim=dim)
+    return torch.cat([vec, torch.zeros(*pad_size, dtype=vec.dtype)], dim=dim)
 
 
 class PadCollate:
