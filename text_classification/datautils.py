@@ -40,7 +40,8 @@ class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
         return _text_tensor, label
 
     def preprocess(self, text, with_noise=True):
-        _text_tensor = torch.zeros([self.max_text_len, self.max_word_len])
+        _text_len = min(self.max_text_len, len(text))
+        _text_tensor = torch.zeros([_text_len, self.max_word_len])
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
@@ -106,8 +107,8 @@ class HierarchicalCSVDataset(torch.utils.data.Dataset):
         return word_tokenize(text)
 
     def _numericalize(self, text):
-        _text_tensor = torch.zeros([self.max_text_len, self.max_word_len],
-                                   dtype=torch.long)
+        _text_len = min(self.max_text_len, len(text))
+        _text_tensor = torch.zeros([_text_len, self.max_word_len], dtype=torch.long)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
@@ -154,7 +155,7 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
         Zero vector used for padding
         """
         super().__init__(path, text_field, label_field, **kwargs)
-        assert isinstance(embeddings, [str, FastText]),\
+        assert isinstance(embeddings, (str, FastText, KeyedVectors)),\
             'embeddings should be gensim FastText object or path to FastText file'
         self.embeddings = embeddings
 
@@ -167,10 +168,10 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
 
     def __getitem__(self, idx):
         item = super().__getitem__(idx)
-        # ???
-        # indices ordered differently from previous models — (word_vec, word_num) instead of (word_num, word_vec)
-        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size])
+        _text_len = min(self.max_text_len, len(item.text))
+        _text_tensor = torch.zeros([_text_len, self.embeddings.vector_size])
 
+        # TODO: tokenize after noising
         for i, token in enumerate(item.text):
             if i >= self.max_text_len: break  # noqa: E701
 
@@ -203,7 +204,7 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
                  elmo=False):
         if isinstance(embeddings, str):
             self.embeddings = FastText.load_fasttext_format(embeddings)
-        elif isinstance(embeddings, [FastText, KeyedVectors]):
+        elif isinstance(embeddings, (FastText, KeyedVectors)):
             self.embeddings = embeddings
         elif embeddings is None:
             self.embeddings = None
@@ -243,13 +244,14 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
         return word_tokenize(text)
 
     def _preprocess(self, text):
-        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size],
-                                   dtype=torch.float32)
+        _text_len = min(self.max_text_len, len(text))
+        _text_tensor = np.zeros([_text_len, self.embeddings.vector_size],
+                                dtype=torch.float32)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
 
-            # fastText object does not have .get() method
+            # KeyedVectors object does not have .get() method
             if token in self.embeddings:
                 token_vec = self.embeddings[token]
             else:
@@ -278,61 +280,75 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
                  max_text_len=cfg.max_text_len,
                  alphabet=None,
                  induce_vectors=False,
+                 window_half_size=10,
+                 induction_iterations=1,
                  induction_matrix=None):
+        """
+        Induce à la carte embeddings for unk words
+        if there are multiple unk words in a text
+        [he, was, so, unk, that, he, unk, unk]
+        multiple induction iterations might help (or might not)
+
+        :param induction_matrix: np.array with shape (embedding_dim, embedding_dim)
+            or 'identity' for just averaging the vectors
+        """
 
         super().__init__(
             filepath, text_field, label_field, embeddings, max_text_len, alphabet, elmo=False
         )
+        assert induce_vectors == bool(induction_matrix), 'induce_vectors and induction_matrix should both be specified'
+        if isinstance(induction_matrix, str) and induction_matrix == 'identity':
+            induction_matrix = np.identity(self.embeddings.vector_size)
         if induction_matrix is not None:
             assert induction_matrix.shape[0] == induction_matrix.shape[1] == self.embeddings.vector_size
 
         self.induce_vectors = induce_vectors
         self.induction_matrix = induction_matrix
-        self.unk_vec = None
+
+        self.window_half_size = window_half_size
+        self.induction_iterations = induction_iterations
+        self.sort_key = None
 
     def _preprocess(self, text):
-        _text_tensor = torch.zeros([self.max_text_len, self.embeddings.vector_size],
-                                   dtype=torch.float32)
+        """
+        :param text: tokenized text, list(str)
+        """
+        _text_len = min(self.max_text_len, len(text))
+        _text_tensor = np.zeros([_text_len, self.embeddings.vector_size], dtype=np.float32)
+        self.sort_key = _text_len
+
+        unk_indices = []
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
 
             if token in self.embeddings:
                 token_vec = self.embeddings[token]
+                _text_tensor[i, :] = token_vec
             else:
-                # build alacarte
-                token_vec = self.unk_vec
+                # mark unk
+                unk_indices.append(i)
+                # token_vec = self.unk_vec
+                # _text_tensor[i, :] = token_vec
 
-            token_tensor = torch.FloatTensor(token_vec)
-            _text_tensor[i, :] = token_tensor
+        if self.induce_vectors:
+            _text_tensor = self._induce_vectors(_text_tensor, unk_indices, _text_len)
+
+        _text_tensor = torch.tensor(_text_tensor)
 
         return _text_tensor
 
-
-
-# --- Functions
-
-
-def model_params_num(model):
-    return sum(np.prod(list(p.size())) for p in model.parameters())
-
-
-def mk_dataline(model_type, epochs, lr, noise_level_train, noise_level_test, acc_train, acc_test,
-                f1_train, f1_test, dropout, model, run_name,):
-    # TODO: do not use cfg here?
-    return {
-        'model_type': model_type,
-        'trainable_params': model_params_num(model),
-        'dropout': dropout,
-        'epochs': epochs,
-        'lr': lr,
-        'noise_level_train': noise_level_train,
-        'noise_level_test': noise_level_test,
-        'acc_train': acc_train,
-        'acc_test': acc_test,
-        'f1_train': f1_train,
-        'f1_test': f1_test,
-        'model_desc': str(model),
-        'run_name': run_name,
-        'data_desc': 'MaxWordLen %s, MaxTexLen %s' % (cfg.max_word_len, cfg.max_text_len)
-    }
+    def _induce_vectors(self, _text_tensor, unk_indices, _text_len):
+        # import pdb; pdb.set_trace()
+        for _ in range(self.induction_iterations):
+            for i in unk_indices:
+                left_word = max(0, i - self.window_half_size)
+                right_word = min(_text_len, i + self.window_half_size + 1)
+                context_indices = [v for v in list(range(left_word, right_word)) if v not in unk_indices]
+                context_vector = self.unk_vec
+                if len(context_indices):
+                    context_vectors = _text_tensor[context_indices, :]
+                    context_vector = np.mean(context_vectors, 0)
+                induced_embedding = self.induction_matrix @ context_vector
+                _text_tensor[i, :] = induced_embedding
+        return _text_tensor

@@ -1,3 +1,5 @@
+from functools import partial
+
 import numpy as np
 
 import torch
@@ -8,6 +10,7 @@ from sklearn.metrics import accuracy_score, f1_score
 
 import cfg
 from text_classification.logger import logger
+from text_classification.utils import PadCollate
 
 from allennlp.modules.elmo import batch_to_ids
 
@@ -70,6 +73,9 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
+    collate_fn = PadCollate(0)
+    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=collate_fn)
+
     if valid_size is not None:
         len_dataset = len(dataset)
         indices = list(range(len_dataset))
@@ -85,23 +91,13 @@ def get_dataloaders(dataset,
         train_sampler = SubsetRandomSampler(train_idx)
         valid_sampler = SubsetRandomSampler(valid_idx)
 
-        train_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=train_sampler, num_workers=num_workers
-        )
-        valid_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=valid_sampler, num_workers=num_workers
-        )
+        train_loader = dataLoader(dataset, sampler=train_sampler)
+        valid_loader = dataLoader(dataset, sampler=valid_sampler)
     else:
-        train_loader = DataLoader(
-            dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
-        )
-        valid_loader = DataLoader(
-            validset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
-        )
+        train_loader = dataLoader(dataset, shuffle=shuffle)
+        valid_loader = dataLoader(validset, shuffle=shuffle)
 
-    test_loader = DataLoader(
-        testset, batch_size=batch_size, num_workers=num_workers
-    )
+    test_loader = DataLoader(testset)
 
     return train_loader, valid_loader, test_loader
 

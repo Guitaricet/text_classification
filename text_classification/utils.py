@@ -1,4 +1,5 @@
 from random import random, choice
+import torch
 
 import cfg
 
@@ -53,3 +54,53 @@ def get_dataset_params(dataset_name, train_on_original_data):
         text_field = text_field_original
 
     return text_field, text_field_original, label_field, n_classes, alphabet
+
+
+def pad_tensor(vec, pad, dim):
+    """
+    args:
+        vec - tensor to pad
+        pad - the size to pad to
+        dim - dimension to pad
+
+    return:
+        a new tensor padded to 'pad' in dimension 'dim'
+    """
+    pad_size = list(vec.shape)
+    pad_size[dim] = pad - vec.size(dim)
+    return torch.cat([vec, torch.zeros(*pad_size)], dim=dim)
+
+
+class PadCollate:
+    """
+    a variant of callate_fn that pads according to the longest sequence in
+    a batch of sequences
+    """
+
+    def __init__(self, dim=0):
+        """
+        args:
+            dim - the dimension to be padded (dimension of time in sequences)
+        """
+        self.dim = dim
+
+    def pad_collate(self, batch):
+        """
+        args:
+            batch - list of (tensor, label)
+
+        reutrn:
+            xs - a tensor of all examples in 'batch' after padding
+            ys - a LongTensor of all labels in batch
+        """
+        # find longest sequence
+        max_len = max([x.shape[self.dim] for x, _ in batch])
+        # pad according to max_len
+        batch = [(pad_tensor(x, pad=max_len, dim=self.dim), y) for x, y in batch]
+        # stack all
+        xs = torch.stack([x[0] for x in batch], dim=0)
+        ys = torch.LongTensor([x[1] for x in batch])
+        return xs, ys
+
+    def __call__(self, batch):
+        return self.pad_collate(batch)

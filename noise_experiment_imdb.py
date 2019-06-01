@@ -59,7 +59,7 @@ def experiment(model_class, train_data, test_data,
             # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
             model.eval()
             train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
-            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)
+            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, noise_levels, cfg.train.evals_per_noise_level)  # noqa E501
             results_dicts_original = evaluate_on_noise(trained_model, test_dataloader, [0], 1)
 
             results_df_noised = pd.DataFrame(results_dicts_noised)
