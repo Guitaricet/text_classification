@@ -249,8 +249,6 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
 
-            token = self._noise_generator(token)
-
             # fastText object does not have .get() method
             if token in self.embeddings:
                 token_vec = self.embeddings[token]
@@ -285,8 +283,9 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
         super().__init__(
             filepath, text_field, label_field, embeddings, max_text_len, alphabet, elmo=False
         )
+        if induction_matrix is not None:
+            assert induction_matrix.shape[0] == induction_matrix.shape[1] == self.embeddings.vector_size
 
-        assert induction_matrix.shape[0] == induction_matrix.shape[1] == self.embeddings.vector_size
         self.induce_vectors = induce_vectors
         self.induction_matrix = induction_matrix
         self.unk_vec = None
@@ -297,8 +296,6 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
-
-            token = self._noise_generator(token)
 
             if token in self.embeddings:
                 token_vec = self.embeddings[token]
