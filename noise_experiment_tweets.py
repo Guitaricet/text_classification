@@ -15,6 +15,7 @@ from gensim.models import FastText
 import cfg
 from train import train, evaluate_on_noise
 from text_classification import utils, trainutils
+from text_classification.utils import PadCollate
 from text_classification.logger import logger
 from text_classification.modules import RNNClassifier, YoonKimModel
 from text_classification.datautils import KeyedVectorsCSVDataset, HierarchicalCSVDataset
@@ -46,7 +47,8 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
     test_original_dataloader = DataLoader(test_original_data,
                                           batch_size=cfg.train.batch_size,
                                           num_workers=cfg.train.num_workers,
-                                          pin_memory=cfg.pin_memory)
+                                          pin_memory=cfg.pin_memory,
+                                          collate_fn=PadCollate(0))
     if noise_level is not None:
         noise_levels = [noise_level]
     else:

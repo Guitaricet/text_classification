@@ -73,8 +73,7 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
-    collate_fn = PadCollate(0)
-    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=collate_fn)
+    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=PadCollate(0))
 
     if valid_size is not None:
         len_dataset = len(dataset)
@@ -97,7 +96,7 @@ def get_dataloaders(dataset,
         train_loader = dataLoader(dataset, shuffle=shuffle)
         valid_loader = dataLoader(validset, shuffle=shuffle)
 
-    test_loader = DataLoader(testset)
+    test_loader = dataLoader(testset)
 
     return train_loader, valid_loader, test_loader
 
@@ -124,7 +123,8 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
 
         test_dataloader = DataLoader(
             test_data, batch_size=cfg.train.batch_size,
-            shuffle=True, num_workers=cfg.train.num_workers
+            shuffle=True, num_workers=cfg.train.num_workers,
+            collate_fn=PadCollate(0)
         )
     else:
         assert isinstance(test_data, torch.utils.data.DataLoader)
