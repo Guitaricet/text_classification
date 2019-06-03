@@ -124,7 +124,7 @@ def train(model,
             logger.info('Training accuracy  : {:.4f}, f1: {:.4f}'.format(train_metrics['accuracy'], train_metrics['f1']))  # noqa E501
             logger.info('Validation accuracy: {:.4f}, f1: {:.4f}'.format(val_metrics['accuracy'], val_metrics['f1']))
 
-    model.load_state_dict(torch.load())
+    model.load_state_dict(torch.load(saveto))
 
     return model
 
