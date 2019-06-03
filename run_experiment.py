@@ -226,9 +226,6 @@ if __name__ == '__main__':
     if epochs == 1:
         logger.warning('Only one epoch!')
 
-    if args.sample_data < 1.0:
-        train_data.data = train_data.data.sample(int(args.sample_data * len(train_data)))
-
     logger.info('Starting the experiment')
     experiment(model_class,
                train_data,

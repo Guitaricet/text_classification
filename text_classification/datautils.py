@@ -40,7 +40,7 @@ class AbstractNoisedDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx):
         # processing from char representation is required for text noising
-        line = self.data.iloc[idx]
+        line = self._data.iloc[idx]
         text = line[self.text_field]
         label = line[self.label_field]
 
