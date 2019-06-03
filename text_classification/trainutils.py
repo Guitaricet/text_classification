@@ -13,8 +13,6 @@ import cfg
 from text_classification.logger import logger
 from text_classification.utils import PadCollate
 
-from allennlp.modules.elmo import batch_to_ids
-
 
 class CosineLRWithRestarts:
     def __init__(self, optimizer, max_lr, cycle_len, n_batches):

@@ -13,8 +13,6 @@ import cfg
 from text_classification import trainutils
 from text_classification.logger import logger
 
-from allennlp.modules.elmo import batch_to_ids
-
 
 # TODO: add early stopping
 # Note: save_model_path and save_results_path are different entities (dir path and file path) better to change this
