@@ -264,7 +264,7 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
                 token_vec = self.unk_vec
 
             token_tensor = torch.FloatTensor(token_vec)
-            _text_tensor[i, :] = token_vec
+            _text_tensor[i, :] = token_tensor
 
         return _text_tensor
 
