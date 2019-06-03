@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 
 import torch
-import torchtext
 
 from nltk.tokenize import word_tokenize
 from gensim.models.keyedvectors import FastTextKeyedVectors, KeyedVectors
@@ -16,89 +15,34 @@ from text_classification.utils import noise_generator
 # TODO: move textlen params from class to object properties
 
 
-class HierarchicalIMDB(torchtext.datasets.imdb.IMDB):
-    """
-    Dataset class for hierarchical (chars -> words -> text) networks, IMDB dataset
+class AbstractNoisedDataset(torch.utils.data.Dataset):
 
-    Zero vector used for padding
-    """
-    noise_level = 0
-    alphabet = cfg.alphabet
-    max_text_len = cfg.max_text_len
-    max_word_len = cfg.max_word_len
+    def set_noise_level(self, noise_level, force_renoise=False):
+        if noise_level != self.noise_level and not force_renoise:
+            self._noise_level = noise_level
+            self._data = self._preprocess_df(self.data)
 
-    def __init__(self, alphabet=None, **kwargs):
-        self.alphabet = alphabet or self.alphabet
-        self.char2int = {s: i for i, s in enumerate(self.alphabet)}
-        self.unk_index = self.char2int['<UNK>']
-        self.pad_index = self.char2int['<PAD>']
-        super().__init__(**kwargs)
+    def _preprocess_text(self, text):
+        text = text.lower()
+        # for mokoron dataset we should remove smiles
+        if ')' not in self.alphabet:
+            text = re.sub('[(,)]', '', text)
+        if self.noise_level > 0:
+            text = self._noise_generator(text)
+        text = self._tokenize(text)
+        return text
 
-    def __getitem__(self, idx):
-        item = super().__getitem__(idx)
-        _text_tensor = self.preprocess(item.text)
-
-        label = int(item.label == 'pos')
-        return _text_tensor, label
-
-    def preprocess(self, text, with_noise=True):
-        _text_len = min(self.max_text_len, len(text))
-        _text_tensor = torch.zeros([_text_len, self.max_word_len])
-
-        for i, token in enumerate(text):
-            if i >= self.max_text_len: break  # noqa: E701
-            for j, char in enumerate(token):
-                if j >= self.max_word_len: break  # noqa: E701
-                _text_tensor[i, j] = self.char2int.get(char, self.unk_index)
-        return _text_tensor
-
-    def _noise_generator(self, string):
-        return noise_generator(string, self.noise_level, self.alphabet)
-
-
-class HierarchicalCSVDataset(torch.utils.data.Dataset):
-    """
-    Dataset class for hierarchical (chars -> words -> text) networks which reads data from .csv
-
-    Mokoron, because it was firstly used for Mokoron twitter sentiment dataset
-    Zero vector used for padding
-    """
-    noise_level = 0
-    alphabet = cfg.alphabet
-
-    # TODO: rename maxwordlen and maxtextlen
-    def __init__(self,
-                 filepath,
-                 text_field,
-                 label_field,
-                 max_word_len=cfg.max_word_len,
-                 max_text_len=cfg.max_text_len,
-                 alphabet=None):
-
-        self.data = pd.read_csv(filepath)
-        self.alphabet = alphabet or self.alphabet
-        self.text_field = text_field
-        self.label_field = label_field
-        self.max_word_len = max_word_len
-        self.max_text_len = max_text_len
-        self.char2int = {s: i for i, s in enumerate(self.alphabet)}
-        self.unk_index = self.char2int['<UNK>']
-        self.pad_index = self.char2int['<PAD>']
-        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
-
-    def __len__(self):
-        return len(self.data)
+    def _preprocess_df(self, df):
+        df[self.label_field] = df[self.label_field].apply(lambda x: self.label2int[x])
+        df[self.text_field] = df[self.text_field].apply(self._preprocess_text)
+        return df
 
     def __getitem__(self, idx):
         # processing from char representation is required for text noising
         line = self.data.iloc[idx]
-        text = line[self.text_field].lower()
-        label = self.label2int[line[self.label_field]]
+        text = line[self.text_field]
+        label = line[self.label_field]
 
-        if self.noise_level > 0:
-            text = self._noise_generator(text)
-
-        text = self._tokenize(text)
         text = self._numericalize(text)
         return text, label
 
@@ -108,15 +52,52 @@ class HierarchicalCSVDataset(torch.utils.data.Dataset):
     def _tokenize(self, text):
         return word_tokenize(text)
 
+
+class HierarchicalCSVDataset(AbstractNoisedDataset):
+    """
+    Dataset class for hierarchical (chars -> words -> text) networks which reads data from .csv
+
+    Mokoron, because it was firstly used for Mokoron twitter sentiment dataset
+    Zero vector used for padding
+    """
+
+    def __init__(self,
+                 filepath,
+                 text_field,
+                 label_field,
+                 max_word_len=cfg.max_word_len,
+                 max_text_len=cfg.max_text_len,
+                 noise_level=0,
+                 alphabet=None):
+
+        self._noise_level = noise_level
+        self.data = pd.read_csv(filepath)
+        self.alphabet = alphabet or cfg.alphabet
+        self.text_field = text_field
+        self.label_field = label_field
+        self.max_word_len = max_word_len
+        self.max_text_len = max_text_len
+        self.char2int = {s: i for i, s in enumerate(self.alphabet)}
+        self.unk_index = self.char2int['<UNK>']
+        self.pad_index = self.char2int['<PAD>']
+        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
+        self.data = self._preprocess_df(self.data)
+
+    @property
+    def noise_level(self):
+        return self._noise_level
+
+    def __len__(self):
+        return len(self.data)
+
     def _numericalize(self, text):
         _text_len = min(self.max_text_len, len(text))
         _text_tensor = torch.zeros([_text_len, self.max_word_len], dtype=torch.long)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
-            for j, char in enumerate(token):
-                if j >= self.max_word_len: break  # noqa: E701
-                _text_tensor[i, j] = self.char2int.get(char, self.unk_index)
+            char_ids = [self.char2int.get(c, self.unk_index) for c in token]
+            _text_tensor[i, :len(char_ids)] = char_ids
 
         return _text_tensor
 
@@ -139,60 +120,7 @@ class HierarchicalCSVDataset(torch.utils.data.Dataset):
             return texts
 
 
-class FastTextIMDB(torchtext.datasets.imdb.IMDB):
-    noise_level = 0
-    alphabet = cfg.alphabet
-    embeddings = None
-
-    def __init__(self,
-                 path,
-                 text_field,
-                 label_field,
-                 embeddings,
-                 max_text_len=cfg.max_text_len,
-                 **kwargs):
-        """
-        IMDB with FastText embeddings dataset
-
-        Zero vector used for padding
-        """
-        super().__init__(path, text_field, label_field, **kwargs)
-        if not isinstance(embeddings, (str, FastTextKeyedVectors, KeyedVectors)):
-            raise ValueError('embeddings should be path to FastText file or '
-                             'gensim FastTextKeyedVectors object or None'
-                             f'got {type(embeddings)} instead')
-        self.embeddings = embeddings
-
-        if isinstance(embeddings, str):
-            print('Loading embeddings from file')
-            self.embeddings = load_facebook_vectors(embeddings)
-
-        self.max_text_len = max_text_len
-        self.unk_vec = np.random.rand(self.embeddings.vector_size)
-
-    def __getitem__(self, idx):
-        item = super().__getitem__(idx)
-        _text_len = min(self.max_text_len, len(item.text))
-        _text_tensor = torch.zeros([_text_len, self.embeddings.vector_size])
-
-        # TODO: tokenize after noising
-        for i, token in enumerate(item.text):
-            if i >= self.max_text_len: break  # noqa: E701
-
-            token = self._noise_generator(token)
-            token_vec = self.embeddings.get(token, self.unk_vec)
-
-            token_tensor = torch.FloatTensor(token_vec)
-            _text_tensor[i, :] = token_tensor
-
-        label = int(item.label == 'pos')
-        return _text_tensor, label
-
-    def _noise_generator(self, string):
-        return noise_generator(string, self.noise_level, self.alphabet)
-
-
-class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
+class KeyedVectorsCSVDataset(AbstractNoisedDataset):
     """
     Zero vector used for padding
     """
@@ -205,21 +133,20 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
                  embeddings=None,
                  max_text_len=cfg.max_text_len,
                  alphabet=None,
+                 noise_level=0,
                  elmo=False):
+        assert not elmo, 'ELMo support is deprecated'
         if isinstance(embeddings, str):
             self.embeddings = load_facebook_vectors(embeddings)
         elif isinstance(embeddings, (FastTextKeyedVectors, KeyedVectors)):
             self.embeddings = embeddings
-        elif embeddings is None:
-            self.embeddings = None
-            assert elmo
         else:
             raise ValueError('embeddings should be path to FastText file or '
-                             'gensim FastTextKeyedVectors object or None'
+                             'gensim FastTextKeyedVectors object'
                              f'got {type(embeddings)} instead')
 
+        self._noise_level = noise_level
         self.alphabet = alphabet or cfg.alphabet
-        self.elmo = elmo
         self.text_field = text_field
         self.label_field = label_field
         self.data = pd.read_csv(filepath)
@@ -227,29 +154,16 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
         if self.embeddings is not None:
             self.unk_vec = np.random.rand(self.embeddings.vector_size)
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
+        self._data = self._preprocess_df(self.data)
+
+    @property
+    def noise_level(self):
+        return self._noise_level
 
     def __len__(self):
-        return len(self.data)
+        return len(self._data)
 
-    def __getitem__(self, idx):
-        line = self.data.iloc[idx]
-        text = line[self.text_field].lower()
-        # for mokoron dataset we should remove smiles
-        if ')' not in self.alphabet:
-            text = re.sub('[(,)]', '', text)
-        label = self.label2int[line[self.label_field]]
-
-        if self.noise_level > 0:
-            text = self._noise_generator(text)
-
-        text = self._tokenize(text)
-        if not self.elmo: text = self._preprocess(text)  # noqa E701
-        return text, label
-
-    def _tokenize(self, text):
-        return word_tokenize(text)
-
-    def _preprocess(self, text):
+    def _numericalize(self, text):
         _text_len = min(self.max_text_len, len(text))
         _text_tensor = torch.zeros([_text_len, self.embeddings.vector_size],
                                    dtype=torch.float32)
@@ -268,9 +182,6 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
 
         return _text_tensor
 
-    def _noise_generator(self, string):
-        return noise_generator(string, self.noise_level, self.alphabet)
-
 
 class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
     """
@@ -285,6 +196,7 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
                  embeddings=None,
                  max_text_len=cfg.max_text_len,
                  alphabet=None,
+                 noise_level=0,
                  induce_vectors=False,
                  window_half_size=10,
                  induction_iterations=1,
@@ -300,7 +212,7 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
         """
 
         super().__init__(
-            filepath, text_field, label_field, embeddings, max_text_len, alphabet, elmo=False
+            filepath, text_field, label_field, embeddings, max_text_len, alphabet, noise_level
         )
         assert induce_vectors == bool(induction_matrix), 'induce_vectors and induction_matrix should both be specified'
         if isinstance(induction_matrix, str) and induction_matrix == 'identity':
@@ -315,7 +227,7 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
         self.induction_iterations = induction_iterations
         self.sort_key = None
 
-    def _preprocess(self, text):
+    def _numericalize(self, text):
         """
         :param text: tokenized text, list(str)
         """

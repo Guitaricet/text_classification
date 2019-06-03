@@ -1,4 +1,5 @@
 from functools import partial
+from copy import deepcopy
 
 import numpy as np
 
@@ -120,7 +121,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device)
     if isinstance(test_data, torch.utils.data.Dataset):
         assert False, 'Do not use '
         if noise_level is not None:
-            test_data.noise_level = noise_level
+            test_data.set_noise_level(noise_level)
 
         test_dataloader = DataLoader(
             test_data, batch_size=cfg.train.batch_size,
@@ -131,9 +132,13 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device)
         assert isinstance(test_data, torch.utils.data.DataLoader)
         test_dataloader = test_data
 
-    if noise_level is not None:
-        prev_noise_level = test_dataloader.dataset.noise_level
-        test_dataloader.dataset.noise_level = noise_level
+    if noise_level is not None and noise_level != test_dataloader.noise_level:
+        # dirty hack
+        # but if you deepcopy all dataloader, it will copy whole embedding matrix
+        prev_dataset_data = deepcopy(test_dataloader.dataset._data)
+        prev_dataset_noise_level = test_dataloader.dataset.noise_level
+
+        test_dataloader.dataset.set_noise_level(noise_level)
 
     predictions = []
     labels = []
@@ -166,6 +171,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device)
         model.train()
 
     if noise_level is not None:
-        test_dataloader.dataset.noise_level = prev_noise_level
+        test_dataloader.dataset._noise_level = prev_dataset_noise_level
+        test_dataloader.dataset._data = prev_dataset_data
 
     return {'accuracy': acc, 'f1': f1}

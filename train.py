@@ -27,7 +27,6 @@ def train(model,
           lr=cfg.train.lr,
           epochs=cfg.train.epochs,
           comment='',
-          log_every=10,
           save_model_path=None,
           use_annealing=True,
           device=cfg.device):
@@ -41,17 +40,16 @@ def train(model,
     :param lr: learning rate
     :param epochs: number of train epochs
     :param comment: comment for TensorBoard runs name
-    :param log_every: log to logger every epochs
     :param save_model_path: path for directory for trained model saving
     :param use_annealing: (deprecated) does not do anything
     :return: model, results where model is trained model, results is list of dicts
     """
-    # assert noise_level in cfg.experiment.noise_levels
     model.to(device)
 
     start_time = time()
 
-    train_dataloader.dataset.__class__.noise_level = noise_level
+    train_dataloader.set_noise_level(noise_level)
+    val_dataloader.set_noise_level(noise_level)
 
     model_name = '_{}_lr{}_noise_level{:.4f}'.format(
         model.name, int(-np.log10(lr)), noise_level
@@ -108,7 +106,7 @@ def train(model,
 
             global_step += 1
 
-        if epoch % log_every == 0 or epoch == epochs-1:
+        if epoch % 10 == 0 or epoch == epochs-1:
             logger.info('Epoch {}. Global step {}. T={:.2f}min'.format(epoch, global_step, (time() - start_time) / 60.))
             logger.info('In-batch loss      : {:.4f}'.format(float(loss)))
             logger.info('Training accuracy  : {:.4f}, f1: {:.4f}'.format(train_metrics['accuracy'], train_metrics['f1']))

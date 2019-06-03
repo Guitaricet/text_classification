@@ -69,7 +69,6 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                                   val_dataloader,
                                   noise_level,
                                   lr=lr,
-                                  log_every=cfg.train.log_every,
                                   epochs=epochs,
                                   comment=comment,
                                   save_model_path='models')
