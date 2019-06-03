@@ -263,6 +263,7 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
             else:
                 token_vec = self.unk_vec
 
+            token_tensor = torch.FloatTensor(token_vec)
             _text_tensor[i, :] = token_vec
 
         return _text_tensor
