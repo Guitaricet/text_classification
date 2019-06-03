@@ -49,8 +49,7 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                                           batch_size=cfg.train.batch_size,
                                           num_workers=cfg.train.num_workers,
                                           pin_memory=cfg.pin_memory,
-                                          collate_fn=PadCollate(0),
-                                          device=cfg.device)
+                                          collate_fn=PadCollate(0))
     if noise_level is not None:
         noise_levels = [noise_level]
     else:
