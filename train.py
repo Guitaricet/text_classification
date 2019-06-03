@@ -29,7 +29,8 @@ def train(model,
           comment='',
           log_every=10,
           save_model_path=None,
-          use_annealing=True):
+          use_annealing=True,
+          device=cfg.device):
     """
     Train the model, evaluate with different noises
 
@@ -46,8 +47,7 @@ def train(model,
     :return: model, results where model is trained model, results is list of dicts
     """
     # assert noise_level in cfg.experiment.noise_levels
-    if cfg.cuda:
-        model.to(torch.device('cuda'))
+    model.to(device)
 
     start_time = time()
 
@@ -71,15 +71,9 @@ def train(model,
         for batch_idx, (text, label) in enumerate(train_dataloader):
             optimizer.zero_grad()
 
-            if cfg.cuda:
-                if cfg.elmo:
-                    text = batch_to_ids(text)
-                text = text.cuda()
-                label = torch.LongTensor(label).cuda()
-            else:
-                label = torch.LongTensor(label)
+            text.to(device)
+            label = torch.LongTensor(label).to(device)
 
-            # import pdb; pdb.set_trace()
             logits = model(text)
             loss = F.cross_entropy(logits, label)
 
@@ -110,8 +104,7 @@ def train(model,
 
                 lr_scheduler.step(val_metrics['f1'])
 
-            # if cfg.cuda:
-            #     torch.cuda.synchronize()
+            # torch.cuda.synchronize()
 
             global_step += 1
 

@@ -54,7 +54,8 @@ def get_dataloaders(dataset,
                     random_seed=42,
                     shuffle=True,
                     num_workers=cfg.train.num_workers,
-                    validset=None):
+                    validset=None,
+                    device=cfg.device):
     """
     Split dataset into train and valid and make dataloaders
 
@@ -73,7 +74,7 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
-    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=PadCollate(0))
+    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=PadCollate(0), device=device)  # noqa E501
 
     if valid_size is not None:
         len_dataset = len(dataset)
@@ -101,7 +102,7 @@ def get_dataloaders(dataset,
     return train_loader, valid_loader, test_loader
 
 
-def get_metrics(model, test_data, noise_level=None, frac=1.0):
+def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device):
     """
     Evaluate the model
 
@@ -143,10 +144,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
         for i, (text, label) in enumerate(test_dataloader):
             if i >= frac * data_length:
                 break
-            if cfg.cuda:
-                if cfg.elmo:
-                    text = batch_to_ids(text)
-                text = text.cuda()
+            text = text.to(device)
 
             logits = model(text)
             _, idx = torch.max(logits, 1)

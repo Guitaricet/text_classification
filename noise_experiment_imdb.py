@@ -97,7 +97,7 @@ if __name__ == '__main__':
     if cfg.train.evals_per_noise_level == 1:
         logger.warning('Only one eval for noise level on test!')
 
-    if not cfg.cuda:
+    if not cfg.device == 'cuda':
         logger.warning('Not using CUDA!')
 
     text_field = torchtext.data.Field(

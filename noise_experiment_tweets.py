@@ -49,7 +49,8 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                                           batch_size=cfg.train.batch_size,
                                           num_workers=cfg.train.num_workers,
                                           pin_memory=cfg.pin_memory,
-                                          collate_fn=PadCollate(0))
+                                          collate_fn=PadCollate(0),
+                                          device=cfg.device)
     if noise_level is not None:
         noise_levels = [noise_level]
     else:
@@ -121,7 +122,7 @@ if __name__ == '__main__':
     if cfg.train.evals_per_noise_level == 1:
         logger.warning('Only one eval for noise level on test!')
 
-    if not cfg.cuda:
+    if not cfg.device == 'cuda':
         logger.warning('Not using CUDA!')
 
     basepath = args.datapath.rstrip('/') + '/'

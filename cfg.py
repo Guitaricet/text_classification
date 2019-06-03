@@ -2,7 +2,9 @@ import numpy as np
 import torch
 
 
-cuda = torch.cuda.is_available()
+device = 'cpu'
+if torch.cuda.is_available():
+    device = 'cuda'
 
 # TODO: add russian chars
 # TODO: move this to class data
