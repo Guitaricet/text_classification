@@ -1,4 +1,4 @@
-from copy import deepcopy
+from copy import deepcopy, copy
 import re
 
 import numpy as np
@@ -20,7 +20,7 @@ class AbstractNoisedDataset(torch.utils.data.Dataset):
     def set_noise_level(self, noise_level, force_renoise=False):
         if noise_level != self.noise_level and not force_renoise:
             self._noise_level = noise_level
-            self._data = self._preprocess_df(deepcopy(self.data))
+            self._data = self._preprocess_df(self.data)
 
     def _preprocess_text(self, text):
         text = text.lower()
@@ -33,6 +33,7 @@ class AbstractNoisedDataset(torch.utils.data.Dataset):
         return text
 
     def _preprocess_df(self, df):
+        df = copy(df)
         df[self.label_field] = df[self.label_field].apply(lambda x: self.label2int[x])
         df[self.text_field] = df[self.text_field].apply(self._preprocess_text)
         return df
