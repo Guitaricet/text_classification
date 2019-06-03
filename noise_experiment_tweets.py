@@ -142,11 +142,11 @@ if __name__ == '__main__':
                                    alphabet=alphabet,
                                    max_text_len=max_text_len)
 
-        train_data = partialclass(basepath + 'train.csv', text_field)
-        valid_data = partialclass(basepath + 'validation.csv', text_field)
-        test_data = partialclass(basepath + 'test.csv', text_field)
+        train_data = get_dataset(basepath + 'train.csv', text_field)
+        valid_data = get_dataset(basepath + 'validation.csv', text_field)
+        test_data = get_dataset(basepath + 'test.csv', text_field)
 
-        test_original_data = partialclass(basepath + 'test.csv', text_field_original)
+        test_original_data = get_dataset(basepath + 'test.csv', text_field_original)
 
         model_class = RNNClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
@@ -204,11 +204,11 @@ if __name__ == '__main__':
                                    label_field=label_field,
                                    alphabet=alphabet,
                                    max_text_len=max_text_len)
-        train_data = partialclass(basepath + 'train.csv', text_field)
-        valid_data = partialclass(basepath + 'validation.csv', text_field)
-        test_data = partialclass(basepath + 'test.csv', text_field)
+        train_data = get_dataset(basepath + 'train.csv', text_field)
+        valid_data = get_dataset(basepath + 'validation.csv', text_field)
+        test_data = get_dataset(basepath + 'test.csv', text_field)
 
-        test_original_data = partialclass(basepath + 'test.csv', text_field_original)
+        test_original_data = get_dataset(basepath + 'test.csv', text_field_original)
 
         model_class = YoonKimModel
         model_params = {'n_filters': 32,
