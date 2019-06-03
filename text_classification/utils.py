@@ -115,6 +115,7 @@ class PadCollate:
     def __call__(self, batch):
         return self.pad_collate(batch)
 
+
 def partialclass(cls, *args, **kwds):
 
     class NewCls(cls):

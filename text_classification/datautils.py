@@ -252,7 +252,7 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
     def _preprocess(self, text):
         _text_len = min(self.max_text_len, len(text))
         _text_tensor = np.zeros([_text_len, self.embeddings.vector_size],
-                                dtype=torch.float32)
+                                dtype=np.float32)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
