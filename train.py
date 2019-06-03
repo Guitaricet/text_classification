@@ -72,8 +72,8 @@ def train(model,
         for batch_idx, (text, label) in enumerate(train_dataloader):
             optimizer.zero_grad()
 
-            text.to(device)
-            label = torch.to(device)
+            text = text.to(device)
+            label = label.to(device)
 
             logits = model(text)
             loss = F.cross_entropy(logits, label)
