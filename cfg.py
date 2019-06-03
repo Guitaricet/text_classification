@@ -29,7 +29,7 @@ class train:
     val_size = 0.15
     val_every = 1000
     log_every = 10
-    num_workers = 4
+    num_workers = 6
     evals_per_noise_level = 1
     lr = 1e-3
     epochs = 20
