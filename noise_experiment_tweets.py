@@ -10,15 +10,15 @@ import pandas as pd
 
 from torch.utils.data import DataLoader
 
-from gensim.models import FastText
+from gensim.models.fasttext import load_facebook_vectors, KeyedVectors
 
 import cfg
 from train import train, evaluate_on_noise
 from text_classification import utils, trainutils
-from text_classification.utils import PadCollate
+from text_classification.utils import PadCollate, partialclass
 from text_classification.logger import logger
 from text_classification.modules import RNNClassifier, YoonKimModel
-from text_classification.datautils import KeyedVectorsCSVDataset, HierarchicalCSVDataset
+from text_classification.datautils import KeyedVectorsCSVDataset, HierarchicalCSVDataset, ALaCarteCSVDataset
 
 from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
@@ -134,24 +134,18 @@ if __name__ == '__main__':
 
     if args.model_name == 'FastText':
         logger.info('Loading embeddings...')
-        embeddings = FastText.load_fasttext_format(args.embeddings_path or cfg.data.fasttext_path)
-        train_data = KeyedVectorsCSVDataset(
-            basepath + 'train.csv', text_field, label_field, embeddings,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
-        valid_data = KeyedVectorsCSVDataset(
-            basepath + 'validation.csv', text_field, label_field, embeddings,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
-        test_data = KeyedVectorsCSVDataset(
-            basepath + 'test.csv', text_field, label_field, embeddings,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
+        embeddings = load_facebook_vectors(args.embeddings_path or cfg.data.fasttext_path)
+        get_dataset = partialclass(KeyedVectorsCSVDataset,
+                                   label_field=label_field,
+                                   embeddings=embeddings,
+                                   alphabet=alphabet,
+                                   max_text_len=max_text_len)
 
-        test_original_data = KeyedVectorsCSVDataset(
-            basepath + 'test.csv', text_field_original, label_field, embeddings,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
+        train_data = partialclass(basepath + 'train.csv', text_field)
+        valid_data = partialclass(basepath + 'validation.csv', text_field)
+        test_data = partialclass(basepath + 'test.csv', text_field)
+
+        test_original_data = partialclass(basepath + 'test.csv', text_field_original)
 
         model_class = RNNClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
@@ -160,27 +154,22 @@ if __name__ == '__main__':
         epochs = 20
 
     elif args.model_name == 'ELMo':
+        raise RuntimeError('ELMo is broken')
         logger.info('Loading embeddings...')
 
         elmo = Elmo(cfg.data.elmo_options_file, cfg.data.elmo_weights_file, 1, dropout=0)
+        get_dataset = partialclass(KeyedVectorsCSVDataset,
+                                   label_field=label_field,
+                                   embeddings=embeddings,
+                                   alphabet=alphabet,
+                                   max_text_len=max_text_len,
+                                   elmo=True)
 
-        train_data = KeyedVectorsCSVDataset(
-            basepath + 'train.csv', text_field, label_field,
-            alphabet=alphabet, max_text_len=max_text_len, elmo=True
-        )
-        valid_data = KeyedVectorsCSVDataset(
-            basepath + 'validation.csv', text_field, label_field,
-            alphabet=alphabet, max_text_len=max_text_len, elmo=True
-        )
-        test_data = KeyedVectorsCSVDataset(
-            basepath + 'test.csv', text_field, label_field,
-            alphabet=alphabet, max_text_len=max_text_len, elmo=True
-        )
+        train_data = get_dataset(basepath + 'train.csv', text_field)
+        valid_data = get_dataset(basepath + 'validation.csv', text_field)
+        test_data = get_dataset(basepath + 'test.csv', text_field)
 
-        test_original_data = KeyedVectorsCSVDataset(
-            basepath + 'test.csv', text_field_original, label_field,
-            alphabet=alphabet, max_text_len=max_text_len, elmo=True
-        )
+        test_original_data = get_dataset(basepath + 'test.csv', text_field_original)
 
         model_class = RNNClassifier
         model_params = {'input_dim': 1024, 'hidden_dim': 256, 'dropout': 0.5,
@@ -189,23 +178,15 @@ if __name__ == '__main__':
         epochs = 10
 
     elif args.model_name == 'YoonKim':
-        train_data = HierarchicalCSVDataset(
-            basepath + 'train.csv', text_field, label_field,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
-        valid_data = HierarchicalCSVDataset(
-            basepath + 'validation.csv', text_field, label_field,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
-        test_data = HierarchicalCSVDataset(
-            basepath + 'test.csv', text_field, label_field,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
+        get_dataset = partialclass(HierarchicalCSVDataset,
+                                   label_field=label_field,
+                                   alphabet=alphabet,
+                                   max_text_len=max_text_len)
+        train_data = partialclass(basepath + 'train.csv', text_field)
+        valid_data = partialclass(basepath + 'validation.csv', text_field)
+        test_data = partialclass(basepath + 'test.csv', text_field)
 
-        test_original_data = HierarchicalCSVDataset(
-            basepath + 'test.csv', text_field_original, label_field,
-            alphabet=alphabet, max_text_len=max_text_len
-        )
+        test_original_data = partialclass(basepath + 'test.csv', text_field_original)
 
         model_class = YoonKimModel
         model_params = {'n_filters': 32,
@@ -218,6 +199,27 @@ if __name__ == '__main__':
                         'num_classes': n_classes}
         lr = 1e-3
         epochs = 25
+
+    if args.model_name.lower() == 'alacarte':
+        logger.info('Loading embeddings...')
+        embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
+        get_dataset = partialclass(ALaCarteCSVDataset,
+                                   label_field=label_field,
+                                   embeddings=embeddings,
+                                   alphabet=alphabet,
+                                   max_text_len=max_text_len)
+
+        train_data = get_dataset(basepath + 'train.csv', text_field)
+        valid_data = get_dataset(basepath + 'validation.csv', text_field)
+        test_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field)
+
+        test_original_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field_original)
+
+        model_class = RNNClassifier
+        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
+                        'num_classes': n_classes}
+        lr = 0.0006
+        epochs = 20
 
     else:
         raise ValueError('Wrong model name')

@@ -10,7 +10,7 @@ import pandas as pd
 import torch
 import torchtext
 
-from gensim.models import FastText
+from gensim.models.fasttext import load_facebook_vectors
 
 import cfg
 from train import train, evaluate_on_noise
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     if args.model_name == 'FastText':
         logger.info('Loading embeddings...')
         logger.info('maxlen: %s' % cfg.max_text_len)
-        embeddings = FastText.load_fasttext_format(cfg.data.fasttext_path)
+        embeddings = load_facebook_vectors(cfg.data.fasttext_path)
         train_data, test_data = FastTextIMDB.splits(text_field, label_field, embeddings=embeddings)
 
         model_class = RNNClassifier

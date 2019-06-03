@@ -1,7 +1,14 @@
+from functools import partialmethod
 from random import random, choice
 import torch
 
 import cfg
+
+
+def swap(c, i, j):
+    c = list(c)
+    c[i], c[j] = c[j], c[i]
+    return ''.join(c)
 
 
 def noise_generator(text, noise_level, alphabet):
@@ -11,6 +18,9 @@ def noise_generator(text, noise_level, alphabet):
             noised += c
         if random() < noise_level:
             noised += choice(alphabet)
+        if random() < noise_level and len(noised) > 1:
+            noised = swap(noised, -1, -2)
+
     return noised
 
 
@@ -104,3 +114,10 @@ class PadCollate:
 
     def __call__(self, batch):
         return self.pad_collate(batch)
+
+def partialclass(cls, *args, **kwds):
+
+    class NewCls(cls):
+        __init__ = partialmethod(cls.__init__, *args, **kwds)
+
+    return NewCls

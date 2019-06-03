@@ -8,6 +8,8 @@ import torchtext
 
 from nltk.tokenize import word_tokenize
 from gensim.models import FastText, KeyedVectors
+from gensim.models.fasttext import load_facebook_vectors
+
 
 import cfg
 from text_classification.utils import noise_generator
@@ -161,7 +163,7 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
 
         if isinstance(embeddings, str):
             print('Loading embeddings from file')
-            self.embeddings = FastText.load_fasttext_format(embeddings)
+            self.embeddings = load_facebook_vectors(embeddings)
 
         self.max_text_len = max_text_len
         self.unk_vec = np.random.rand(self.embeddings.vector_size)
@@ -203,7 +205,7 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
                  alphabet=None,
                  elmo=False):
         if isinstance(embeddings, str):
-            self.embeddings = FastText.load_fasttext_format(embeddings)
+            self.embeddings = load_facebook_vectors(embeddings)
         elif isinstance(embeddings, (FastText, KeyedVectors)):
             self.embeddings = embeddings
         elif embeddings is None:
@@ -322,7 +324,7 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
 
-            if token in self.embeddings:
+            if token in self.embeddings.vocab:  # do not use fastText OOV
                 token_vec = self.embeddings[token]
                 _text_tensor[i, :] = token_vec
             else:
