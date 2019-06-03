@@ -167,7 +167,7 @@ if __name__ == '__main__':
         valid_data = get_dataset(basepath + 'validation.csv', text_field)
         test_data = get_dataset(basepath + 'test.csv', text_field)
 
-        test_original_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field_original)
+        test_original_data = get_dataset(basepath + 'test.csv', text_field_original)
 
         model_class = RNNClassifier
         model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
