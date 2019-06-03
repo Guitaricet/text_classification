@@ -45,8 +45,8 @@ def train(model,
 
     start_time = time()
 
-    train_dataloader.set_noise_level(noise_level)
-    val_dataloader.set_noise_level(noise_level)
+    train_dataloader.dataset.set_noise_level(noise_level)
+    val_dataloader.dataset.set_noise_level(noise_level)
 
     model_name = '{}_noise_level{:.4f}'.format(model.name, noise_level)
     model_name += comment
