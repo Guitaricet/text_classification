@@ -130,7 +130,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device)
         assert isinstance(test_data, torch.utils.data.DataLoader)
         test_dataloader = test_data
 
-    if noise_level is not None and noise_level != test_dataloader.noise_level:
+    if noise_level is not None and noise_level != test_dataloader.dataset.noise_level:
         # dirty hack
         # but if you deepcopy all dataloader, it will copy whole embedding matrix
         prev_dataset_data = deepcopy(test_dataloader.dataset._data)
