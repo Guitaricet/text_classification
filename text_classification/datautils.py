@@ -12,7 +12,6 @@ from gensim.models.fasttext import load_facebook_vectors
 
 import cfg
 from text_classification.utils import noise_generator
-# TODO: move textlen params from class to object properties
 
 
 class AbstractNoisedDataset(torch.utils.data.Dataset):
@@ -198,7 +197,7 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
                  alphabet=None,
                  noise_level=0,
                  induce_vectors=False,
-                 window_half_size=10,
+                 window_half_size=2,
                  induction_iterations=1,
                  induction_matrix=None):
         """

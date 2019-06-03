@@ -6,8 +6,6 @@ device = 'cpu'
 if torch.cuda.is_available():
     device = 'cuda'
 
-# TODO: add russian chars
-# TODO: move this to class data
 alphabet = ['<PAD>', '<UNK>'] + [s for s in """ abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'’/\|_@#$%ˆ&*‘+-=<>()[]{}"""]
 russian_chars = [s for s in 'абвгдеёжзийклмнопрстуфхцчщъыьэюя']
 
