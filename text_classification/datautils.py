@@ -7,7 +7,7 @@ import torch
 import torchtext
 
 from nltk.tokenize import word_tokenize
-from gensim.models import FastText, KeyedVectors
+from gensim.models.keyedvectors import FastTextKeyedVectors, KeyedVectors
 from gensim.models.fasttext import load_facebook_vectors
 
 
@@ -157,8 +157,10 @@ class FastTextIMDB(torchtext.datasets.imdb.IMDB):
         Zero vector used for padding
         """
         super().__init__(path, text_field, label_field, **kwargs)
-        assert isinstance(embeddings, (str, FastText, KeyedVectors)),\
-            'embeddings should be gensim FastText object or path to FastText file'
+        if not isinstance(embeddings, (str, FastTextKeyedVectors, KeyedVectors)):
+            raise ValueError('embeddings should be path to FastText file or '
+                             'gensim FastTextKeyedVectors object or None'
+                             f'got {type(embeddings)} instead')
         self.embeddings = embeddings
 
         if isinstance(embeddings, str):
@@ -206,13 +208,15 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
                  elmo=False):
         if isinstance(embeddings, str):
             self.embeddings = load_facebook_vectors(embeddings)
-        elif isinstance(embeddings, (FastText, KeyedVectors)):
+        elif isinstance(embeddings, (FastTextKeyedVectors, KeyedVectors)):
             self.embeddings = embeddings
         elif embeddings is None:
             self.embeddings = None
             assert elmo
         else:
-            raise ValueError('embeddings should be path to FastText file of gensim FastText object or None')
+            raise ValueError('embeddings should be path to FastText file or '
+                             'gensim FastTextKeyedVectors object or None'
+                             f'got {type(embeddings)} instead')
 
         self.alphabet = alphabet or cfg.alphabet
         self.elmo = elmo
