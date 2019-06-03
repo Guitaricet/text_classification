@@ -118,7 +118,7 @@ def train(model,
 
             global_step += 1
 
-        if epoch % 10 == 0 or epoch == epochs-1:
+        if epoch % 5 == 0 or epoch == epochs-1 or stop_training:
             logger.info('Epoch {}. Global step {}. T={:.2f}min'.format(epoch, global_step, (time() - start_time) / 60.))
             logger.info('In-batch loss      : {:.4f}'.format(float(loss)))
             logger.info('Training accuracy  : {:.4f}, f1: {:.4f}'.format(train_metrics['accuracy'], train_metrics['f1']))  # noqa E501
