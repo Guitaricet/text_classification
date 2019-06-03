@@ -119,7 +119,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device)
     if isinstance(test_data, torch.utils.data.Dataset):
         assert False, 'Do not use '
         if noise_level is not None:
-            test_data.set_noise_level(noise_level)
+            test_data.dataset.set_noise_level(noise_level)
 
         test_dataloader = DataLoader(
             test_data, batch_size=cfg.train.batch_size,
