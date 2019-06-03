@@ -1,4 +1,3 @@
-import os
 from time import time
 
 import numpy as np
@@ -25,9 +24,10 @@ def train(model,
           lr=cfg.train.lr,
           epochs=cfg.train.epochs,
           comment='',
-          save_model_path=None,
+          saveto=None,
           use_annealing=True,
-          device=cfg.device):
+          device=cfg.device,
+          patience=5):
     """
     Train the model, evaluate with different noises
 
@@ -49,12 +49,12 @@ def train(model,
     train_dataloader.set_noise_level(noise_level)
     val_dataloader.set_noise_level(noise_level)
 
-    model_name = '_{}_lr{}_noise_level{:.4f}'.format(
-        model.name, int(-np.log10(lr)), noise_level
-    )
+    model_name = '{}_noise_level{:.4f}'.format(model.name, noise_level)
     model_name += comment
 
-    writer = SummaryWriter(comment=model_name)
+    saveto = saveto or f'models/{model_name}.pt'
+
+    writer = SummaryWriter(comment='_' + model_name)
     run_name = list(writer.all_writers.keys())[0]
     logger.info('Writer: %s' % run_name)
 
@@ -62,8 +62,14 @@ def train(model,
     lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer)
 
     global_step = 0
+    best_metrics = {'f1': 0, 'accuracy': 0}
+    impatience = 0
+    stop_training = False
 
     for epoch in range(epochs):
+        if stop_training:
+            break
+
         for batch_idx, (text, label) in enumerate(train_dataloader):
             optimizer.zero_grad()
 
@@ -100,6 +106,16 @@ def train(model,
 
                 lr_scheduler.step(val_metrics['f1'])
 
+                if val_metrics['f1'] < best_metrics['f1']:
+                    impatience += 1
+                    if impatience > patience and epoch > 0:
+                        stop_training = True  # noqa E701
+                        break
+                else:
+                    impatience = 0
+                    best_metrics = val_metrics
+                    torch.save(model.state_dict(), saveto)
+
             # torch.cuda.synchronize()
 
             global_step += 1
@@ -107,18 +123,10 @@ def train(model,
         if epoch % 10 == 0 or epoch == epochs-1:
             logger.info('Epoch {}. Global step {}. T={:.2f}min'.format(epoch, global_step, (time() - start_time) / 60.))
             logger.info('In-batch loss      : {:.4f}'.format(float(loss)))
-            logger.info('Training accuracy  : {:.4f}, f1: {:.4f}'.format(train_metrics['accuracy'], train_metrics['f1']))
+            logger.info('Training accuracy  : {:.4f}, f1: {:.4f}'.format(train_metrics['accuracy'], train_metrics['f1']))  # noqa E501
             logger.info('Validation accuracy: {:.4f}, f1: {:.4f}'.format(val_metrics['accuracy'], val_metrics['f1']))
 
-    if save_model_path is not None:
-        logger.info('Saving the model')
-        filename = '%s.torch' % run_name.split('/')[-1]
-        with open(os.path.join(save_model_path, filename), 'wb') as f:
-            try:
-                torch.save(model, f)
-            except Exception as e:
-                logger.error(e)
-                logger.error('Continuing (likely) without saving')
+    model.load_state_dict(torch.load())
 
     return model
 

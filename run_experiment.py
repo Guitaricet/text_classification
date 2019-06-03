@@ -64,31 +64,31 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
 
             model = model_class(**model_params)
 
-            trained_model = train(model,
-                                  train_dataloader,
-                                  val_dataloader,
-                                  noise_level,
-                                  lr=lr,
-                                  epochs=epochs,
-                                  comment=comment,
-                                  save_model_path='models')
+            model = train(model,
+                          train_dataloader,
+                          val_dataloader,
+                          noise_level,
+                          lr=lr,
+                          epochs=epochs,
+                          comment=comment,
+                          saveto='models')
 
             logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))  # noqa E501
             sleep(2)  # workaround for ConnectionResetError
             # https://stackoverflow.com/questions/47762973/python-pytorch-multiprocessing-throwing-errors-connection-reset-by-peer-and-f
             model.eval()
-            train_metrics = trainutils.get_metrics(trained_model, train_dataloader, frac=0.1)
-            results_dicts_noised = evaluate_on_noise(trained_model, test_dataloader, [noise_level], cfg.train.evals_per_noise_level)  # noqa E501
-            results_dicts_original = evaluate_on_noise(trained_model, test_original_dataloader, [0], 1)  # noqa E501
+            train_metrics = trainutils.get_metrics(model, train_dataloader, frac=0.1)
+            results_dicts_noised = evaluate_on_noise(model, test_dataloader, [noise_level], cfg.train.evals_per_noise_level)  # noqa E501
+            results_dicts_original = evaluate_on_noise(model, test_original_dataloader, [0], 1)  # noqa E501
             # for testing
-            evaluate_on_noise(trained_model, val_dataloader, [noise_level], cfg.train.evals_per_noise_level)  # noqa E501
+            evaluate_on_noise(model, val_dataloader, [noise_level], cfg.train.evals_per_noise_level)  # noqa E501
 
             results_df_noised = pd.DataFrame(results_dicts_noised)
             results_df_original = pd.DataFrame(results_dicts_original)
             results_df_original['noise_level_test'] = -1
             results_df = pd.concat([results_df_noised, results_df_original], sort=False)
 
-            results_df['model_type'] = trained_model.name
+            results_df['model_type'] = model.name
             results_df['noise_level_train'] = noise_level
             results_df['acc_train'] = train_metrics['accuracy']
             results_df['f1_train'] = train_metrics['f1']
