@@ -251,8 +251,8 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
 
     def _preprocess(self, text):
         _text_len = min(self.max_text_len, len(text))
-        _text_tensor = np.zeros([_text_len, self.embeddings.vector_size],
-                                dtype=np.float32)
+        _text_tensor = torch.zeros([_text_len, self.embeddings.vector_size],
+                                   dtype=torch.float32)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
@@ -263,8 +263,7 @@ class KeyedVectorsCSVDataset(torch.utils.data.Dataset):
             else:
                 token_vec = self.unk_vec
 
-            token_tensor = torch.FloatTensor(token_vec)
-            _text_tensor[i, :] = token_tensor
+            _text_tensor[i, :] = token_vec
 
         return _text_tensor
 
