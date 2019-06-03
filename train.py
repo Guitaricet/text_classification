@@ -23,7 +23,6 @@ def train(model,
           lr=cfg.train.lr,
           epochs=cfg.train.epochs,
           comment='',
-          saveto=None,
           use_annealing=True,
           device=cfg.device,
           patience=5):
@@ -51,7 +50,7 @@ def train(model,
     model_name = '{}_noise_level{:.4f}'.format(model.name, noise_level)
     model_name += comment
 
-    saveto = saveto or f'models/{model_name}.pt'
+    saveto = f'models/{model_name}.pt'
 
     writer = SummaryWriter(comment='_' + model_name)
     run_name = list(writer.all_writers.keys())[0]

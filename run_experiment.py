@@ -69,8 +69,7 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
                           noise_level,
                           lr=lr,
                           epochs=epochs,
-                          comment=comment,
-                          saveto='models')
+                          comment=comment)
 
             logger.info('Calculating test metrics... Absolute time T={:.2f}min'.format((time() - start_time) / 60.))  # noqa E501
             sleep(2)  # workaround for ConnectionResetError
