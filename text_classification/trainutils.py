@@ -73,7 +73,7 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
-    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=PadCollate(0), device=device)  # noqa E501
+    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=PadCollate(0))  # noqa E501
 
     if valid_size is not None:
         len_dataset = len(dataset)

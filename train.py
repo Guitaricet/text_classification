@@ -73,7 +73,7 @@ def train(model,
             optimizer.zero_grad()
 
             text.to(device)
-            label = torch.LongTensor(label).to(device)
+            label = torch.to(device)
 
             logits = model(text)
             loss = F.cross_entropy(logits, label)
