@@ -168,7 +168,7 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device)
     if is_training_mode:
         model.train()
 
-    if noise_level is not None:
+    if noise_level is not None and noise_level != test_dataloader.dataset.noise_level:
         test_dataloader.dataset._noise_level = prev_dataset_noise_level
         test_dataloader.dataset._data = prev_dataset_data
 
