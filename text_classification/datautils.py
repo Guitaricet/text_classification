@@ -1,3 +1,4 @@
+from copy import copy
 import re
 
 import numpy as np
@@ -19,7 +20,7 @@ class AbstractNoisedDataset(torch.utils.data.Dataset):
     def set_noise_level(self, noise_level, force_renoise=False):
         if noise_level != self.noise_level and not force_renoise:
             self._noise_level = noise_level
-            self._data = self._preprocess_df(self.data)
+            self._data = self._preprocess_df(copy(self.data))
 
     def _preprocess_text(self, text):
         text = text.lower()
