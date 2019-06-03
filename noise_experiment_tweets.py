@@ -10,7 +10,8 @@ import pandas as pd
 
 from torch.utils.data import DataLoader
 
-from gensim.models.fasttext import load_facebook_vectors, KeyedVectors
+from gensim.models import KeyedVectors
+from gensim.models.fasttext import load_facebook_vectors
 
 import cfg
 from train import train, evaluate_on_noise
@@ -153,6 +154,27 @@ if __name__ == '__main__':
         lr = 0.0006
         epochs = 20
 
+    if args.model_name.lower() == 'alacarte':
+        logger.info('Loading embeddings...')
+        embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
+        get_dataset = partialclass(ALaCarteCSVDataset,
+                                   label_field=label_field,
+                                   embeddings=embeddings,
+                                   alphabet=alphabet,
+                                   max_text_len=max_text_len)
+
+        train_data = get_dataset(basepath + 'train.csv', text_field)
+        valid_data = get_dataset(basepath + 'validation.csv', text_field)
+        test_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field)
+
+        test_original_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field_original)
+
+        model_class = RNNClassifier
+        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
+                        'num_classes': n_classes}
+        lr = 0.0006
+        epochs = 20
+
     elif args.model_name == 'ELMo':
         raise RuntimeError('ELMo is broken')
         logger.info('Loading embeddings...')
@@ -199,27 +221,6 @@ if __name__ == '__main__':
                         'num_classes': n_classes}
         lr = 1e-3
         epochs = 25
-
-    if args.model_name.lower() == 'alacarte':
-        logger.info('Loading embeddings...')
-        embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
-        get_dataset = partialclass(ALaCarteCSVDataset,
-                                   label_field=label_field,
-                                   embeddings=embeddings,
-                                   alphabet=alphabet,
-                                   max_text_len=max_text_len)
-
-        train_data = get_dataset(basepath + 'train.csv', text_field)
-        valid_data = get_dataset(basepath + 'validation.csv', text_field)
-        test_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field)
-
-        test_original_data = ALaCarteCSVDataset(basepath + 'test.csv', text_field_original)
-
-        model_class = RNNClassifier
-        model_params = {'input_dim': embeddings.vector_size, 'hidden_dim': 256, 'dropout': 0.5,
-                        'num_classes': n_classes}
-        lr = 0.0006
-        epochs = 20
 
     else:
         raise ValueError('Wrong model name')
