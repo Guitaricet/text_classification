@@ -7,7 +7,6 @@ tensorboardx
 matplotlib
 seaborn
 tqdm
-spacy
 gensim
 pymystem3
 nltk
