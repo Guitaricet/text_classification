@@ -154,7 +154,7 @@ if __name__ == '__main__':
         lr = 0.0006
         epochs = 20
 
-    if args.model_name.lower() == 'alacarte':
+    elif args.model_name.lower() == 'alacarte':
         logger.info('Loading embeddings...')
         embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
         get_dataset = partialclass(ALaCarteCSVDataset,
