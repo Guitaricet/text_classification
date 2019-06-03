@@ -77,7 +77,7 @@ def pad_tensor(vec, pad, dim):
         a new tensor padded to 'pad' in dimension 'dim'
     """
     pad_size = list(vec.shape)
-    pad_size[dim] = pad - vec.size(dim)
+    pad_size[dim] = pad - vec.shape[dim]
     return torch.cat([vec, torch.zeros(*pad_size, dtype=vec.dtype)], dim=dim)
 
 
