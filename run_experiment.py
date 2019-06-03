@@ -109,7 +109,7 @@ if __name__ == '__main__':
     if args.original_train:
         save_results_path += '_orig'
     if os.path.exists(save_results_path) and not args.y:
-        if input('File at path %s already exists, delete it? (y/n)' % save_results_path).lower() != 'y':  # noqa E501
+        if input('File at path %s already exists, delete it? (y/n) ' % save_results_path).lower() != 'y':  # noqa E501
             logger.warning('Cancelling execution due to existing output file')
             exit(1)
 
