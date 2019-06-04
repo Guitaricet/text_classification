@@ -9,13 +9,13 @@ import torch
 from nltk.tokenize import word_tokenize
 from gensim.models.keyedvectors import FastTextKeyedVectors, KeyedVectors
 from gensim.models.fasttext import load_facebook_vectors
-
+from torch.utils.data import Dataset
 
 import cfg
 from text_classification.utils import noise_generator
 
 
-class AbstractNoisedDataset(torch.utils.data.Dataset):
+class AbstractNoisedDataset(Dataset):
 
     def set_noise_level(self, noise_level, force_renoise=False):
         if noise_level != self.noise_level and not force_renoise:
