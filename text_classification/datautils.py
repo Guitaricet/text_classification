@@ -207,7 +207,8 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
         super().__init__(
             filepath, text_field, label_field, embeddings, max_text_len, alphabet, noise_level
         )
-        assert induce_vectors == bool(induction_matrix), 'induce_vectors and induction_matrix should both be specified'
+        assert induce_vectors == (induction_matrix is not None),\
+            'induce_vectors and induction_matrix should both be specified'
         if isinstance(induction_matrix, str) and induction_matrix == 'identity':
             induction_matrix = np.identity(self.embeddings.vector_size)
         if induction_matrix is not None:
