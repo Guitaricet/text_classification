@@ -87,16 +87,12 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
         self._data = self._preprocess_df(self.data)
 
-    @property
-    def noise_level(self):
-        return self._noise_level
-
     def __len__(self):
         return len(self.data)
 
     def _numericalize(self, text):
         _text_len = min(self.max_text_len, len(text))
-        _text_tensor = np.zeros([_text_len, self.max_word_len], np=torch.long)
+        _text_tensor = np.zeros([_text_len, self.max_word_len], dtype=np.long)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
