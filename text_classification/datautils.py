@@ -16,6 +16,9 @@ from text_classification.utils import noise_generator
 
 
 class AbstractNoisedDataset(Dataset):
+    @property
+    def noise_level(self):
+        return self._noise_level
 
     def set_noise_level(self, noise_level, force_renoise=False):
         if noise_level != self.noise_level and not force_renoise:
@@ -125,8 +128,6 @@ class KeyedVectorsCSVDataset(AbstractNoisedDataset):
     """
     Zero vector used for padding
     """
-    noise_level = 0
-
     def __init__(self,
                  filepath,
                  text_field,
@@ -157,10 +158,6 @@ class KeyedVectorsCSVDataset(AbstractNoisedDataset):
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
         self._data = self._preprocess_df(self.data)
 
-    @property
-    def noise_level(self):
-        return self._noise_level
-
     def __len__(self):
         return len(self._data)
 
@@ -188,8 +185,6 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
     """
     Zero vector used for padding
     """
-    noise_level = 0
-
     def __init__(self,
                  filepath,
                  text_field,
