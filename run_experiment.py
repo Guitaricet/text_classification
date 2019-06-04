@@ -158,13 +158,14 @@ if __name__ == '__main__':
         logger.info('Loading embeddings...')
         embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
         induction_matrix = args.induction_matrix.lower()
-        if induction_matrix != 'identity':
+        if induction_matrix != 'identity' and induction_matrix is not None:
             induction_matrix = np.fromfile(induction_matrix, dtype=np.float32)
         get_dataset = partialclass(ALaCarteCSVDataset,
                                    label_field=label_field,
                                    embeddings=embeddings,
                                    alphabet=alphabet,
                                    max_text_len=max_text_len,
+                                   induce_vectors=induction_matrix is not None,
                                    induction_matrix=induction_matrix)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
