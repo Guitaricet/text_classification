@@ -160,6 +160,9 @@ if __name__ == '__main__':
         induction_matrix = args.induction_matrix.lower()
         if induction_matrix != 'identity' and induction_matrix is not None:
             induction_matrix = np.fromfile(induction_matrix, dtype=np.float32)
+            if len(induction_matrix) != 2:
+                d = int(np.sqrt(induction_matrix.shape[0]))
+                induction_matrix = induction_matrix.reshape(d, d)
         get_dataset = partialclass(ALaCarteCSVDataset,
                                    label_field=label_field,
                                    embeddings=embeddings,
