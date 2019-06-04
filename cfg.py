@@ -36,5 +36,5 @@ class train:
 
 
 class experiment:
-    noise_levels = reversed(np.concatenate([np.arange(0, 0.05, 0.01), np.arange(0.05, 0.2, 0.025), [0.9]]))
+    noise_levels = list(reversed(np.concatenate([np.arange(0, 0.05, 0.01), np.arange(0.05, 0.2, 0.025), [0.9]])))
     n_trains = 10
