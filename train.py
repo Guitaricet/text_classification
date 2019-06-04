@@ -1,6 +1,6 @@
 from time import time
 
-import numpy as np
+import numpy as np  # noqa F401
 
 import torch
 import torch.nn.functional as F

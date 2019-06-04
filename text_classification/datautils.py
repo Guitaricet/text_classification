@@ -1,4 +1,4 @@
-from copy import deepcopy, copy
+from copy import copy
 import re
 
 import numpy as np
@@ -96,7 +96,7 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
-            char_ids = [self.char2int.get(c, self.unk_index) for c in token[:max_word_len]]
+            char_ids = [self.char2int.get(c, self.unk_index) for c in token[:self.max_word_len]]
             _text_tensor[i, :len(char_ids)] = char_ids
 
         _text_tensor = torch.tensor(_text_tensor)

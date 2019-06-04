@@ -6,7 +6,7 @@ device = 'cpu'
 if torch.cuda.is_available():
     device = 'cuda'
 
-alphabet = ['<PAD>', '<UNK>'] + [s for s in """ abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'’/\|_@#$%ˆ&*‘+-=<>()[]{}"""]
+alphabet = ['<PAD>', '<UNK>'] + [s for s in """ abcdefghijklmnopqrstuvwxyz0123456789,;.!?:'’/\|_@#$%ˆ&*‘+-=<>()[]{}"""]  # noqa W608
 russian_chars = [s for s in 'абвгдеёжзийклмнопрстуфхцчщъыьэюя']
 
 max_word_len = 8
