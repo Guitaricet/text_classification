@@ -6,6 +6,7 @@ import os
 import argparse
 from time import time, sleep
 
+import numpy as np
 import pandas as pd
 
 from torch.utils.data import DataLoader
@@ -35,6 +36,7 @@ parser.add_argument('--embeddings-path', default=None)
 parser.add_argument('-y', default=False, action='store_true', help='yes to all')
 parser.add_argument('--original-train', default=False, action='store_true', help='train_on_original_dataset')  # noqa E501
 parser.add_argument('--sample-data', type=float, default=1.0)
+parser.add_argument('--induction-matrix', type=str, help='path to a la carte tranform_matrix.bin or string "identity"')
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
@@ -155,11 +157,15 @@ if __name__ == '__main__':
     elif args.model_name.lower() == 'alacarte':
         logger.info('Loading embeddings...')
         embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
+        tranform_matrix = args.tranform_matrix.lower()
+        if tranform_matrix != 'identity':
+            tranform_matrix = np.fromfile(tranform_matrix, dtype=np.float32)
         get_dataset = partialclass(ALaCarteCSVDataset,
                                    label_field=label_field,
                                    embeddings=embeddings,
                                    alphabet=alphabet,
-                                   max_text_len=max_text_len)
+                                   max_text_len=max_text_len,
+                                   tranform_matrix=tranform_matrix)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
         valid_data = get_dataset(basepath + 'validation.csv', text_field)
