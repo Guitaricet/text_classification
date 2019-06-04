@@ -85,7 +85,7 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
         self.unk_index = self.char2int['<UNK>']
         self.pad_index = self.char2int['<PAD>']
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
-        self.data = self._preprocess_df(self.data)
+        self._data = self._preprocess_df(self.data)
 
     @property
     def noise_level(self):

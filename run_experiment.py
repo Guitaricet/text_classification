@@ -59,7 +59,7 @@ def experiment(model_class, train_data, val_data, test_data, test_original_data,
     for _ in range(cfg.experiment.n_trains):
         for i, noise_level in enumerate(noise_levels):
             logger.info('Training model for noise level {:.3f} ({}/{})'
-                        .format(noise_level, i, len(noise_levels)))
+                        .format(noise_level, i+1, len(noise_levels)))
 
             model = model_class(**model_params)
 
