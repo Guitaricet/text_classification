@@ -157,15 +157,15 @@ if __name__ == '__main__':
     elif args.model_name.lower() == 'alacarte':
         logger.info('Loading embeddings...')
         embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
-        tranform_matrix = args.tranform_matrix.lower()
-        if tranform_matrix != 'identity':
-            tranform_matrix = np.fromfile(tranform_matrix, dtype=np.float32)
+        induction_matrix = args.induction_matrix.lower()
+        if induction_matrix != 'identity':
+            induction_matrix = np.fromfile(induction_matrix, dtype=np.float32)
         get_dataset = partialclass(ALaCarteCSVDataset,
                                    label_field=label_field,
                                    embeddings=embeddings,
                                    alphabet=alphabet,
                                    max_text_len=max_text_len,
-                                   tranform_matrix=tranform_matrix)
+                                   induction_matrix=induction_matrix)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
         valid_data = get_dataset(basepath + 'validation.csv', text_field)
