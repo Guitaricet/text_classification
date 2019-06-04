@@ -96,13 +96,14 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
 
     def _numericalize(self, text):
         _text_len = min(self.max_text_len, len(text))
-        _text_tensor = torch.zeros([_text_len, self.max_word_len], dtype=torch.long)
+        _text_tensor = np.zeros([_text_len, self.max_word_len], np=torch.long)
 
         for i, token in enumerate(text):
             if i >= self.max_text_len: break  # noqa: E701
             char_ids = [self.char2int.get(c, self.unk_index) for c in token]
             _text_tensor[i, :len(char_ids)] = char_ids
 
+        _text_tensor = torch.tensor(_text_tensor)
         return _text_tensor
 
     def onehot2text(self, one_hotted_text, batch_size=None, show_pad=False):
