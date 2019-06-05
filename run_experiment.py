@@ -157,7 +157,7 @@ if __name__ == '__main__':
     elif args.model_name.lower() == 'alacarte':
         logger.info('Loading embeddings...')
         embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
-        induction_matrix = args.induction_matrix.lower()
+        induction_matrix = args.induction_matrix
         if induction_matrix != 'identity' and induction_matrix is not None:
             induction_matrix = np.fromfile(induction_matrix, dtype=np.float32)
             if len(induction_matrix) != 2:
