@@ -38,6 +38,7 @@ parser.add_argument('--original-train', default=False, action='store_true', help
 parser.add_argument('--sample-data', type=float, default=1.0)
 parser.add_argument('--induction-matrix', type=str, help='path to a la carte tranform_matrix.bin or string "identity"')
 parser.add_argument('--window-half-size', type=int, default=5, help='half size of a la carte window')
+parser.add_argument('--trainable-induction', default=False, action='store_true', help='trainable induction matrix')
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
@@ -195,6 +196,13 @@ if __name__ == '__main__':
         embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
         stoi = {s: v.index for s, v in embeddings.vocab.items()}
 
+        if args.trainable_induction and induction_matrix is None:
+            v_size = embeddings.vector_size
+            induction_matrix = np.random.normal(
+                scale=np.sqrt(v_size),
+                size=(v_size, v_size)
+            )
+
         get_dataset = partialclass(WordIndexDataset,
                                    label_field=label_field,
                                    alphabet=alphabet,
@@ -213,6 +221,7 @@ if __name__ == '__main__':
                         'dropout': 0.5,
                         'num_classes': n_classes,
                         'induction_matrix': induction_matrix,
+                        'trainable_induction': args.trainable_induction,
                         'induction_trainable': False,
                         'window_half_size': args.window_half_size}
         lr = 0.0006

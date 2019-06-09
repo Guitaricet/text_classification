@@ -171,7 +171,7 @@ class ALaCarteClassifier(nn.Module):
 
     def __init__(self, hidden_dim, emb_matrix,
                  num_layers=1, dropout=0.5, cell_type='GRU', num_classes=2,
-                 induction_matrix=None, induction_trainable=False, window_half_size=5):
+                 induction_matrix=None, trainable_induction=False, window_half_size=5):
         super().__init__()
 
         self.hidden_dim = hidden_dim
@@ -196,9 +196,12 @@ class ALaCarteClassifier(nn.Module):
             self.induction_matrix = torch.Tensor(np.identity(self.embedding.embedding_dim))
         elif isinstance(induction_matrix, np.ndarray):
             self.induction_matrix = torch.Tensor(induction_matrix)
+        self.induction_matrix = torch.nn.Parameter(self.induction_matrix)
+
+        if not trainable_induction:
+            self.induction_matrix.requires_grad = False
 
         self.window_half_size = window_half_size
-        assert not induction_trainable
 
         if cell_type == 'GRU':
             self.rnn = nn.GRU(self.embedding_size, hidden_dim, num_layers=num_layers, dropout=dropout, batch_first=True,)
