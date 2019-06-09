@@ -19,8 +19,8 @@ from train import train, evaluate_on_noise
 from text_classification import utils, trainutils
 from text_classification.utils import PadCollate, partialclass
 from text_classification.logger import logger
-from text_classification.modules import RNNClassifier, YoonKimModel
-from text_classification.datautils import KeyedVectorsCSVDataset, HierarchicalCSVDataset, ALaCarteCSVDataset
+from text_classification.modules import RNNClassifier, YoonKimModel, ALaCarteClassifier
+from text_classification.datautils import KeyedVectorsCSVDataset, HierarchicalCSVDataset, ALaCarteCSVDataset, WordIndexDataset  # noqa E501
 
 from allennlp.modules.elmo import Elmo
 # TODO: add run name to results csv
@@ -37,6 +37,7 @@ parser.add_argument('-y', default=False, action='store_true', help='yes to all')
 parser.add_argument('--original-train', default=False, action='store_true', help='train_on_original_dataset')  # noqa E501
 parser.add_argument('--sample-data', type=float, default=1.0)
 parser.add_argument('--induction-matrix', type=str, help='path to a la carte tranform_matrix.bin or string "identity"')
+parser.add_argument('--window-half-size', type=int, default=5, help='half size of a la carte window')
 
 
 def experiment(model_class, train_data, val_data, test_data, test_original_data,
@@ -155,8 +156,8 @@ if __name__ == '__main__':
         epochs = 20
 
     elif args.model_name.lower() == 'alacarte':
+        # TODO: rename
         logger.info('Loading embeddings...')
-        embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
         induction_matrix = args.induction_matrix
         if induction_matrix != 'identity' and induction_matrix is not None:
             induction_matrix = np.fromfile(induction_matrix, dtype=np.float32)
@@ -165,10 +166,8 @@ if __name__ == '__main__':
                 induction_matrix = induction_matrix.reshape(d, d)
         get_dataset = partialclass(ALaCarteCSVDataset,
                                    label_field=label_field,
-                                   embeddings=embeddings,
                                    alphabet=alphabet,
                                    max_text_len=max_text_len,
-                                   induce_vectors=induction_matrix is not None,
                                    induction_matrix=induction_matrix)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
@@ -183,17 +182,23 @@ if __name__ == '__main__':
         lr = 0.0006
         epochs = 20
 
-    elif args.model_name == 'ELMo':
-        raise RuntimeError('ELMo is broken')
-        logger.info('Loading embeddings...')
+    elif args.model_name.lower() == 'alacarte_v2':
+        logger.info('Loading induction matrix...')
+        induction_matrix = args.induction_matrix
+        if induction_matrix != 'identity' and induction_matrix is not None:
+            induction_matrix = np.fromfile(induction_matrix, dtype=np.float32)
+            if len(induction_matrix) != 2:
+                d = int(np.sqrt(induction_matrix.shape[0]))
+                induction_matrix = induction_matrix.reshape(d, d)
 
-        elmo = Elmo(cfg.data.elmo_options_file, cfg.data.elmo_weights_file, 1, dropout=0)
-        get_dataset = partialclass(KeyedVectorsCSVDataset,
+        logger.info('Loading embeddings...')
+        embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
+        stoi = {s: v.index for s, v in embeddings.vocab.items()}
+
+        get_dataset = partialclass(WordIndexDataset,
                                    label_field=label_field,
-                                   embeddings=embeddings,
                                    alphabet=alphabet,
-                                   max_text_len=max_text_len,
-                                   elmo=True)
+                                   max_text_len=max_text_len)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
         valid_data = get_dataset(basepath + 'validation.csv', text_field)
@@ -201,11 +206,15 @@ if __name__ == '__main__':
 
         test_original_data = get_dataset(basepath + 'test.csv', text_field_original)
 
-        model_class = RNNClassifier
-        model_params = {'input_dim': 1024, 'hidden_dim': 256, 'dropout': 0.5,
-                        'num_classes': n_classes, 'elmo': elmo}
+        model_class = ALaCarteClassifier
+        model_params = {'hidden_dim': 256,
+                        'dropout': 0.5,
+                        'num_classes': n_classes,
+                        'induction_matrix': induction_matrix,
+                        'induction_trainable': False,
+                        'window_half_size': args.window_half_size}
         lr = 0.0006
-        epochs = 10
+        epochs = 20
 
     elif args.model_name == 'YoonKim':
         get_dataset = partialclass(HierarchicalCSVDataset,

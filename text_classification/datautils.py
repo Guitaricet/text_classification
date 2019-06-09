@@ -16,6 +16,9 @@ from text_classification.utils import noise_generator
 
 
 class AbstractNoisedDataset(Dataset):
+    def __len__(self):
+        return len(self._data)
+
     @property
     def noise_level(self):
         return self._noise_level
@@ -62,7 +65,6 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
     Dataset class for hierarchical (chars -> words -> text) networks which reads data from .csv
 
     Mokoron, because it was firstly used for Mokoron twitter sentiment dataset
-    Zero vector used for padding
     """
     name = 'CharCNN'
 
@@ -87,9 +89,6 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
         self.pad_index = self.char2int['<PAD>']
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
         self._data = self._preprocess_df(self.data)
-
-    def __len__(self):
-        return len(self.data)
 
     def _numericalize(self, text):
         _text_len = min(self.max_text_len, len(text))
@@ -122,10 +121,39 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
             return texts
 
 
+class WordIndexDataset(AbstractNoisedDataset):
+    name = 'WordIndexDataset'
+
+    def __init__(self,
+                 filepath,
+                 text_field,
+                 label_field,
+                 stoi,
+                 max_text_len=cfg.max_text_len,
+                 alphabet=None,
+                 noise_level=0):
+        self._noise_level = noise_level
+        self.alphabet = alphabet or cfg.alphabet
+        self.text_field = text_field
+        self.label_field = label_field
+        self.data = pd.read_csv(filepath)
+        self.max_text_len = max_text_len
+        self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
+        self.stoi = stoi
+        self.unk_index = -1
+        self._data = self._preprocess_df(self.data)
+
+    def _numericalize(self, text):
+        _text_len = min(self.max_text_len, len(text))
+        _text_tensor = torch.zeros([_text_len, ], dtype=torch.long)
+
+        for i, token in enumerate(text):
+            _text_tensor[i] = self.stoi.get(token, self.unk_index)
+
+        return _text_tensor
+
+
 class KeyedVectorsCSVDataset(AbstractNoisedDataset):
-    """
-    Zero vector used for padding
-    """
     name = 'KeyedVectors'
 
     def __init__(self,
@@ -158,9 +186,6 @@ class KeyedVectorsCSVDataset(AbstractNoisedDataset):
         self.label2int = {l: i for i, l in enumerate(sorted(self.data[self.label_field].unique()))}
         self._data = self._preprocess_df(self.data)
 
-    def __len__(self):
-        return len(self._data)
-
     def _numericalize(self, text):
         _text_len = min(self.max_text_len, len(text))
         _text_tensor = torch.zeros([_text_len, self.embeddings.vector_size],
@@ -182,9 +207,6 @@ class KeyedVectorsCSVDataset(AbstractNoisedDataset):
 
 
 class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
-    """
-    Zero vector used for padding
-    """
     name = 'ALaCarte'
 
     def __init__(self,
