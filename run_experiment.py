@@ -222,7 +222,6 @@ if __name__ == '__main__':
                         'num_classes': n_classes,
                         'induction_matrix': induction_matrix,
                         'trainable_induction': args.trainable_induction,
-                        'induction_trainable': False,
                         'window_half_size': args.window_half_size}
         lr = 0.0006
         epochs = 20
