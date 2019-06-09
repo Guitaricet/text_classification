@@ -64,6 +64,7 @@ class HierarchicalCSVDataset(AbstractNoisedDataset):
     Mokoron, because it was firstly used for Mokoron twitter sentiment dataset
     Zero vector used for padding
     """
+    name = 'CharCNN'
 
     def __init__(self,
                  filepath,
@@ -125,6 +126,8 @@ class KeyedVectorsCSVDataset(AbstractNoisedDataset):
     """
     Zero vector used for padding
     """
+    name = 'KeyedVectors'
+
     def __init__(self,
                  filepath,
                  text_field,
@@ -182,6 +185,8 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
     """
     Zero vector used for padding
     """
+    name = 'ALaCarte'
+
     def __init__(self,
                  filepath,
                  text_field,
@@ -207,10 +212,13 @@ class ALaCarteCSVDataset(KeyedVectorsCSVDataset):
         super().__init__(
             filepath, text_field, label_field, embeddings, max_text_len, alphabet, noise_level
         )
-        assert induce_vectors == (induction_matrix is not None),\
-            'induce_vectors and induction_matrix should both be specified'
+        if induce_vectors != (induction_matrix is not None):
+            raise RuntimeError('induce_vectors and induction_matrix should both be specified')
+
         if isinstance(induction_matrix, str) and induction_matrix == 'identity':
             induction_matrix = np.identity(self.embeddings.vector_size)
+            self.name = 'Mean'
+
         if induction_matrix is not None:
             assert induction_matrix.shape[0] == induction_matrix.shape[1] == self.embeddings.vector_size
 

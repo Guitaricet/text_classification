@@ -47,7 +47,7 @@ def train(model,
     train_dataloader.dataset.set_noise_level(noise_level)
     val_dataloader.dataset.set_noise_level(noise_level)
 
-    model_name = '{}_noise_level{:.4f}'.format(model.name, noise_level)
+    model_name = '{}_{}_noise_level{:.4f}'.format(train_dataloader.dataset.name, model.name, noise_level)
     model_name += comment
 
     saveto = f'models/{model_name}.pt'
