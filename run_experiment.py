@@ -198,7 +198,8 @@ if __name__ == '__main__':
         get_dataset = partialclass(WordIndexDataset,
                                    label_field=label_field,
                                    alphabet=alphabet,
-                                   max_text_len=max_text_len)
+                                   max_text_len=max_text_len,
+                                   stoi=stoi)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
         valid_data = get_dataset(basepath + 'validation.csv', text_field)
