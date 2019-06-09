@@ -148,6 +148,7 @@ class WordIndexDataset(AbstractNoisedDataset):
         _text_tensor = torch.zeros([_text_len, ], dtype=torch.long)
 
         for i, token in enumerate(text):
+            if i >= self.max_text_len: break  # noqa: E701
             _text_tensor[i] = self.stoi.get(token, self.unk_index)
 
         return _text_tensor
