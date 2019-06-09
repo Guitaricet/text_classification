@@ -1,3 +1,6 @@
+from functools import partial
+from copy import deepcopy
+
 import numpy as np
 
 import torch
@@ -8,8 +11,7 @@ from sklearn.metrics import accuracy_score, f1_score
 
 import cfg
 from text_classification.logger import logger
-
-from allennlp.modules.elmo import batch_to_ids
+from text_classification.utils import PadCollate
 
 
 class CosineLRWithRestarts:
@@ -51,7 +53,8 @@ def get_dataloaders(dataset,
                     random_seed=42,
                     shuffle=True,
                     num_workers=cfg.train.num_workers,
-                    validset=None):
+                    validset=None,
+                    device=cfg.device):
     """
     Split dataset into train and valid and make dataloaders
 
@@ -70,6 +73,8 @@ def get_dataloaders(dataset,
     """
     assert (validset is not None) ^ (valid_size is not None), 'Only one of valid_size or validset should be specified'
 
+    dataLoader = partial(DataLoader, batch_size=batch_size, num_workers=num_workers, collate_fn=PadCollate(0))  # noqa E501
+
     if valid_size is not None:
         len_dataset = len(dataset)
         indices = list(range(len_dataset))
@@ -85,28 +90,18 @@ def get_dataloaders(dataset,
         train_sampler = SubsetRandomSampler(train_idx)
         valid_sampler = SubsetRandomSampler(valid_idx)
 
-        train_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=train_sampler, num_workers=num_workers
-        )
-        valid_loader = DataLoader(
-            dataset, batch_size=batch_size, sampler=valid_sampler, num_workers=num_workers
-        )
+        train_loader = dataLoader(dataset, sampler=train_sampler)
+        valid_loader = dataLoader(dataset, sampler=valid_sampler)
     else:
-        train_loader = DataLoader(
-            dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
-        )
-        valid_loader = DataLoader(
-            validset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
-        )
+        train_loader = dataLoader(dataset, shuffle=shuffle)
+        valid_loader = dataLoader(validset, shuffle=shuffle)
 
-    test_loader = DataLoader(
-        testset, batch_size=batch_size, num_workers=num_workers
-    )
+    test_loader = dataLoader(testset)
 
     return train_loader, valid_loader, test_loader
 
 
-def get_metrics(model, test_data, noise_level=None, frac=1.0):
+def get_metrics(model, test_data, noise_level=None, frac=1.0, device=cfg.device):
     """
     Evaluate the model
 
@@ -119,23 +114,29 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
     if is_training_mode:
         logger.warning('Model is evaluating in training mode!')
         model.eval()
-        logger.info('Set the model into eval mode')
+        logger.info('Seting the model into eval mode')
 
     if isinstance(test_data, torch.utils.data.Dataset):
         assert False, 'Do not use '
         if noise_level is not None:
-            test_data.noise_level = noise_level
+            test_data.dataset.set_noise_level(noise_level)
 
         test_dataloader = DataLoader(
-            test_data, batch_size=cfg.train.batch_size, shuffle=True, num_workers=cfg.train.num_workers
+            test_data, batch_size=cfg.train.batch_size,
+            shuffle=True, num_workers=cfg.train.num_workers,
+            collate_fn=PadCollate(0)
         )
     else:
         assert isinstance(test_data, torch.utils.data.DataLoader)
         test_dataloader = test_data
 
-    if noise_level is not None:
-        prev_noise_level = test_dataloader.dataset.noise_level
-        test_dataloader.dataset.noise_level = noise_level
+    if noise_level is not None and noise_level != test_dataloader.dataset.noise_level:
+        # dirty hack
+        # but if you deepcopy all dataloader, it will copy whole embedding matrix
+        prev_dataset_data = deepcopy(test_dataloader.dataset._data)
+        prev_dataset_noise_level = test_dataloader.dataset.noise_level
+
+        test_dataloader.dataset.set_noise_level(noise_level)
 
     predictions = []
     labels = []
@@ -146,15 +147,10 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
         for i, (text, label) in enumerate(test_dataloader):
             if i >= frac * data_length:
                 break
-            if cfg.cuda:
-                if cfg.elmo:
-                    text = batch_to_ids(text)
-                text = text.cuda()
+            text = text.to(device)
 
-            text = text.permute(1, 0, 2)
-
-            prediction = model(text)
-            _, idx = torch.max(prediction, 1)
+            logits = model(text)
+            _, idx = torch.max(logits, 1)
 
             # if i == 0:
             #     _, symb = text[9]
@@ -167,12 +163,13 @@ def get_metrics(model, test_data, noise_level=None, frac=1.0):
         # logger.info(labels)
         # logger.info(predictions)
         acc = accuracy_score(labels, predictions)
-        f1 = f1_score(labels, predictions, average='weighted')
+        f1 = f1_score(labels, predictions, average='macro')
 
     if is_training_mode:
         model.train()
 
-    if noise_level is not None:
-        test_dataloader.dataset.noise_level = prev_noise_level
+    if noise_level is not None and noise_level != test_dataloader.dataset.noise_level:
+        test_dataloader.dataset._noise_level = prev_dataset_noise_level
+        test_dataloader.dataset._data = prev_dataset_data
 
     return {'accuracy': acc, 'f1': f1}

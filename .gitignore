@@ -7,6 +7,7 @@ models
 .idea
 .vscode
 runs
+results*
 
 
 # Created by https://www.gitignore.io/api/macos,python,pycharm,visualstudiocode
