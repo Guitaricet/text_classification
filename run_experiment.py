@@ -209,6 +209,7 @@ if __name__ == '__main__':
 
         model_class = ALaCarteClassifier
         model_params = {'hidden_dim': 256,
+                        'emb_matrix': embeddings.vectors,
                         'dropout': 0.5,
                         'num_classes': n_classes,
                         'induction_matrix': induction_matrix,
