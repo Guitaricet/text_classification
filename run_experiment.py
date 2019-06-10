@@ -157,7 +157,6 @@ if __name__ == '__main__':
         epochs = 20
 
     elif args.model_name.lower() == 'alacarte':
-        # TODO: rename
         logger.info('Loading embeddings...')
         induction_matrix = args.induction_matrix
         if induction_matrix != 'identity' and induction_matrix is not None:
@@ -165,10 +164,13 @@ if __name__ == '__main__':
             if len(induction_matrix) != 2:
                 d = int(np.sqrt(induction_matrix.shape[0]))
                 induction_matrix = induction_matrix.reshape(d, d)
+        embeddings = KeyedVectors.load_word2vec_format(args.embeddings_path)
         get_dataset = partialclass(ALaCarteCSVDataset,
                                    label_field=label_field,
+                                   embeddings=embeddings,
                                    alphabet=alphabet,
                                    max_text_len=max_text_len,
+                                   induce_vectors=induction_matrix is not None,
                                    induction_matrix=induction_matrix)
 
         train_data = get_dataset(basepath + 'train.csv', text_field)
