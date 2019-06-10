@@ -189,7 +189,7 @@ class ALaCarteClassifier(nn.Module):
 
         self.unk_index = -1  # TODO: hardcode
         self.embedding = nn.Embedding.from_pretrained(emb_matrix_pt, padding_idx=self.pad_idx, freeze=True)
-        self.unk_vec = torch.randn(self.embedding_size)
+        self.unk_vec = torch.randn(self.embedding_size).cuda()
 
         self.induction_matrix = induction_matrix  # None case
         if isinstance(induction_matrix, str) and induction_matrix == 'identity':
@@ -230,7 +230,7 @@ class ALaCarteClassifier(nn.Module):
                     context_indices = [v for v in list(range(left_word, right_word)) if not unk_indices[batch_idx, seq_idx]]  # noqa E501
                     context_vector = self.unk_vec
                     if len(context_indices):
-                        context_vector = torch.mean(x[batch_idx, context_indices])
+                        context_vector = torch.mean(x[batch_idx, context_indices]).cuda()
 
                     x[batch_idx, seq_idx] = self.induction_matrix @ context_vector
         return x
